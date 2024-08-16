@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.bg-landing {
+    position: relative; /* Positioning context for the pseudo-element */
+    background-image: url('../images/al-nik-conf-room-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.bg-landing::before {
+    content: ''; /* Required for pseudo-element */
+    position: absolute; /* Position it over the background */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(11, 33, 71, 0.5); /* Primary color with 50% opacity */
+    z-index: 1; /* Ensure it sits above the background image */
+}
+
+/* Ensure content within .bg-landing is above the overlay */
+.bg-landing > * {
+    position: relative; /* Positioning context for child elements */
+    z-index: 2; /* Ensure content is above the overlay */
+}
+
+.layout-section {
+    min-height: 100vh; /* Ensures each section takes full viewport height */
+    display: flex; /* Flexbox for centering content */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    transition: background-color 0.3s ease; /* Smooth transition for background changes */
+}
+
+.hidden {
+    opacity: 0;
+    transition: all 1s;
+}
+
+.show {
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .hidden {
+      transition: all 1s;
+    }
+}
