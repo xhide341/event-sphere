@@ -18,10 +18,10 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="antialiased font-poppins">
-        <div class="text-black/50 text-primary bg-white-500">
+        <div class="relative text-black/50 text-primary bg-white-500">
             <div class="relative min-h-screen flex flex-col bg-landing">
                 <!-- header -->                 
-                <div class="w-full flex justify-center bg-white/30 backdrop-blur shadow-lg text-primary">
+                <div class="w-full flex justify-center bg-white backdrop-blur shadow-lg text-primary">
                     <div class="w-full max-w-7xl px-6">
                         <header class="py-6 flex items-center justify-between w-full">
                             <div class="flex items-center">
@@ -30,17 +30,17 @@
                             </div>
 
                             <nav class="flex space-x-16 text-lg">
-                                <a href="#home" class="hover:text-accent relative group transition-transform duration-300 ease-in-out hover:-rotate-2">
+                                <a href="#home" class="hover:text-primary relative group transition-transform duration-300 ease-in-out hover:-rotate-2">
                                     <span class="relative z-10">Home</span>
-                                    <span class="absolute left-0 bottom-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-left"></span>
+                                    <span class="absolute left-0 bottom-0 w-full h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-left"></span>
                                 </a>
-                                <a href="#about" class="hover:text-accent relative group transition-transform duration-300 ease-in-out hover:-rotate-2">
+                                <a href="#about" class="hover:text-primary relative group transition-transform duration-300 ease-in-out hover:-rotate-2">
                                     <span class="relative z-10">About</span>
-                                    <span class="absolute left-0 bottom-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-left"></span>
+                                    <span class="absolute left-0 bottom-0 w-full h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-left"></span>
                                 </a>
-                                <a href="#contact" class="hover:text-accent relative group transition-transform duration-300 ease-in-out hover:-rotate-2">
+                                <a href="#contact" class="hover:text-primary relative group transition-transform duration-300 ease-in-out hover:-rotate-2">
                                     <span class="relative z-10">Contact</span>
-                                    <span class="absolute left-0 bottom-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-left"></span>
+                                    <span class="absolute left-0 bottom-0 w-full h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-left"></span>
                                 </a>
                             </nav>
 
@@ -57,45 +57,83 @@
                             <h1 id="typing-text" class="text-5xl font-bold">
                                 <span id="cursor" class="cursor">|</span>
                             </h1>
-                            <img src="{{ Vite::asset('resources/images/event_image.png') }}" alt="Placeholder Image" class="mt-4 w-1/2 h-auto">
                         </div>
                     </div>
                 </section>
             </div>
 
+            <!-- powered by section -->
+            <section class="absolute min-w-[50dvw] w-[50dvw] flex space-x-6 items-center justify-center mx-auto text-center py-8 px-16 -mt-12 z-10 relative border-2 border-primary bg-gray-200 shadow-lg rounded-lg">
+                <div class="flex space-x-6 items-center justify-center">
+                    <h2 class="text-xl font-semibold text-primary">Powered by:</h2>
+                    <a href="https://laravel.com" target="_blank" class="hover:scale-110 transition-transform duration-300">
+                        <img src="{{ Vite::asset('resources/images/laravel-logo.svg') }}" alt="Laravel Logo" class="w-10 h-10">
+                    </a>
+                    <a href="https://tailwindcss.com" target="_blank" class="hover:scale-110 transition-transform duration-300">
+                        <img src="{{ Vite::asset('resources/images/tailwind-logo.svg') }}" alt="Tailwind Logo" class="w-10 h-10">
+                    </a>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" class="hover:scale-110 transition-transform duration-300">
+                        <img src="{{ Vite::asset('resources/images/javascript-logo.svg') }}" alt="JavaScript Logo" class="w-10 h-10">
+                    </a>
+                    <a href="https://www.php.net" target="_blank" class="hover:scale-110 transition-transform duration-300">
+                        <img src="{{ Vite::asset('resources/images/php-logo.svg') }}" alt="PHP Logo" class="w-10 h-10">
+                    </a>
+                    <a href="https://www.mysql.com" target="_blank" class="hover:scale-110 transition-transform duration-300">
+                        <img src="{{ Vite::asset('resources/images/mysql-logo.svg') }}" alt="MySQL Logo" class="w-10 h-10">
+                    </a>
+                    <a href="https://laravel-livewire.com" target="_blank" class="hover:scale-110 transition-transform duration-300">
+                        <img src="{{ Vite::asset('resources/images/livewire-logo.svg') }}" alt="Livewire Logo" class="w-10 h-10">
+                    </a>
+                    <a href="https://vitejs.dev" target="_blank" class="hover:scale-110 transition-transform duration-300">
+                        <img src="{{ Vite::asset('resources/images/vite-js-logo.svg') }}" alt="Vite Logo" class="w-10 h-10">
+                    </a>
+                    <a href="https://alpinejs.dev" target="_blank" class="hover:scale-110 transition-transform duration-300">
+                        <img src="{{ Vite::asset('resources/images/alpine-js.svg') }}" alt="Alpine Logo" class="w-10 h-10">
+                    </a>
+                </div>
+            </section>
+            
             <!-- creator section -->
-            <section id="about">
-                <div class="min-h-[600px] flex items-center justify-center bg-primary">
-                    <div class="relative flex flex-col items-center justify-center space-y-10 text-white">
-                        <h1 class="is-hidden avatar text-5xl font-bold">Meet the team</h1>
-                        <img src="{{ Vite::asset('resources/images/curve-arrow.svg') }}" alt="Curve Arrow" class="absolutes" style="top: 50%; transform: translateY(-50%); left: calc(50% - 20px);">
-                        <div class="flex flex-row items-center justify-center space-x-20 text-white text-center">
-                            <div class="is-hidden avatar">
-                                <img src="{{ Vite::asset('resources/images/boy1.png') }}" alt="Placeholder Image" class="h-[200px]">
-                                <p class="text-2xl font-bold">Shawne Nuque</p>
-                                <p class="text-sm">Web Developer</p>
+            <div class="relative bg-white">
+                <section id="about">
+                    <div class="min-h-[80dvh] w-full flex items-center pb-16 justify-center border-b-2 border-gray-200">
+                        <div class="relative flex flex-col items-center justify-center text-primary tracking-widest">
+                            <h1 class="text-5xl font-bold relative mb-10">
+                                Meet the <span class="bg-primary text-white px-2">team</span>
+                            </h1>
+                            <p class="text-justify text-lg w-[40dvw] mx-auto tracking-normal leading-8 mb-16">We are a team of 3 students from <a href="https://www.facebook.com/LaConsolacionU" target="_blank" class="font-bold text-accent">La Consolacion University Philippines</a>, taking up Bachelor of Science in Information Technology. This system is part of our final capstone project.</p>
+                            <div class="flex flex-row items-center justify-center space-x-20 text-primary text-center">
+                                <div class="is-hidden avatar text-center flex flex-col items-center justify-center">
+                                    <img src="{{ Vite::asset('resources/images/boy1.png') }}" alt="Placeholder Image" class="h-[200px] transition-transform duration-300 ease-in-out hover:scale-110">
+                                    <p class="text-2xl font-bold mt-2">Shawne Nuque</p>
+                                    <p class="text-sm">Web Developer</p>
+                                </div>
+                                <div class="is-hidden avatar text-center flex flex-col items-center justify-center">
+                                    <img src="{{ Vite::asset('resources/images/girl1.png') }}" alt="Placeholder Image" class="h-[200px] transition-transform duration-300 ease-in-out hover:scale-110">
+                                    <p class="text-2xl font-bold mt-2">Lorrea Delos Reyes</p>
+                                    <p class="text-sm">Project Researcher</p>
+                                </div>
+                                <div class="is-hidden avatar text-center flex flex-col items-center justify-center">
+                                    <img src="{{ Vite::asset('resources/images/girl2.png') }}" alt="Placeholder Image" class="h-[200px] transition-transform duration-300 ease-in-out hover:scale-110">
+                                    <p class="text-2xl font-bold mt-2">Pauline Joy Panillo</p>
+                                    <p class="text-sm">Project Researcher</p>
+                                </div>
                             </div>
-                            <div class="is-hidden avatar">
-                                <img src="{{ Vite::asset('resources/images/girl1.png') }}" alt="Placeholder Image" class="h-[200px]">
-                                <p class="text-2xl font-bold">Lorrea Delos Reyes</p>
-                                <p class="text-sm">Project Researcher</p>
-                            </div>
-                            <div class="is-hidden avatar">
-                                <img src="{{ Vite::asset('resources/images/girl2.png') }}" alt="Placeholder Image" class="h-[200px]">
-                                <p class="text-2xl font-bold">Pauline Joy Panillo</p>
-                                <p class="text-sm">Project Researcher</p>
-                            </div>
-                        </div>                        
+                        </div>
                     </div>
-                </div>
-            </section>
-
-            <!-- contact section -->
-            <section id="contact">
-                <div class="min-h-[700px] flex items-center justify-center text-primary border-2 border-primary">
-                    <h1 class="is-hidden text-5xl font-bold">Contact</h1>
-                </div>
-            </section>
+                </section>
+                <!-- contact section -->
+                <section id="contact">
+                    <div class="min-h-[50dvh] w-full flex items-center justify-center py-16 border-b-2 border-gray-200">
+                        <div class="text-center">
+                            <h2 class="text-4xl font-bold text-primary mb-4">Contact Us</h2>
+                            <p class="text-lg mb-2">Email: <a href="mailto:info@example.com" class="text-accent">info@example.com</a></p>
+                            <p class="text-lg mb-2">Phone: <a href="tel:+1234567890" class="text-accent">+1 (234) 567-890</a></p>
+                            <p class="text-lg">Address: 123 Event St, City, Country</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
 
             <!-- footer -->
             <footer class="py-16 text-center text-sm text-black">

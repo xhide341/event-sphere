@@ -24,6 +24,7 @@ export default {
                 success: '#00C49F',
                 warning: '#FF8B00',
                 info: '#0081C6',
+                'custom-white': '#F5F5F5',
             },
         },
     },
