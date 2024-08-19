@@ -139,8 +139,8 @@
                             <h2 class="text-4xl font-bold mx-auto">
                                 <span class="bg-primary text-white px-2">How</span> it all started 🚀
                             </h2>
-                            <div class="flex items-center justify-between space-x-10 pt-10">
-                                <p class="text-justify text-lg w-[30dvw] mx-auto tracking-normal leading-8 mb-0 h-[300px]">
+                            <div class="flex items-center">
+                                <p class="text-justify text-lg w-[30dvw] mx-auto tracking-normal leading-8 mb-12">
                                     Our journey began with a simple idea: <span class="text-accent">to create a platform that connects people through events</span>. 
                                     As students, we encountered various challenges in organizing and promoting events. 
                                     This experience motivated us to develop a solution that simplifies event management. 
@@ -148,8 +148,8 @@
                                     With dedication and a passion for technology, we turned our vision into a reality. 💻✨
                                 </p>
                                 <!-- Updated YouTube video link -->
-                                <div class="px-4 mb-0 w-[30dvw]">
-                                    <iframe class="border rounded-2xl" width="100%" height="300" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                <div class="border rounded-lg p-4 mb-4">
+                                    <iframe width="100%" height="300" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                                 </div>
                             </div>
                         </div>

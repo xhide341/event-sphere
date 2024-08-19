@@ -148,8 +148,8 @@
                                     With dedication and a passion for technology, we turned our vision into a reality. 💻✨
                                 </p>
                                 <!-- Updated YouTube video link -->
-                                <div class="px-4 mb-0 w-[30dvw]">
-                                    <iframe class="border rounded-2xl" width="100%" height="300" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                <div class="border rounded-lg px-4 mb-0 w-[30dvw]">
+                                    <iframe class="rounded-md" width="100%" height="300" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                                 </div>
                             </div>
                         </div>

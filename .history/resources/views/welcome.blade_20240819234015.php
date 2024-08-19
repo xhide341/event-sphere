@@ -139,17 +139,17 @@
                             <h2 class="text-4xl font-bold mx-auto">
                                 <span class="bg-primary text-white px-2">How</span> it all started 🚀
                             </h2>
-                            <div class="flex items-center justify-between space-x-10 pt-10">
-                                <p class="text-justify text-lg w-[30dvw] mx-auto tracking-normal leading-8 mb-0 h-[300px]">
+                            <div class="flex items-center">
+                                <p class="text-justify text-lg w-[30dvw] mx-auto tracking-normal leading-8 mb-12">
                                     Our journey began with a simple idea: <span class="text-accent">to create a platform that connects people through events</span>. 
                                     As students, we encountered various challenges in organizing and promoting events. 
                                     This experience motivated us to develop a solution that simplifies event management. 
                                     Through collaboration and innovation, we aimed to enhance the event experience for everyone involved. 
                                     With dedication and a passion for technology, we turned our vision into a reality. 💻✨
                                 </p>
-                                <!-- Updated YouTube video link -->
-                                <div class="px-4 mb-0 w-[30dvw]">
-                                    <iframe class="border rounded-2xl" width="100%" height="300" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                <div class="border rounded-lg p-4 mb-4">
+                                    <img src="path/to/placeholder-image.png" alt="TBD" class="w-[40dvw] h-[300px] rounded-lg">
+                                    <p class="text-center text-sm text-gray-500">TBD</p>
                                 </div>
                             </div>
                         </div>
@@ -220,7 +220,7 @@
             </div>
 
             <!-- footer -->
-            <footer class="py-6 mx-auto flex items-center justify-between text-sm text-primary max-w-[93dvw] border-t-2 border-gray-200">
+            <footer class="py-6 mx-auto flex items-center justify-between text-sm text-primary max-w-[90dvw] border-t-2 border-gray-200">
                 <div class="flex items-center">
                     <img src="{{ Vite::asset('resources/images/eventsphere_logo.png') }}" alt="Logo" class="w-10 h-10 rounded-full">
                     <p class="font-logo text-lg ml-2">eventsphere</p>
