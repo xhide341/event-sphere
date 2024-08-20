@@ -1,6 +1,8 @@
 {
     "private": true,
     "type": "module",
+    "name": "eventsphere",
+    "version": "1.0.0",
     "scripts": {
         "dev": "vite",
         "build": "vite build"
