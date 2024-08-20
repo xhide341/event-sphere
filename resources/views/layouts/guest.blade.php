@@ -27,7 +27,7 @@
                     <a href="/" wire:navigate>
                         <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
                     </a>
-                    <p class="text-base text-primary font-logo">eventsphere</p>
+                    <p class="text-base text-primary font-logo mb-4">eventsphere</p>
                 </div>
                 {{ $slot }}
             </div>
