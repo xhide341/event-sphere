@@ -148,7 +148,7 @@
                                 With dedication and a passion for technology, we turned our vision into a reality. 💻✨
                             </p>
                             <div class="px-4 mb-0 w-full sm:w-[30dvw]">
-                                <iframe class="border rounded-2xl" width="100%" height="300" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                <iframe class="border rounded-2xl" width="100%" height="300" sandbox="allow-same-origin allow-scripts" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                             </div>
                         </div>
                     </div>
@@ -194,26 +194,7 @@
                         <p class="text-sm sm:text-base">Phone: <a href="tel:+1234567890" class="text-accent">+1 (234) 567-890</a></p>
                     </div>
                     <!-- Contact Form -->
-                    <form class="w-full max-w-md px-4" action="mailto:team@example.com" method="post" enctype="text/plain">
-                        @csrf
-                        <div class="mb-4">
-                            <label class="block text-sm mb-2" for="name">Name</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Enter your name" required>
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-sm mb-2" for="email">Email</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Enter your email" required>
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-sm mb-2" for="message">Message</label>
-                            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-32" id="message" placeholder="Enter your message" required></textarea>
-                        </div>
-                        <div class="flex items-center justify-center mt-6 sm:mt-10">
-                            <button class="min-w-fit w-32 bg-primary hover:bg-accent text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" onclick="this.form.action='mailto:team@example.com?subject=' + document.getElementById('name').value + ' - [some other subject details]&body=' + document.getElementById('message').value;">
-                                Submit
-                            </button>
-                        </div>
-                    </form>
+                     <livewire:welcome.contact-form/>
                 </div>
             </section>
 
