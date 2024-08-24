@@ -30,6 +30,7 @@ export default {
                 'alice-blue': '#F0F8FF',
                 'patten-blue': '#D5E7F1',
                 'angora-blue': '#B8C6D9',
+                'buzz': '#F2C744',
                 'white-900': '#F5F5F5',
                 'white-800': '#EBEBEB',
                 'white-700': '#D6D6D6',

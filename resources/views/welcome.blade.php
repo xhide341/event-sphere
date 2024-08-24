@@ -28,7 +28,7 @@
                                 <p class="font-logo text-lg ml-2">eventsphere</p>
                             </div>
 
-                            <nav class="flex flex-row text-normal space-x-4 sm:space-y-0 sm:space-x-10">
+                            <nav class="flex flex-row text-base space-x-4 sm:space-y-0 sm:space-x-12">
                                 <a href="#home" class="hover:text-white-900 relative group transition-transform duration-100 ease-in-out hover:-rotate-2">
                                     <span class="relative z-10">Home</span>
                                     <span class="absolute left-0 bottom-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-left"></span>
@@ -61,7 +61,7 @@
                 </section>
                 <!-- benefits section -->
                 <section id="benefits">
-                    <div class="relative w-full flex flex-col justify-around px-4 space-y-6 mt-auto sm:space-y-0 sm:flex-row sm:space-x-6 sm:w-[90dvw]">
+                    <div class="relative w-full flex flex-col justify-around px-4 space-y-6 mt-auto sm:space-y-0 sm:flex-row sm:space-x-6 sm:w-[80dvw]">
                         <div class="flex flex-col flex-wrap text-center bg-gray-100 p-4 rounded-lg shadow-md">
                             <div class="flex items-center justify-center mb-2">
                                 <span class="text-green-500">✔️</span>
@@ -69,7 +69,9 @@
                             </div>
                             <p class="text-gray-700 text-sm break-words">Streamline the process of organizing events with our user-friendly platform.</p>
                             <div class="flex justify-center mt-2">
-                                {{ '★ ★ ★ ★ ★' }}
+                                @for ($i = 0; $i < 5; $i++)
+                                    <img src="{{ Vite::asset('resources/images/star.svg') }}" alt="Star" class="w-4 h-4 inline-block" />
+                                @endfor
                             </div>
                         </div>
                         <div class="flex flex-col flex-wrap text-center bg-gray-100 p-4 rounded-lg shadow-md">
@@ -79,7 +81,9 @@
                             </div>
                             <p class="text-gray-700 text-sm break-words">Easily connect with participants and keep them informed about event updates.</p>
                             <div class="flex justify-center mt-2">
-                                {{ '★ ★ ★ ★ ★' }}
+                                @for ($i = 0; $i < 5; $i++)
+                                    <img src="{{ Vite::asset('resources/images/star.svg') }}" alt="Star" class="w-4 h-4 inline-block" />
+                                @endfor
                             </div>
                         </div>
                         <div class="flex flex-col flex-wrap text-center bg-gray-100 p-4 rounded-lg shadow-md">
@@ -89,7 +93,9 @@
                             </div>
                             <p class="text-gray-700 text-sm break-words">Gain valuable insights into attendee engagement and event performance.</p>
                             <div class="flex justify-center mt-2">
-                                {{ '★ ★ ★ ★ ★' }}
+                                @for ($i = 0; $i < 5; $i++)
+                                    <img src="{{ Vite::asset('resources/images/star.svg') }}" alt="Star" class="w-4 h-4 inline-block" />
+                                @endfor
                             </div>
                         </div>
                     </div>
@@ -98,7 +104,7 @@
 
             <!-- powered by section -->
             <section id="powered-by">
-                <div class="relative w-[90dvw] flex flex-col items-center justify-center mx-auto py-8 px-4 my-8 border-2 border-primary bg-white shadow-lg rounded-lg sm:px-8 sm:-mt-12 sm:z-10 sm:my-0 sm:w-[60dvw] sm:flex-nowrap">
+                <div class="relative w-[90dvw] flex flex-col items-center justify-center mx-auto py-8 px-4 my-8 border-2 border-primary bg-white shadow-lg rounded-lg sm:px-8 sm:-mt-12 sm:z-10 sm:my-0 sm:w-[50dvw] sm:flex-nowrap">
                     <div class="flex flex-wrap space-y-4 space-x-6 items-center justify-center sm:flex-row sm:space-y-0">
                         <h2 class="text-normal font-semibold text-primary sm:text-lg">Powered by:</h2>
                         <a href="https://laravel.com" target="_blank" class="hover:scale-110 transition-transform duration-300">
@@ -133,7 +139,7 @@
             </section>
             
             <!-- how it all started -->
-                <section id="how-it-all-started">
+            <section id="how-it-all-started">
                 <div class="relative min-h-[70dvh] flex flex-col items-center justify-center text-center w-full pb-10 text-primary tracking-widest px-4 sm:pt-10">
                     <div class="bg-patten-blue p-8 rounded-lg mb-6 sm:p-16">
                         <h2 class="text-2xl font-bold mx-auto sm:text-4xl">
