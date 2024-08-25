@@ -19,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Disable lazy loading
+        \Illuminate\Database\Eloquent\Model::preventLazyLoading(!app()->isProduction());
     }
 }
