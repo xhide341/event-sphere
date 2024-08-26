@@ -1,0 +1,52 @@
+models:
+  Student:
+    name: string
+    email: string unique
+    phone: string
+    department_id: id foreign unsigned
+    year_level: integer
+    relationships:
+      belongsTo: Department
+      belongsToMany: Event
+
+  Event:
+    name: string
+    description: string
+    start_date: datetime
+    end_date: datetime
+    organizer_id: id foreign unsigned
+    venue_id: id foreign unsigned
+    status: string
+    relationships:
+      belongsTo: Organizer, Venue
+      belongsToMany: Student
+
+  Venue:
+    name: string
+    location: string
+    capacity: integer
+    relationships:
+      hasMany: Event
+
+  Registration:
+    event_id: id foreign unsigned
+    student_id: id foreign unsigned
+    registration_date: datetime
+    relationships:
+      belongsTo: Event, Student
+
+  Department:
+    name: string
+    relationships:
+      hasMany: Student
+
+  Organizer:
+    name: string
+    email: string unique
+    role: string
+    relationships:
+      hasMany: Event
+  # ...
+
+# controllers:
+#   # ...
