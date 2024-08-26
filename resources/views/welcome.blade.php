@@ -25,7 +25,7 @@
                         <header class="py-4 space-y-4 flex flex-col items-center justify-between w-screen sm:flex-row sm:p-6 sm:space-y-0">
                             <div class="flex items-center">
                                 <img src="{{ Vite::asset('resources/images/LCUP.png') }}" alt="Logo" class="w-10 h-10 rounded-full">
-                                <p class="font-logo text-lg ml-2">eventsphere</p>
+                                <p class="font-logo text-lg ml-2">{{config('app.name')}}</p>
                             </div>
 
                             <nav class="flex flex-row text-base space-x-4 sm:space-y-0 sm:space-x-20">
