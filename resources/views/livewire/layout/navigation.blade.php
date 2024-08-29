@@ -16,11 +16,11 @@ new class extends Component
     }
 }; ?>
 
-<div class="flex font-poppins z-40">
-    <aside class="flex flex-col w-64 min-h-screen h-auto px-4 py-8 overflow-y-auto bg-white-900 border-r border-gray-200">
+<div class="flex font-poppins z-40 bg-alice-blue m-4 rounded-xl shadow-xl">
+    <aside class="flex flex-col w-80 min-h-screen h-auto px-6 py-8 overflow-y-auto">
         <div class="mx-auto flex align-center space-x-2">
             <x-application-logo class="w-auto h-6 sm:h-7"/>
-            <span class="text-primary text-base font-logo">{{config('app.name')}}</span>
+            <span class="text-primary text-base font-logo">{{ config('app.name') }}</span>
         </div>
 
         <div class="flex flex-col items-center mt-6 -mx-2">
@@ -31,7 +31,7 @@ new class extends Component
 
         <div class="flex flex-col justify-between flex-1 mt-6">
             <nav>
-                <a class="flex items-center px-4 py-2 mt-5 text-primary transition-colors duration-300 transform rounded-lg hover:bg-gray-800 hover:text-gray-200 active:text-white" href="#">
+                <a class="flex items-center px-4 py-2 mt-5 {{ request()->routeIs('dashboard') ? 'text-gray-200 bg-gray-800 active:bg-gray-800 focus:bg-gray-800' : 'text-primary' }} transition-colors duration-300 transform rounded-lg hover:bg-gray-800 hover:text-gray-200 active:text-white" href="{{ route('dashboard') }}">
                     <svg class="w-5 h-5 transition-colors duration-300 hover:stroke-gray-200" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M19 11H5M19 11C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11M19 11V9C19 7.89543 18.1046 7 17 7M5 11V9C5 7.89543 5.89543 7 7 7M7 7V5C7 3.89543 7.89543 3 9 3H15C16.1046 3 17 3.89543 17 5V7M7 7H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
@@ -53,7 +53,7 @@ new class extends Component
                         <path d="M15 5V7M15 11V13M15 17V19M5 5C3.89543 5 3 5.89543 3 7V10C4.10457 10 5 10.8954 5 12C5 13.1046 4.10457 14 3 14V17C3 18.1046 3.89543 19 5 19H19C20.1046 19 21 18.1046 21 17V14C19.8954 14 19 13.1046 19 12C19 10.8954 19.8954 10 21 10V7C21 5.89543 20.1046 5 19 5H5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
 
-                    <span class="mx-4 font-medium">Tickets</span>
+                    <span class="mx-4 font-medium">Events</span>
                 </a>
 
                 <a class="flex items-center px-4 py-2 mt-5 text-primary transition-colors duration-300 transform rounded-lg hover:bg-gray-800 hover:text-gray-200 active:text-white" href="#">

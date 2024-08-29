@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
+        <h2 class="font-semibold text-xl text-primary leading-tight">
+            {{ __('User Profile') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-screen mx-auto sm:px-10 lg:px-12 space-y-6">
+    <div class="py-6">
+        <div class="max-w-screen mx-auto sm:px-4 lg:px-6 space-y-6">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     <livewire:profile.update-profile-information-form />
