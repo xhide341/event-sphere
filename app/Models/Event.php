@@ -47,4 +47,9 @@ class Event extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    public function registrants()
+    {
+        return $this->hasMany(Registration::class, 'event_id');
+    }
 }

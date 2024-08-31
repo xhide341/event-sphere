@@ -52,4 +52,10 @@ class User extends Authenticatable
         return $this->belongsTo(Department::class);
     }
 
+    public function registeredEvents()
+    {
+        return $this->hasMany(Registration::class, 'user_id');
+    }
+
+
 }
