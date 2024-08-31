@@ -8,7 +8,7 @@ new class extends Component
 }; ?>
 
 <section>
-    <div class="relative flex w-full max-w-[26rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
+    <div class="relative flex w-full max-w-[26rem] flex-col rounded-xl bg-gray-200 bg-clip-border text-gray-700 shadow-lg">
       <div class="relative mx-4 mt-4 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
         <img
           src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"
@@ -36,7 +36,7 @@ new class extends Component
       <div class="p-6">
         <div class="mb-3 flex items-center justify-between">
           <h5 class="block font-sans text-xl font-medium leading-snug tracking-normal text-blue-gray-900 antialiased">
-            Wooden House, Florida
+            <!-- insert title here -->
           </h5>
           <p class="flex items-center gap-1.5 font-sans text-base font-normal leading-relaxed text-blue-gray-900 antialiased">
             <svg
@@ -56,13 +56,12 @@ new class extends Component
           </p>
         </div>
         <p class="block font-sans text-base font-light leading-relaxed text-gray-700 antialiased">
-          Enter a freshly updated and thoughtfully furnished peaceful home
-          surrounded by ancient trees, stone walls, and open meadows.
+          <!-- insert description here -->
         </p>
         <div class="group mt-8 inline-flex flex-wrap items-center gap-3">
           <span
             data-tooltip-target="money"
-            class="cursor-pointer rounded-full border border-pink-500/5 bg-pink-500/5 p-3 text-pink-500 transition-colors hover:border-pink-500/10 hover:bg-pink-500/10 hover:!opacity-100 group-hover:opacity-70"
+            class="cursor-pointer rounded-full border border-patten-blue bg-white p-3 text-primary-500 transition-colors hover:border-primary-500/10 hover:bg-primary-500/10 hover:!opacity-100 group-hover:opacity-70"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +81,7 @@ new class extends Component
           </span>
           <span
             data-tooltip-target="wifi"
-            class="cursor-pointer rounded-full border border-pink-500/5 bg-pink-500/5 p-3 text-pink-500 transition-colors hover:border-pink-500/10 hover:bg-pink-500/10 hover:!opacity-100 group-hover:opacity-70"
+            class="cursor-pointer rounded-full border border-patten-blue bg-white p-3 text-primary-500 transition-colors hover:border-primary-500/10 hover:bg-primary-500/10 hover:!opacity-100 group-hover:opacity-70"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +100,7 @@ new class extends Component
     
           <span
             data-tooltip-target="bedrooms"
-            class="cursor-pointer rounded-full border border-pink-500/5 bg-pink-500/5 p-3 text-pink-500 transition-colors hover:border-pink-500/10 hover:bg-pink-500/10 hover:!opacity-100 group-hover:opacity-70"
+            class="cursor-pointer rounded-full border border-patten-blue bg-white p-3 text-primary-500 transition-colors hover:border-primary-500/10 hover:bg-primary-500/10 hover:!opacity-100 group-hover:opacity-70"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +116,7 @@ new class extends Component
     
           <span
             data-tooltip-target="tv"
-            class="cursor-pointer rounded-full border border-pink-500/5 bg-pink-500/5 p-3 text-pink-500 transition-colors hover:border-pink-500/10 hover:bg-pink-500/10 hover:!opacity-100 group-hover:opacity-70"
+            class="cursor-pointer rounded-full border border-patten-blue bg-white p-3 text-primary-500 transition-colors hover:border-primary-500/10 hover:bg-primary-500/10 hover:!opacity-100 group-hover:opacity-70"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -136,7 +135,7 @@ new class extends Component
           </span>
           <span
             data-tooltip-target="fire"
-            class="cursor-pointer rounded-full border border-pink-500/5 bg-pink-500/5 p-3 text-pink-500 transition-colors hover:border-pink-500/10 hover:bg-pink-500/10 hover:!opacity-100 group-hover:opacity-70"
+            class="cursor-pointer rounded-full border border-patten-blue bg-white p-3 text-primary-500 transition-colors hover:border-primary-500/10 hover:bg-primary-500/10 hover:!opacity-100 group-hover:opacity-70"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -154,7 +153,7 @@ new class extends Component
           </span>
           <span
             data-tooltip-target="more"
-            class="cursor-pointer rounded-full border border-pink-500/5 bg-pink-500/5 p-3 text-pink-500 transition-colors hover:border-pink-500/10 hover:bg-pink-500/10 hover:!opacity-100 group-hover:opacity-70"
+            class="cursor-pointer rounded-full border border-patten-blue bg-white p-3 text-primary-500 transition-colors hover:border-primary-500/10 hover:bg-white-500/10 hover:!opacity-100 group-hover:opacity-70"
           >
             +20
           </span>
@@ -163,11 +162,11 @@ new class extends Component
       </div>
       <div class="p-6 pt-3">
         <button
-          class="block w-full select-none rounded-lg bg-pink-500 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          class="block w-full select-none rounded-lg bg-primary py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-primary-500/20 transition-all hover:shadow-lg hover:shadow-primary-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           type="button"
           data-ripple-light="true"
         >
-          Reserve
+          Register
         </button>
       </div>
     </div>

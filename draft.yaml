@@ -1,25 +1,15 @@
 models:
-  Student:
-    name: string
-    email: string unique
-    phone: string
-    department_id: id foreign unsigned
-    year_level: integer
-    relationships:
-      belongsTo: Department
-      belongsToMany: Event
 
   Event:
     name: string
     description: string
     start_date: datetime
     end_date: datetime
-    organizer_id: id foreign unsigned
     venue_id: id foreign unsigned
     status: string
     relationships:
-      belongsTo: Organizer, Venue
-      belongsToMany: Student
+      belongsTo: Venue
+      belongsToMany: User
 
   Venue:
     name: string
@@ -30,23 +20,14 @@ models:
 
   Registration:
     event_id: id foreign unsigned
-    student_id: id foreign unsigned
+    user_id: id foreign unsigned
     registration_date: datetime
     relationships:
-      belongsTo: Event, Student
+      belongsTo: Event, User
 
   Department:
     name: string
     relationships:
-      hasMany: Student
+      hasMany: User
 
-  Organizer:
-    name: string
-    email: string unique
-    role: string
-    relationships:
-      hasMany: Event
-  # ...
-
-# controllers:
-#   # ...
+  # Additional models can be added here as needed

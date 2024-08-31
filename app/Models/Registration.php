@@ -17,7 +17,7 @@ class Registration extends Model
      */
     protected $fillable = [
         'event_id',
-        'student_id',
+        'user_id',
         'registration_date',
     ];
 
@@ -29,7 +29,7 @@ class Registration extends Model
     protected $casts = [
         'id' => 'integer',
         'event_id' => 'integer',
-        'student_id' => 'integer',
+        'user_id' => 'integer',
         'registration_date' => 'datetime',
     ];
 
@@ -38,8 +38,8 @@ class Registration extends Model
         return $this->belongsTo(Event::class);
     }
 
-    public function student(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(Student::class);
+        return $this->belongsTo(User::class);
     }
 }

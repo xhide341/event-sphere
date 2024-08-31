@@ -23,7 +23,7 @@ class VenueFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'location' => $this->faker->word(),
-            'capacity' => $this->faker->numberBetween(-10000, 10000),
+            'capacity' => $this->faker->numberBetween(0, 1000),
         ];
     }
 }

@@ -21,7 +21,7 @@ class DepartmentFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
+            'name' => strtoupper($this->faker->words(rand(3, 4), true)),
         ];
     }
 }

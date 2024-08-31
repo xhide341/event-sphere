@@ -21,9 +21,9 @@ class Event extends Model
         'description',
         'start_date',
         'end_date',
-        'organizer_id',
         'venue_id',
         'status',
+        'image',
     ];
 
     /**
@@ -35,22 +35,16 @@ class Event extends Model
         'id' => 'integer',
         'start_date' => 'datetime',
         'end_date' => 'datetime',
-        'organizer_id' => 'integer',
         'venue_id' => 'integer',
     ];
-
-    public function organizer(): BelongsTo
-    {
-        return $this->belongsTo(Organizer::class);
-    }
 
     public function venue(): BelongsTo
     {
         return $this->belongsTo(Venue::class);
     }
 
-    public function students(): BelongsToMany
+    public function users(): BelongsToMany
     {
-        return $this->belongsToMany(Student::class);
+        return $this->belongsToMany(User::class);
     }
 }

@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('description');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
-            $table->foreignId('organizer_id')->constrained()->unsigned();
             $table->foreignId('venue_id')->constrained()->unsigned();
             $table->string('status');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
 

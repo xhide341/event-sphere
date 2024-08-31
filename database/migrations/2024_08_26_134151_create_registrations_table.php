@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('registrations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('event_id')->constrained()->unsigned();
-            $table->foreignId('student_id')->constrained()->unsigned();
+            $table->foreignId('user_id')->constrained()->unsigned();
             $table->dateTime('registration_date');
             $table->timestamps();
         });

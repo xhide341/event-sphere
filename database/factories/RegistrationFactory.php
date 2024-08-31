@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Event;
 use App\Models\Registration;
-use App\Models\Student;
+use App\Models\User;
 
 class RegistrationFactory extends Factory
 {
@@ -24,7 +24,7 @@ class RegistrationFactory extends Factory
     {
         return [
             'event_id' => Event::factory(),
-            'student_id' => Student::factory(),
+            'user_id' => User::factory(),
             'registration_date' => $this->faker->dateTime(),
         ];
     }
