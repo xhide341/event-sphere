@@ -13,7 +13,7 @@ new class extends Component
 }; ?>
 
 <section>
-    <div class="relative flex max-w-[26rem] h-[30rem] flex-col rounded-xl bg-gray-200 bg-clip-border text-gray-700 shadow-lg">
+    <div class="relative flex w-[21rem] h-[30rem] flex-col rounded-xl bg-gray-200 bg-clip-border text-gray-700 shadow-lg">
       <div class="relative mx-4 mt-4 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
         <img
           src="{{ $event->image }}"
@@ -61,8 +61,8 @@ new class extends Component
             5.0
           </p>
         </div>
-        <div class="min-h-[3rem]">
-          <p class="text-sm leading-normal font-light text-gray-700 antialiased line-clamp-2">
+        <div class="min-h-[2.5rem]">
+          <p class="line-clamp-2 text-sm font-light text-gray-700">
             {{ $event->description }}
           </p>
         </div>
@@ -158,12 +158,6 @@ new class extends Component
                 clip-rule="evenodd"
               ></path>
             </svg>
-          </span>
-          <span
-            data-tooltip-target="more"
-            class="cursor-pointer rounded-full border border-patten-blue bg-white p-3 text-primary-500 transition-colors hover:border-primary-500/10 hover:bg-white-500/10 hover:!opacity-100 group-hover:opacity-70"
-          >
-            +20
           </span>
     
         </div>

@@ -9,7 +9,7 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::get('/dashboard', [UserEventController::class, 'showRegisteredEvents'])
+Route::get('/dashboard', [UserEventController::class, 'showEvents'])
 ->middleware(['auth', 'verified'])
 ->name('dashboard');
 

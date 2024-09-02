@@ -20,13 +20,16 @@
     </head>
     <body class="font-poppins antialiased">
         <div class="flex min-h-screen bg-gray-200">
-            <livewire:layout.navigation class="w-1/4" />
             
-            <div class="flex-1"> <!-- Main content wrapper -->
+            <div class="fixed inset-y-0 left-0 flex flex-wrap max-w-64 w-full block z-10 bg-alice-blue rounded-xl shadow-none m-4 transition-all duration-200">
+                @include('livewire.layout.navigation')
+            </div>
+            
+            <div class="relative w-screen max-w-screen py-4 ml-72">
                 <!-- Page Heading -->
                 @if (isset($header))
                     <header>
-                        <div class="max-w-screen mx-auto mt-4 py-6 px-4 sm:px-6 lg:px-8">
+                        <div class="mx-auto mt-4 px-4">
                             {{ $header }}
                         </div>
                     </header>
@@ -37,6 +40,7 @@
                     {{ $slot }}
                 </main>
             </div>
+
         </div>
     </body>
 </html>

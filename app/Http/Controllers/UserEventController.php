@@ -14,25 +14,22 @@ class UserEventController extends Controller
      *
      * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
      */
-    public function showRegisteredEvents()
-    {
-        // Get the currently authenticated user
+
+    public function showEvents() {
         $user = Auth::user();
 
-        // Check if the user exists
         if ($user) {
-            // Retrieve the events that the user has registered for
             $registeredEvents = Event::whereIn('id', function ($query) use ($user) {
                 $query->select('event_id')
                       ->from('registrations')
                       ->where('user_id', $user->id);
-            })->simplePaginate(3);
+            })->paginate(4, ['*'], 'registeredEventsPage');
 
-            // Pass the registered events to the dashboard view
-            return view('dashboard', compact('registeredEvents'));
+            $allEvents = Event::paginate(4, ['*'], 'allEventsPage');
+
+            return view('dashboard', compact('registeredEvents', 'allEvents'));
         }
 
-        // Handle case where user is not authenticated
         return redirect()->route('login')->with('error', 'Please log in to view your registered events.');
     }
 }

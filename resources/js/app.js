@@ -1,5 +1,6 @@
 import './bootstrap';
 
+
 if (window.location.pathname === '/') {
     import('./welcome');
 }
