@@ -28,7 +28,7 @@ class EventFactory extends Factory
             'end_date' => $this->faker->dateTimeBetween('+1 month', '+2 months'),
             'venue_id' => Venue::factory(),
             'status' => $this->faker->randomElement(['Scheduled', 'Cancelled', 'Postponed']),
-            'image' => $this->faker->imageUrl(640, 480, 'event', true),
+            'image' => 'https://unsplash.it/640/480?random=' . Str::random(10),
         ];
     }
 }

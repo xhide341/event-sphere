@@ -4,19 +4,25 @@ use Livewire\Volt\Component;
 
 new class extends Component
 {
+  public $event;
 
+  public function mount($event)
+  {
+      $this->event = $event;
+  }
 }; ?>
 
 <section>
-    <div class="relative flex w-full max-w-[26rem] flex-col rounded-xl bg-gray-200 bg-clip-border text-gray-700 shadow-lg">
+    <div class="relative flex max-w-[26rem] h-[30rem] flex-col rounded-xl bg-gray-200 bg-clip-border text-gray-700 shadow-lg">
       <div class="relative mx-4 mt-4 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
         <img
-          src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"
-          alt="ui/ux review check"
+          src="{{ $event->image }}"
+          alt="{{ $event->name }}"
+          class="w-full h-[10rem] object-cover "
         />
         <div class="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
         <button
-          class="!absolute top-4 right-4 h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-red-500 transition-all hover:bg-red-500/10 active:bg-red-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          class="!absolute top-4 right-4 h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-full text-center align-middle text-xs font-medium uppercase text-red-500 transition-all hover:bg-red-500/10 active:bg-red-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           type="button"
           data-ripple-dark="true"
         >
@@ -35,10 +41,10 @@ new class extends Component
       </div>
       <div class="p-6">
         <div class="mb-3 flex items-center justify-between">
-          <h5 class="block font-sans text-xl font-medium leading-snug tracking-normal text-blue-gray-900 antialiased">
-            <!-- insert title here -->
+          <h5 class="block text-xl font-medium leading-snug tracking-normal text-blue-gray-900 antialiased truncate">
+            {{ $event->name }}
           </h5>
-          <p class="flex items-center gap-1.5 font-sans text-base font-normal leading-relaxed text-blue-gray-900 antialiased">
+          <p class="flex items-center gap-1.5 text-base font-normal leading-relaxed text-blue-gray-900 antialiased">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -55,9 +61,11 @@ new class extends Component
             5.0
           </p>
         </div>
-        <p class="block font-sans text-base font-light leading-relaxed text-gray-700 antialiased">
-          <!-- insert description here -->
-        </p>
+        <div class="min-h-[3rem]">
+          <p class="text-sm leading-normal font-light text-gray-700 antialiased line-clamp-2">
+            {{ $event->description }}
+          </p>
+        </div>
         <div class="group mt-8 inline-flex flex-wrap items-center gap-3">
           <span
             data-tooltip-target="money"
@@ -162,7 +170,7 @@ new class extends Component
       </div>
       <div class="p-6 pt-3">
         <button
-          class="block w-full select-none rounded-lg bg-primary py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-primary-500/20 transition-all hover:shadow-lg hover:shadow-primary-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          class="block w-full select-none rounded-lg bg-primary py-3.5 px-7 text-center align-middle text-sm font-bold uppercase text-white shadow-md shadow-primary-500/20 transition-all hover:shadow-lg hover:shadow-primary-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           type="button"
           data-ripple-light="true"
         >

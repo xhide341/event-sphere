@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Registration; // Make sure to include the Registration model
+use App\Models\Event; // Assuming Event model is defined
 
 class UserEventController extends Controller
 {
@@ -20,11 +21,12 @@ class UserEventController extends Controller
 
         // Check if the user exists
         if ($user) {
-            // Retrieve the registrations with their related events for the authenticated user
-            $registeredEvents = Registration::with('event') // Eager load the event relationship
-                ->where('user_id', $user->id)
-                ->get()
-                ->pluck('event'); // Get only the event part of the registration
+            // Retrieve the events that the user has registered for
+            $registeredEvents = Event::whereIn('id', function ($query) use ($user) {
+                $query->select('event_id')
+                      ->from('registrations')
+                      ->where('user_id', $user->id);
+            })->simplePaginate(3);
 
             // Pass the registered events to the dashboard view
             return view('dashboard', compact('registeredEvents'));

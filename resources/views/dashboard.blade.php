@@ -10,21 +10,19 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex flex-col space-y-4 text-primary text-xl font-semibold p-6 text-gray-900">
                     <p class="mb-6">My Events</p>
-                    <div>
-                        {{-- <livewire:dashboard.events /> --}}
+                    <div class="flex flex-row justify-center">
                         @if($registeredEvents->isEmpty())
                             <p>No events registered.</p>
                         @else
-                            <ul>
-                                @foreach($registeredEvents as $event)
-                                    <li>
-                                        <strong>{{ $event->name }}</strong><br>
-                                        {{ $event->description }}<br>
-                                        <em>{{ $event->start_date->format('F j, Y') }} to {{ $event->end_date->format('F j, Y') }}</em>
-                                    </li>
-                                @endforeach
-                            </ul>
+                        <div class="flex flex-row space-x-4">
+                            @foreach($registeredEvents as $event)
+                            <livewire:dashboard.events :event="$event" />
+                            @endforeach
+                        </div>
                         @endif
+                    </div>
+                    <div class="mt-4">
+                        {{ $registeredEvents->links() }}
                     </div>
                 </div>
             </div>
