@@ -19,11 +19,9 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-poppins antialiased">
-        <div class="flex min-h-screen bg-gray-200">
+        <div class="flex min-h-screen bg-[#91AAB4]">
             
-            <div class="fixed inset-y-0 left-0 flex flex-wrap max-w-64 w-full block z-10 bg-alice-blue rounded-xl shadow-none m-4 transition-all duration-200">
-                @include('livewire.layout.navigation')
-            </div>
+            <livewire:layout.sidebar/>
             
             <div class="relative w-screen max-w-screen py-4 ml-72">
                 <!-- Page Heading -->
