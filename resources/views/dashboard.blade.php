@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <!--  -->
-        <div class="flex flex-row flex-wrap items-center">
+        <div class="rounded-lg flex flex-row flex-wrap items-center">
             <nav class="bg-transparent antialiased text-[#193441]">
                 <ol class="flex flex-wrap pt-1 mr-8 bg-transparent">
                     <li class="text-sm breadcrumb-item">
@@ -22,7 +22,7 @@
     </x-slot>
 
     <div class="pt-4">
-        <div class="max-w-screen mx-auto sm:pr-4 lg:pr-6 space-y-6">
+        <div class="max-w-screen mx-auto pr-4 lg:pr-6 space-y-6">
             <div class="bg-milk-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex flex-col space-y-6 text-primary text-xl font-semibold p-6 text-gray-900">
                     <p class="mb-2">My Events</p>
