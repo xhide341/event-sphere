@@ -25,7 +25,7 @@
                 <livewire:layout.sidebar/>
             </div>
             
-            <div class="w-screen p-2 xl:p-4 2xl:ml-72">
+            <div class="w-screen py-2 p-2 xl:py-4 2xl:pr-4 2xl:ml-72">
                 <!-- Page Heading -->
                 @if (isset($header))
                     <header>

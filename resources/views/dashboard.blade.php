@@ -16,8 +16,10 @@
                 <h2 class="font-semibold text-xl capitalize">
                     {{ __('Dashboard') }}
                 </h2>
-            </nav>    
-            <livewire:dashboard.toggle-sidebar/>
+            </nav>
+            <div class="block 2xl:hidden">
+                <livewire:dashboard.toggle-sidebar/>
+            </div>
         </div>
     </x-slot>
 
