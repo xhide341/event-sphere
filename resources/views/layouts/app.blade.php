@@ -19,17 +19,17 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-poppins antialiased">
-        <div class="flex bg-[#91AAB4] px-6 sm:px-0">
+        <div class="flex bg-[#91AAB4] min-w-screen">
             
             <div>
                 <livewire:layout.sidebar/>
             </div>
             
-            <div class="relative min-w-screen w-screen py-4 xl:ml-72">
+            <div class="w-screen p-2 xl:p-4 2xl:ml-72">
                 <!-- Page Heading -->
                 @if (isset($header))
                     <header>
-                        <div class="mx-auto sm:px-4">
+                        <div class="mx-auto px-4">
                             {{ $header }}
                         </div>
                     </header>

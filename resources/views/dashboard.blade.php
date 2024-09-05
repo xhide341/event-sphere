@@ -22,17 +22,19 @@
     </x-slot>
 
     <div class="pt-4">
-        <div class="max-w-screen mx-auto pr-4 lg:pr-6 space-y-6">
-            <div class="bg-milk-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="flex flex-col space-y-6 text-primary text-xl font-semibold p-6 text-gray-900">
+        <div class="max-w-dvw mx-auto space-y-6">
+            <div class="bg-milk-white overflow-hidden shadow-sm rounded-lg">
+                <div class="flex flex-col space-y-2 md:space-y-4 text-primary text-xl font-semibold p-4">
                     <p class="mb-2">My Events</p>
                     <div>
                         @if($registeredEvents->isEmpty())
                             <p>No events registered.</p>
                         @else
-                        <div class="flex flex-row space-x-6 justify-evenly">
+                        <div class="flex overflow-x-auto pb-4 space-x-4 2xl:justify-evenly">
                             @foreach($registeredEvents as $event)
-                                <livewire:dashboard.events :event="$event" />
+                                <div class="flex-shrink-0">
+                                    <livewire:dashboard.events :event="$event" />
+                                </div>
                             @endforeach
                         </div>
                         @endif
@@ -42,16 +44,18 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-milk-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="flex flex-col space-y-6 text-primary text-xl font-semibold p-6 text-gray-900">
+            <div class="bg-milk-white overflow-hidden shadow-sm rounded-lg">
+                <div class="flex flex-col space-y-2 md:space-y-4 text-primary text-xl font-semibold p-4">
                     <p class="mb-2">All Events</p>
                     <div>
                         @if($allEvents->isEmpty())
                             <p>No events registered.</p>
                         @else
-                        <div class="flex flex-row space-x-6 justify-evenly">
+                        <div class="flex overflow-x-auto pb-4 space-x-4 2xl:justify-evenly">
                             @foreach($allEvents as $event)
-                                <livewire:dashboard.events :event="$event" />
+                                <div class="flex-shrink-0">
+                                    <livewire:dashboard.events :event="$event" />
+                                </div>
                             @endforeach
                         </div>
                         @endif
