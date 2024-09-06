@@ -21,9 +21,10 @@ class Event extends Model
         'description',
         'start_date',
         'end_date',
-        'venue_id',
+        'venue',
         'status',
         'image',
+        'capacity',
     ];
 
     /**
@@ -34,14 +35,12 @@ class Event extends Model
     protected $casts = [
         'id' => 'integer',
         'start_date' => 'datetime',
-        'end_date' => 'datetime',
-        'venue_id' => 'integer',
+        'start_time' => 'string',
+        'end_time' => 'string',
+        'capacity' => 'integer',
+        'venue' => 'string',
     ];
 
-    public function venue(): BelongsTo
-    {
-        return $this->belongsTo(Venue::class);
-    }
 
     public function users(): BelongsToMany
     {
@@ -51,5 +50,20 @@ class Event extends Model
     public function registrants()
     {
         return $this->hasMany(Registration::class, 'event_id');
+    }
+
+    public function department(): BelongsTo
+    {
+        return $this->belongsTo(Department::class);
+    }
+
+    /**
+     * Get the number of participants for the event.
+     *
+     * @return int
+     */
+    public function getParticipantCountAttribute(): int
+    {
+        return $this->registrants()->count();
     }
 }

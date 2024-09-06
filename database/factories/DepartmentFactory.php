@@ -20,8 +20,14 @@ class DepartmentFactory extends Factory
      */
     public function definition(): array
     {
+        $startTime = $this->faker->time();
+        $endTime = date('H:i:s', strtotime($startTime) + rand(3600, 7200)); // 1-2 hours later
+
         return [
-            'name' => strtoupper($this->faker->words(rand(3, 4), true)),
+            'name' => strtoupper($this->faker->lexify(str_repeat('?', rand(3, 4)))),
+            'start_date' => $this->faker->date('l, F j, Y'),
+            'start_time' => $startTime,
+            'end_time' => $endTime,
         ];
     }
 }

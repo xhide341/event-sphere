@@ -25,7 +25,7 @@
 
     <div class="pt-4">
         <div class="max-w-dvw mx-auto space-y-6">
-            <div class="bg-milk-white overflow-hidden shadow-sm rounded-lg">
+            <div class="bg-white overflow-hidden shadow-sm rounded-lg">
                 <div class="flex flex-col space-y-2 md:space-y-4 text-primary text-xl font-semibold p-4">
                     <p class="mb-2">My Events</p>
                     <div>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-milk-white overflow-hidden shadow-sm rounded-lg">
+            <div class="bg-white overflow-hidden shadow-sm rounded-lg">
                 <div class="flex flex-col space-y-2 md:space-y-4 text-primary text-xl font-semibold p-4">
                     <p class="mb-2">All Events</p>
                     <div>

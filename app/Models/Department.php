@@ -17,6 +17,9 @@ class Department extends Model
      */
     protected $fillable = [
         'name',
+        'start_date',
+        'start_time',
+        'end_time',
     ];
 
     /**

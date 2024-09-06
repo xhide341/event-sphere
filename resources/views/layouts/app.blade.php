@@ -28,11 +28,13 @@
             <div class="w-screen py-2 p-2 xl:py-4 2xl:pr-4 2xl:ml-72">
                 <!-- Page Heading -->
                 @if (isset($header))
-                    <header>
-                        <div class="mx-auto px-4">
-                            {{ $header }}
-                        </div>
-                    </header>
+                <header x-data="{ isToggled: false }" @toggle-sidebar.window="isToggled = !isToggled"
+                    class="transition-all duration-300 ease-in-out"
+                    :class="{ 'pl-72': isToggled, 'pl-0': !isToggled }">
+                    <div class="mx-auto px-4">
+                        {{ $header }}
+                    </div>
+                </header>
                 @endif
 
                 <!-- Page Content -->

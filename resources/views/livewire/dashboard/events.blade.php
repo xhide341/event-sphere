@@ -4,16 +4,41 @@ use Livewire\Volt\Component;
 
 new class extends Component
 {
-  public $event;
+    public $event;
+    public $showModal = false;
+    public $modalContent = null;
 
-  public function mount($event)
-  {
-      $this->event = $event;
-  }
+    public function mount($event)
+    {
+        $this->event = $event;
+        $this->preloadModalContent();
+    }
+
+    public function preloadModalContent()
+    {
+        // Fetch and prepare all the data needed for the modal
+        $this->modalContent = [
+            'name' => $this->event->name,
+            'image' => $this->event->image,
+            'department' => $this->event->department->name,
+            'description' => $this->event->description,
+            'venue' => $this->event->venue,
+            'participant_count' => $this->event->participant_count,
+            'capacity' => $this->event->capacity,
+            'status' => $this->event->status,
+            'category' => $this->event->category,
+        ];
+    }
+
+    public function toggleModal()
+    {
+        $this->showModal = !$this->showModal;
+    }
 }; ?>
 
-<section>
-    <div class="relative flex w-[21rem] h-[30rem] flex-col rounded-xl bg-gray-300 bg-clip-border text-gray-700 shadow-lg">
+<section x-data="{ showModal: @entangle('showModal') }">
+    <div class="relative flex w-[21rem] h-[32rem] flex-col rounded-xl bg-gray-300 bg-clip-border text-gray-700 shadow-lg border-2 border-gray-400 cursor-pointer"
+         @click="showModal = true">
       <div class="relative mx-4 mt-4 overflow-hidden rounded-md bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
         <img
           src="{{ $event->image }}"
@@ -38,27 +63,19 @@ new class extends Component
             </svg>
           </span>
         </button>
+        <div class="absolute bottom-0 left-0 p-2">
+          <span class="bg-white rounded-full px-3 py-1 text-sm font-semibold text-primary">
+            {{ $event->department->name }}
+          </span>
+        </div>
       </div>
       <div class="p-6">
-        <div class="mb-3 flex items-center justify-between">
+        <div class="mb-3 flex flex-col justify-between">
           <h5 class="block text-xl font-medium leading-snug tracking-normal text-blue-gray-900 antialiased truncate">
             {{ $event->name }}
           </h5>
-          <p class="flex items-center gap-1.5 text-base font-normal leading-relaxed text-blue-gray-900 antialiased">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-              class="-mt-0.5 h-5 w-5 text-yellow-700"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-            5.0
+          <p class="text-sm font-light text-primary">
+            {{ $event->venue }}
           </p>
         </div>
         <div class="min-h-[2.5rem]">
@@ -171,6 +188,78 @@ new class extends Component
           Register
         </button>
       </div>
+    </div>
+
+    <!-- Modal -->
+    <div x-show="showModal" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 z-50 overflow-y-auto" 
+         aria-labelledby="modal-title" 
+         role="dialog" 
+         aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                 x-transition:leave="transition ease-in duration-200"
+                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
+                <div class="leading-normal font-poppins bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg leading-6 font-medium text-primary" id="modal-title">
+                            {{ $modalContent['name'] }}
+                        </h3>
+                        <button type="button" class="text-gray-400 hover:text-gray-500" @click="showModal = false">
+                            <span class="sr-only">Close</span>
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="mt-2 break-words text-pretty font-normal">
+                        <div class="relative">
+                          <img src="{{ $modalContent['image'] }}" alt="{{ $modalContent['name'] }}" class="w-full h-48 object-cover rounded-md">
+                          <p class="absolute bottom-0 left-0 m-2 bg-white rounded-full px-3 py-1 text-sm font-semibold text-primary">{{ $modalContent['department'] }}</p>
+                        </div>
+                        <div class="mt-2 p-2">
+                          <h5 class="text-lg font-semibold text-primary">Details:</h5>
+                          <p class="text-base text-primary font-normal">{{ $modalContent['description'] }}</p>
+                        </div>
+                        <div class="flex items-center space-x-2 mt-2 px-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0B2147"><path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 400Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Z"/></svg>
+                          <p class="text-sm tracking-wide font-normal text-primary">{{ $modalContent['venue'] }}</p>
+                        </div>
+                        <div class="flex items-center space-x-2 mt-2 px-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0B2147"><path d="M0-240v-63q0-43 44-70t116-27q13 0 25 .5t23 2.5q-14 21-21 44t-7 48v65H0Zm240 0v-65q0-32 17.5-58.5T307-410q32-20 76.5-30t96.5-10q53 0 97.5 10t76.5 30q32 20 49 46.5t17 58.5v65H240Zm540 0v-65q0-26-6.5-49T754-397q11-2 22.5-2.5t23.5-.5q72 0 116 26.5t44 70.5v63H780ZM160-440q-33 0-56.5-23.5T80-520q0-34 23.5-57t56.5-23q34 0 57 23t23 57q0 33-23 56.5T160-440Zm640 0q-33 0-56.5-23.5T720-520q0-34 23.5-57t56.5-23q34 0 57 23t23 57q0 33-23 56.5T800-440Zm-320-40q-50 0-85-35t-35-85q0-51 35-85.5t85-34.5q51 0 85.5 34.5T600-600q0 50-34.5 85T480-480Z"/></svg>
+                          <p class="text-sm tracking-wide font-normal text-primary">{{ $modalContent['participant_count'] }} / {{ $modalContent['capacity'] }}</p>
+                        </div>
+                        <div class="flex items-center space-x-2 mt-2 px-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0B2147"><path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>
+                          <p class="text-sm tracking-wide font-normal {{ $modalContent['status'] === 'Postponed' ? 'text-danger' : ($modalContent['status'] === 'Delayed' ? 'text-warning' : ($modalContent['status'] === 'Scheduled' ? 'text-success' : 'text-primary')) }}">
+                              {{ $modalContent['status'] }}
+                          </p>
+                        </div>
+                        <div class="flex items-center space-x-2 mt-2 px-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0B2147"><path d="M240-120q-66 0-113-47T80-280q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47Zm480 0q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM480-520q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47Z"/></svg>
+                          <p class="text-sm tracking-wide font-normal text-primary">{{ $modalContent['category'] }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:ml-3 sm:w-auto sm:text-sm">
+                        Register
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
