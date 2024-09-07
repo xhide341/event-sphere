@@ -13,11 +13,11 @@
                         Dashboard
                     </li>
                 </ol>
-                <h2 class="font-semibold text-xl capitalize">
+                <h2 class="font-semibold text-3xl capitalize">
                     {{ __('Profile') }}
                 </h2>
             </nav>
-            <div class="block 2xl:hidden">
+            <div class="block xl:hidden">
                 <livewire:dashboard.toggle-sidebar/>
             </div>
         </div>

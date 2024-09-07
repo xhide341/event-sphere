@@ -19,19 +19,17 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-poppins antialiased">
-        <div class="flex bg-[#91AAB4] min-w-screen">
+        <div class="relative flex bg-[#91AAB4] max-w-full w-full">
             
-            <div>
-                <livewire:layout.sidebar/>
-            </div>
+            <livewire:layout.sidebar/>
             
-            <div class="w-screen py-2 p-2 xl:py-4 2xl:pr-4 2xl:ml-72">
+            <div class="max-w-screen w-screen py-4 p-4 xl:py-6 xl:pl-0 xl:pr-6 xl:ml-[280px]">
                 <!-- Page Heading -->
                 @if (isset($header))
                 <header x-data="{ isToggled: false }" @toggle-sidebar.window="isToggled = !isToggled"
                     class="transition-all duration-300 ease-in-out"
-                    :class="{ 'pl-72': isToggled, 'pl-0': !isToggled }">
-                    <div class="mx-auto px-4">
+                    :class="{ 'ml-64': isToggled, 'ml-0': !isToggled }">
+                    <div class="px-4 xl:px-0">
                         {{ $header }}
                     </div>
                 </header>

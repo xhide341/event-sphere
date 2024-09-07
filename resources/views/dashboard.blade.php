@@ -13,51 +13,55 @@
                         Dashboard
                     </li>
                 </ol>
-                <h2 class="font-semibold text-xl capitalize">
+                <h2 class="font-semibold text-3xl capitalize">
                     {{ __('Dashboard') }}
                 </h2>
             </nav>
-            <div class="block 2xl:hidden">
+            <div class="block xl:hidden">
                 <livewire:dashboard.toggle-sidebar/>
             </div>
         </div>
     </x-slot>
 
-    <div class="pt-4">
-        <div class="max-w-dvw mx-auto space-y-6">
-            <div class="bg-white overflow-hidden shadow-sm rounded-lg">
-                <div class="flex flex-col space-y-2 md:space-y-4 text-primary text-xl font-semibold p-4">
-                    <p class="mb-2">My Events</p>
-                    <div>
-                        @if($registeredEvents->isEmpty())
-                            <p>No events registered.</p>
-                        @else
-                        <div class="flex overflow-x-auto pb-4 space-x-4 2xl:justify-evenly">
-                            @foreach($registeredEvents as $event)
-                                <div class="flex-shrink-0">
-                                    <livewire:dashboard.events :event="$event" />
-                                </div>
-                            @endforeach
-                        </div>
-                        @endif
-                        <div class="mt-4">
-                            {{ $registeredEvents->links() }}
-                        </div>
+    <div class="mt-4">
+        <div class="space-y-6 overflow-hidden">
+            <div class="bg-white shadow-sm rounded-lg flex flex-col py-4 px-6 xl:py-6 xl:px-8 space-y-2 md:space-y-6 text-primary text-xl font-semibold">
+                <div class="flex flex-row items-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#0B2147"><path d="M434.67-227.33 295.33-366l47.34-47.33 92 90.66 178.66-178.66 47.34 48-226 226ZM186.67-80q-27 0-46.84-19.83Q120-119.67 120-146.67v-600q0-27 19.83-46.83 19.84-19.83 46.84-19.83h56.66V-880h70v66.67h333.34V-880h70v66.67h56.66q27 0 46.84 19.83Q840-773.67 840-746.67v600q0 27-19.83 46.84Q800.33-80 773.33-80H186.67Zm0-66.67h586.66v-420H186.67v420Z"/></svg>
+                    <p class="ml-2 text-2xl">My Events</p>
+                </div>
+                <div>
+                    @if($registeredEvents->isEmpty())
+                        <p>No events registered.</p>
+                    @else
+                    <div class="flex pb-2 xl:pb-4 flex-row space-x-4 overflow-x-auto">
+                        @foreach($registeredEvents as $event)
+                            <div class="flex-shrink-0">
+                                <livewire:dashboard.events :event="$event" />
+                            </div>
+                        @endforeach
+                    </div>
+                    @endif
+                    <div class="mt-4">
+                        {{ $registeredEvents->links() }}
                     </div>
                 </div>
             </div>
-            <div class="bg-white overflow-hidden shadow-sm rounded-lg">
-                <div class="flex flex-col space-y-2 md:space-y-4 text-primary text-xl font-semibold p-4">
-                    <p class="mb-2">All Events</p>
+            <div class="space-y-6 overflow-hidden">
+                <div class="bg-white shadow-sm rounded-lg flex flex-col p-4 xl:p-8 space-y-2 md:space-y-4 text-primary text-xl font-semibold">
+                    <div class="flex flex-row items-center space-x-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#0B2147"><path d="M280-413.33V-480h400v66.67H280ZM280-240v-66.67h279.33V-240H280ZM186.67-80q-27 0-46.84-19.83Q120-119.67 120-146.67v-600q0-27 19.83-46.83 19.84-19.83 46.84-19.83h56.66V-880h70v66.67h333.34V-880h70v66.67h56.66q27 0 46.84 19.83Q840-773.67 840-746.67v600q0 27-19.83 46.84Q800.33-80 773.33-80H186.67Zm0-66.67h586.66v-420H186.67v420Z"/></svg>
+                        <p class="ml-2 text-2xl">All Events</p>
+                    </div>
                     <div>
                         @if($allEvents->isEmpty())
                             <p>No events registered.</p>
                         @else
-                        <div class="flex overflow-x-auto pb-4 space-x-4 2xl:justify-evenly">
+                        <div class="flex pb-2 xl:pb-4 flex-row space-x-4 overflow-x-auto">
                             @foreach($allEvents as $event)
-                                <div class="flex-shrink-0">
-                                    <livewire:dashboard.events :event="$event" />
-                                </div>
+                            <div class="flex-shrink-0">
+                                <livewire:dashboard.events :event="$event" />
+                            </div>
                             @endforeach
                         </div>
                         @endif

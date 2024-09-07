@@ -12,7 +12,7 @@ new class extends Component
 <aside x-data="{ isToggled: false }" 
     @toggle-sidebar.window="isToggled = !isToggled"
     :class="{ 'translate-x-0': isToggled, '-translate-x-full': !isToggled }"
-    class="fixed flex overflow-y-auto flex-col bg-white z-50 sm:w-64 px-8 py-10 2xl:my-4 2xl:ml-4 h-dvh 2xl:h-[calc(100dvh-2rem)] 2xl:rounded-lg shadow-xl transform transition-transform ease-in-out duration-300 2xl:translate-x-0">
+    class="fixed flex flex-col bg-white z-50 w-64 px-8 py-10 h-full shadow-xl transform transition-transform ease-in-out duration-300 -translate-x-full xl:translate-x-0">
     <div class="mx-auto flex align-center justify-center space-x-2">
         <x-application-logo class="w-auto h-6 sm:h-7"/>
         <span class="text-primary text-base font-logo">{{ config('app.name') }}</span>
