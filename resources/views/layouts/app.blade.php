@@ -23,7 +23,7 @@
             
             <livewire:layout.sidebar/>
             
-            <div class="max-w-screen w-screen py-4 p-4 xl:py-6 xl:pl-0 xl:pr-6 xl:ml-[280px]">
+            <div class="max-w-full w-full py-4 p-4 xl:py-6 xl:pl-0 xl:pr-6 xl:ml-[280px] overflow-x-hidden">
                 <!-- Page Heading -->
                 @if (isset($header))
                 <header x-data="{ isToggled: false }" @toggle-sidebar.window="isToggled = !isToggled"

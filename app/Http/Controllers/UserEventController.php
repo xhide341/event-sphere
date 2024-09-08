@@ -26,9 +26,9 @@ class UserEventController extends Controller
                     $query->select('event_id')
                           ->from('registrations')
                           ->where('user_id', $user->id);
-                })->paginate(4, ['*'], 'registeredEventsPage');
+                })->paginate(5, ['*'], 'registeredEventsPage');
 
-            $allEvents = Event::with('department')->paginate(4, ['*'], 'allEventsPage');
+            $allEvents = Event::with('department')->paginate(5, ['*'], 'allEventsPage');
 
             $departments = Department::all();
 
