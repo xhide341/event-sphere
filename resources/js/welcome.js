@@ -16,7 +16,7 @@ const observer = new IntersectionObserver((entries) => {
 const hiddenElements = document.querySelectorAll('.is-hidden');
 hiddenElements.forEach((el) => observer.observe(el));
 
-const text = "Events made easy";
+const text = "Events made easy.";
 let index = 0;
 const cursor = document.getElementById("cursor");
 

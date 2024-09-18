@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title>eventsphere</title>
+        <title>Welcome! - eventsphere</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -17,27 +17,27 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="antialiased font-poppins">
-        <div class="relative text-primary bg-alice-blue">
-            <div class="relative min-h-screen flex flex-col items-center justify-between bg-landing pb-16 sm:px-0 sm:pb-20">
+        <div class="relative text-primary bg-gray-100">
+            <div class="relative min-h-screen flex flex-col items-center justify-between pb-16 sm:px-0 sm:pb-20">
                 <!-- header -->                 
-                <div class="w-full flex flex-col justify-center text-white bg-white/10 backdrop-blur shadow-lg mx-auto sm:flex-row">
+                <div class="fixed top-0 w-full flex flex-col justify-center z-10 text-primary bg-white backdrop-blur shadow-lg mx-auto sm:flex-row">
                     <div class="w-full flex justify-center sm:max-w-7xl">
-                        <header class="py-4 space-y-4 flex flex-col items-center justify-between w-screen sm:flex-row sm:p-6 sm:space-y-0">
+                        <header class="py-4 space-y-4 flex flex-col items-center justify-between w-screen sm:flex-row sm:py-4 sm:space-y-0">
                             <div class="flex items-center">
                                 <img src="{{ Vite::asset('resources/images/LCUP.png') }}" alt="Logo" class="w-10 h-10 rounded-full">
-                                <p class="font-logo text-lg ml-2">{{config('app.name')}}</p>
+                                <p class="font-logo text-md ml-2">{{config('app.name')}}</p>
                             </div>
 
-                            <nav class="flex flex-row text-base space-x-4 sm:space-y-0 sm:space-x-20">
-                                <a href="#home" class="hover:text-white-900 relative group transition-transform duration-100 ease-in-out hover:-rotate-2">
+                            <nav class="flex flex-row text-base space-x-4 sm:space-y-0 sm:space-x-20 scroll-smooth">
+                                <a href="#home" class="hover:text-primary-900 relative group transition-transform duration-100 ease-in-out hover:-rotate-2">
                                     <span class="relative z-10">Home</span>
                                     <span class="absolute left-0 bottom-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-left"></span>
                                 </a>
-                                <a href="#about" class="hover:text-white-900 relative group transition-transform duration-100 ease-in-out hover:-rotate-2">
+                                <a href="#how-it-all-started" class="hover:text-primary-900 relative group transition-transform duration-100 ease-in-out hover:-rotate-2">
                                     <span class="relative z-10">About</span>
                                     <span class="absolute left-0 bottom-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-left"></span>
                                 </a>
-                                <a href="#contact" class="hover:text-white-900 relative group transition-transform duration-100 ease-in-out hover:-rotate-2">
+                                <a href="#contact" class="hover:text-primary-900 relative group transition-transform duration-100 ease-in-out hover:-rotate-2">
                                     <span class="relative z-10">Contact</span>
                                     <span class="absolute left-0 bottom-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-left"></span>
                                 </a>
@@ -50,56 +50,21 @@
                     </div>
                 </div>
                 <!-- home -->
-                <section class="#home">
-                    <div class="w-full h-auto text-white flex flex-col items-center text-center sm:px-4">
-                        <div class="py-20 flex items-center justify-start text-center">
-                                <h1 id="typing-text" class="text-4xl font-bold text-start sm:text-5xl min-w-fit">
+                <section id="home" class="pt-12 sm:pt-16 mt-20">
+                    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                        <h1 class="px-6 text-lg text-gray-600 font-inter">Admin Dashboard and Event Management System</h1>
+                        <div class="mt-5 text-4xl font-bold leading-normal text-accent sm:text-5xl lg:text-6xl">
+                            <div class="flex items-center justify-start text-center">
+                                <h1 id="typing-text" class="text-xl font-bold text-start sm:text-5xl min-w-fit">
                                     <span id="cursor" class="cursor">|</span>
                                 </h1>
+                            </div>
                         </div>
+
                     </div>
+                        
                 </section>
                 <!-- benefits section -->
-                <section id="benefits">
-                    <div class="relative w-full flex flex-col justify-around px-4 space-y-6 mt-auto sm:space-y-0 sm:flex-row sm:space-x-6 sm:w-[80dvw]">
-                        <div class="flex flex-col flex-wrap text-center bg-gray-100 p-4 rounded-lg shadow-md">
-                            <div class="flex items-center justify-center mb-2">
-                                <span class="text-green-500">✔️</span>
-                                <p class="font-bold ml-2 text-normal">Easy Event Management</p>
-                            </div>
-                            <p class="text-gray-700 text-sm break-words">Streamline the process of organizing events with our user-friendly platform.</p>
-                            <div class="flex justify-center mt-2">
-                                @for ($i = 0; $i < 5; $i++)
-                                    <img src="{{ Vite::asset('resources/images/star.svg') }}" alt="Star" class="w-4 h-4 inline-block" />
-                                @endfor
-                            </div>
-                        </div>
-                        <div class="flex flex-col flex-wrap text-center bg-gray-100 p-4 rounded-lg shadow-md">
-                            <div class="flex items-center justify-center mb-2">
-                                <span class="text-green-500">✔️</span>
-                                <p class="font-bold ml-2 text-normal">Connect with Attendees</p>
-                            </div>
-                            <p class="text-gray-700 text-sm break-words">Easily connect with participants and keep them informed about event updates.</p>
-                            <div class="flex justify-center mt-2">
-                                @for ($i = 0; $i < 5; $i++)
-                                    <img src="{{ Vite::asset('resources/images/star.svg') }}" alt="Star" class="w-4 h-4 inline-block" />
-                                @endfor
-                            </div>
-                        </div>
-                        <div class="flex flex-col flex-wrap text-center bg-gray-100 p-4 rounded-lg shadow-md">
-                            <div class="flex items-center justify-center mb-2">
-                                <span class="text-green-500">✔️</span>
-                                <p class="font-bold ml-2 text-normal">Analytics and Insights</p>
-                            </div>
-                            <p class="text-gray-700 text-sm break-words">Gain valuable insights into attendee engagement and event performance.</p>
-                            <div class="flex justify-center mt-2">
-                                @for ($i = 0; $i < 5; $i++)
-                                    <img src="{{ Vite::asset('resources/images/star.svg') }}" alt="Star" class="w-4 h-4 inline-block" />
-                                @endfor
-                            </div>
-                        </div>
-                    </div>
-                </section>
             </div>
 
             <!-- powered by section -->

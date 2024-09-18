@@ -9,7 +9,7 @@
     @else
         <a
             href="{{ route('login') }}"
-            class="hover:text-white relative group transition-transform duration-100 ease-in-out hover:-rotate-2"
+            class="text-primary relative group transition-transform duration-100 ease-in-out hover:-rotate-2"
         >
             <span class="relative z-10">Log in</span>   
             <span class="absolute left-0 bottom-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-left"></span>
@@ -18,7 +18,7 @@
         @if (Route::has('register'))
             <a
                 href="{{ route('register') }}"
-                class="hover:text-white relative ring-1 ring-primary px-3 py-2 rounded-md bg-primary"
+                class="hover:bg-gray-700 hover:scale-105 text-white relative px-3 py-2 rounded-md bg-primary"
             >
                 <span class="relative z-10">Register for free</span>
             </a>

@@ -19,7 +19,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(11, 33, 71, 0.4); /* Primary color with 50% opacity */
+    background: rgba(0, 0, 0, 0.7); /* Changed to solid black with adjusted opacity for white text */
     z-index: 1; /* Ensure it sits above the background image */
 }
 
