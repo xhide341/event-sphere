@@ -21,87 +21,158 @@
             <div class="relative min-h-screen flex flex-col items-center justify-between pb-16 sm:px-0 sm:pb-20">
                 <!-- header -->                 
                 <div class="fixed top-0 w-full flex flex-col justify-center z-10 text-primary bg-white backdrop-blur shadow-lg mx-auto sm:flex-row">
-                    <div class="w-full flex justify-center sm:max-w-7xl">
-                        <header class="py-4 space-y-4 flex flex-col items-center justify-between w-screen sm:flex-row sm:py-4 sm:space-y-0">
+                    <div class="w-full flex justify-center sm:max-w-7xl" x-data="{ expanded: false }">
+                        <header class="p-4 flex items-center justify-between w-screen sm:flex-row md:p-6">
                             <div class="flex items-center">
-                                <img src="{{ Vite::asset('resources/images/LCUP.png') }}" alt="Logo" class="w-10 h-10 rounded-full">
-                                <p class="font-logo text-md ml-2">{{config('app.name')}}</p>
+                                <div class="flex flex-shrink-0 items-center">
+                                    <img src="{{ Vite::asset('resources/images/LCUP.png') }}" alt="Logo" class="w-10 h-10 rounded-full">
+                                    <p class="font-logo text-md ml-2">{{config('app.name')}}</p>
+                                </div>
                             </div>
 
-                            <nav class="flex flex-row text-base space-x-4 sm:space-y-0 sm:space-x-20 scroll-smooth">
-                                <a href="#home" class="hover:text-primary-900 relative group transition-transform duration-100 ease-in-out hover:-rotate-2">
-                                    <span class="relative z-10">Home</span>
-                                    <span class="absolute left-0 bottom-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-left"></span>
-                                </a>
-                                <a href="#how-it-all-started" class="hover:text-primary-900 relative group transition-transform duration-100 ease-in-out hover:-rotate-2">
-                                    <span class="relative z-10">About</span>
-                                    <span class="absolute left-0 bottom-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-left"></span>
-                                </a>
-                                <a href="#contact" class="hover:text-primary-900 relative group transition-transform duration-100 ease-in-out hover:-rotate-2">
-                                    <span class="relative z-10">Contact</span>
-                                    <span class="absolute left-0 bottom-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-left"></span>
-                                </a>
-                            </nav>
+                            <div class="flex items-center lg:hidden">
+                                <button type="button" class="text-gray-900" @click="expanded = !expanded" :aria-expanded="expanded">
+                                    <span x-show="!expanded" aria-hidden="true">
+                                        <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+                                        </svg>
+                                    </span>
+
+                                    <span x-show="expanded" aria-hidden="true" style="display: none;">
+                                        <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </span>
+                                </button>
+                            </div>
 
                             @if (Route::has('login'))
                                 <livewire:welcome.navigation />
                             @endif
                         </header>
+
+                        <!-- Add the expanded menu here, inside the x-data scope -->
+                        <nav x-show="expanded" x-cloak class="lg:hidden absolute shadow-lg top-full left-0 right-0 bg-white z-20">
+                            <div class="px-4 py-6">
+                                <div class="grid gap-y-7">
+                                    <a href="#" title="" class="flex items-center p-3 -m-3 text-base font-medium text-gray-900 transition-all duration-200 rounded-xl hover:bg-gray-50 focus:outline-none font-pj focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"> Home </a>
+
+                                    <a href="#" title="" class="flex items-center p-3 -m-3 text-base font-medium text-gray-900 transition-all duration-200 rounded-xl hover:bg-gray-50 focus:outline-none font-pj focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"> About </a>
+
+                                    <a href="#" title="" class="flex items-center p-3 -m-3 text-base font-medium text-gray-900 transition-all duration-200 rounded-xl hover:bg-gray-50 focus:outline-none font-pj focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"> Contact </a>
+
+                                    <a
+                                        href="#"
+                                        title=""
+                                        class="inline-flex items-center justify-center px-6 py-3 text-base font-bold leading-7 text-white transition-all duration-200 bg-gray-900 border border-transparent rounded-xl hover:bg-gray-600 font-pj focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+                                        role="button"
+                                    >
+                                    Register for free
+                                    </a>
+                                </div>
+                            </div>
+                        </nav>
                     </div>
                 </div>
                 <!-- home -->
-                <section id="home" class="pt-12 sm:pt-16 mt-20">
-                    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                        <h1 class="px-6 text-lg text-gray-600 font-inter">Admin Dashboard and Event Management System</h1>
-                        <div class="mt-5 text-4xl font-bold leading-normal text-accent sm:text-5xl lg:text-6xl">
-                            <div class="flex items-center justify-start text-center">
-                                <h1 id="typing-text" class="text-xl font-bold text-start sm:text-5xl min-w-fit">
-                                    <span id="cursor" class="cursor">|</span>
-                                </h1>
+                <section id="home" class="pt-12 sm:pt-20 mt-12 sm:mt-20">
+                    <div class="px-4 mx-auto text-center max-w-7xl sm:px-6 lg:px-8">
+                        <div class="max-w-3xl mx-auto text-center">
+                            <h1 class="px-6 text-lg text-gray-600">Admin Dashboard and Event Management System</h1>
+                            <div class="mt-5">
+                                <div class="flex items-center justify-start text-center leading-normal">
+                                    <h1 id="typing-text" class="text-4xl font-bold text-accent sm:text-5xl lg:text-6xl">
+                                        <span id="cursor" class="cursor">|</span>
+                                    </h1>
+                                </div>
+                            </div>
+                            <div class="px-8 sm:items-center sm:justify-center sm:px-0 sm:space-x-5 sm:flex mt-9">
+                                <a
+                                    href="#"
+                                    title=""
+                                    class="inline-flex items-center justify-center w-full px-8 py-3 text-lg font-semibold text-white transition-all duration-200 bg-accent border-2 border-transparent sm:w-auto rounded-xl hover:bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+                                    role="button"
+                                >
+                                   Register now
+                                </a>
+                                <a
+                                    href="#"
+                                    title=""
+                                    class="inline-flex items-center justify-center w-full px-6 py-3 mt-4 text-lg font-semibold text-gray-900 transition-all duration-200 border-2 border-gray-400 sm:w-auto sm:mt-0 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 hover:bg-gray-900 focus:bg-gray-900 hover:text-white focus:text-white hover:border-gray-900 focus:border-gray-900"
+                                    role="button"
+                                >
+                                <svg class="w-5 h-5 mr-2" viewBox="0 0 18 18" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                    d="M8.18003 13.4261C6.8586 14.3918 5 13.448 5 11.8113V5.43865C5 3.80198 6.8586 2.85821 8.18003 3.82387L12.5403 7.01022C13.6336 7.80916 13.6336 9.44084 12.5403 10.2398L8.18003 13.4261Z"
+                                    stroke-width="2"
+                                    stroke-miterlimit="10"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    />
+                                </svg>
+                                    Watch free demo
+                                </a>
+                            </div>
+                            <p class="mt-8 text-sm text-gray-500">This website is not affiliated with the official campus of La Consolacion University Philippines.</p>
+                        </div>
+                    </div>
+                    <div class="pt-12">
+                        <div class="relative">
+                            <div class="absolute inset-0 h-2/3 bg-gray-50"></div>
+                            <div class="relative mx-auto">
+                                <div class="lg:max-w-6xl lg:mx-auto">
+                                    <img src="{{ Vite::asset('resources/images/bg-image-lcup.jpg') }}" alt="">
+                                </div>
                             </div>
                         </div>
-
-                    </div>
-                        
+                    </div>                        
                 </section>
-                <!-- benefits section -->
             </div>
 
-            <!-- powered by section -->
-            <section id="powered-by">
-                <div class="relative w-[90dvw] flex flex-col items-center justify-center mx-auto py-8 px-4 my-8 border-2 border-primary bg-white shadow-lg rounded-lg sm:px-8 sm:-mt-12 sm:z-10 sm:my-0 sm:w-[50dvw] sm:flex-nowrap">
-                    <div class="flex flex-wrap space-y-4 space-x-6 items-center justify-center sm:flex-row sm:space-y-0">
-                        <h2 class="text-normal font-semibold text-primary sm:text-lg">Powered by:</h2>
-                        <a href="https://laravel.com" target="_blank" class="hover:scale-110 transition-transform duration-300">
-                            <img src="{{ Vite::asset('resources/images/laravel-logo.svg') }}" alt="Laravel Logo" class="w-10 h-10">
-                        </a>
-                        <a href="https://tailwindcss.com" target="_blank" class="hover:scale-110 transition-transform duration-300">
-                            <img src="{{ Vite::asset('resources/images/tailwind-logo.svg') }}" alt="Tailwind Logo" class="w-10 h-10">
-                        </a>
-                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" class="hover:scale-110 transition-transform duration-300">
-                            <img src="{{ Vite::asset('resources/images/javascript-logo.svg') }}" alt="JavaScript Logo" class="w-10 h-10">
-                        </a>
-                        <a href="https://www.php.net" target="_blank" class="hover:scale-110 transition-transform duration-300">
-                            <img src="{{ Vite::asset('resources/images/php-logo.svg') }}" alt="PHP Logo" class="w-10 h-10">
-                        </a>
-                        <a href="https://www.mysql.com" target="_blank" class="hover:scale-110 transition-transform duration-300">
-                            <img src="{{ Vite::asset('resources/images/mysql-logo.svg') }}" alt="MySQL Logo" class="w-10 h-10">
-                        </a>
-                        <a href="https://laravel-livewire.com" target="_blank" class="hover:scale-110 transition-transform duration-300">
-                            <img src="{{ Vite::asset('resources/images/livewire-logo.svg') }}" alt="Livewire Logo" class="w-10 h-10">
-                        </a>
-                        <a href="https://vitejs.dev" target="_blank" class="hover:scale-110 transition-transform duration-300">
-                            <img src="{{ Vite::asset('resources/images/vite-js-logo.svg') }}" alt="Vite Logo" class="w-10 h-10">
-                        </a>
-                        <a href="https://alpinejs.dev" target="_blank" class="hover:scale-110 transition-transform duration-300">
-                            <img src="{{ Vite::asset('resources/images/alpine-js.svg') }}" alt="Alpine Logo" class="w-10 h-10">
-                        </a>
-                        <a href="https://www.html5.org" target="_blank" class="hover:scale-110 transition-transform duration-300">
-                            <img src="{{ Vite::asset('resources/images/html5-logo.svg') }}" alt="HTML5 Logo" class="w-10 h-10">
-                        </a>
+            <section class="py-10 sm:py-16 lg:py-24">
+                <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    <div class="max-w-2xl mx-auto text-center">
+                        <h2 class="text-3xl font-bold leading-tight text-accent sm:text-4xl lg:text-5xl">How does it work?</h2>
+                        <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">Below are the simple steps to get you started.</p>
+                    </div>
+
+                    <div class="relative mt-12 lg:mt-20">
+                        <div class="absolute inset-x-0 hidden xl:px-44 top-2 md:block md:px-20 lg:px-28">
+                        <svg width="875" height="48" viewBox="0 0 875 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 29C20.2154 33.6961 38.9915 35.1324 57.6111 37.5555C80.2065 40.496 102.791 43.3231 125.556 44.5555C163.184 46.5927 201.26 45 238.944 45C312.75 45 385.368 30.7371 458.278 20.6666C495.231 15.5627 532.399 11.6429 569.278 6.11109C589.515 3.07551 609.767 2.09927 630.222 1.99998C655.606 1.87676 681.208 1.11809 706.556 2.44442C739.552 4.17096 772.539 6.75565 805.222 11.5C828 14.8064 850.34 20.2233 873 24" stroke="#035AA6" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 12"/>
+                        </svg>
+                        </div>
+
+                        <div class="relative grid grid-cols-1 text-center gap-y-12 md:grid-cols-3 gap-x-12">
+                            <div>
+                                <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-accent rounded-full shadow">
+                                    <span class="text-xl font-semibold text-gray-700"> 1 </span>
+                                </div>
+                                <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Create a free account</h3>
+                                <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
+                            </div>
+
+                            <div>
+                                <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-accent rounded-full shadow">
+                                    <span class="text-xl font-semibold text-gray-700"> 2 </span>
+                                </div>
+                                <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Build your website</h3>
+                                <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
+                            </div>
+
+                            <div>
+                                <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-accent rounded-full shadow">
+                                    <span class="text-xl font-semibold text-gray-700"> 3 </span>
+                                </div>
+                                <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Release & Launch</h3>
+                                <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
+
+
             
             <!-- how it all started -->
             <section id="how-it-all-started">

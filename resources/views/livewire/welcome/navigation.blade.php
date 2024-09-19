@@ -1,4 +1,4 @@
-<nav class="flex flex-row items-center justify-between space-x-4 text-white-900 sm:space-x-10 sm:space-y-0">
+<nav class="hidden lg:ml-auto lg:flex lg:items-center lg:space-x-10">
     @auth
         <a
             href="{{ url('/dashboard') }}"

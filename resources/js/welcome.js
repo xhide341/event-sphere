@@ -1,5 +1,3 @@
-// Check if the current route is 'welcome'
-
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         console.log(entry);
@@ -16,7 +14,7 @@ const observer = new IntersectionObserver((entries) => {
 const hiddenElements = document.querySelectorAll('.is-hidden');
 hiddenElements.forEach((el) => observer.observe(el));
 
-const text = "Events made easy.";
+const text = "Streamline your events. Amplify your impact.";
 let index = 0;
 const cursor = document.getElementById("cursor");
 
@@ -24,9 +22,9 @@ function type() {
     if (index < text.length) {
         document.getElementById("typing-text").innerHTML = text.substring(0, index + 1) + cursor.outerHTML;
         index++;
-        setTimeout(type, 100); // Adjust typing speed here
+        setTimeout(type, 100);
     } else {
-        cursor.style.display = "none"; // Hide cursor after typing is done
+        cursor.style.display = "none";
     }
 }
 

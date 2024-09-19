@@ -32,7 +32,7 @@
 /* typing effect for landing page */
 
 #cursor {
-    animation: blink 1s step-end infinite;
+    animation: blink 1s step-end 20;
 }
 
 @keyframes blink {
