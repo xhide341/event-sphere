@@ -17,7 +17,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="antialiased font-poppins">
-        <div class="relative text-primary bg-gray-100">
+        <div class="relative text-primary bg-alice-blue">
             <div class="relative min-h-screen flex flex-col items-center justify-between pb-16 sm:px-0 sm:pb-20">
                 <!-- header -->                 
                 <div class="fixed top-0 w-full flex flex-col justify-center z-10 text-primary bg-white backdrop-blur shadow-lg mx-auto sm:flex-row">
@@ -30,48 +30,10 @@
                                 </div>
                             </div>
 
-                            <div class="flex items-center lg:hidden">
-                                <button type="button" class="text-gray-900" @click="expanded = !expanded" :aria-expanded="expanded">
-                                    <span x-show="!expanded" aria-hidden="true">
-                                        <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
-                                        </svg>
-                                    </span>
-
-                                    <span x-show="expanded" aria-hidden="true" style="display: none;">
-                                        <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
-                                    </span>
-                                </button>
-                            </div>
-
                             @if (Route::has('login'))
                                 <livewire:welcome.navigation />
                             @endif
                         </header>
-
-                        <!-- Add the expanded menu here, inside the x-data scope -->
-                        <nav x-show="expanded" x-cloak class="lg:hidden absolute shadow-lg top-full left-0 right-0 bg-white z-20">
-                            <div class="px-4 py-6">
-                                <div class="grid gap-y-7">
-                                    <a href="#" title="" class="flex items-center p-3 -m-3 text-base font-medium text-gray-900 transition-all duration-200 rounded-xl hover:bg-gray-50 focus:outline-none font-pj focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"> Home </a>
-
-                                    <a href="#" title="" class="flex items-center p-3 -m-3 text-base font-medium text-gray-900 transition-all duration-200 rounded-xl hover:bg-gray-50 focus:outline-none font-pj focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"> About </a>
-
-                                    <a href="#" title="" class="flex items-center p-3 -m-3 text-base font-medium text-gray-900 transition-all duration-200 rounded-xl hover:bg-gray-50 focus:outline-none font-pj focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"> Contact </a>
-
-                                    <a
-                                        href="#"
-                                        title=""
-                                        class="inline-flex items-center justify-center px-6 py-3 text-base font-bold leading-7 text-white transition-all duration-200 bg-gray-900 border border-transparent rounded-xl hover:bg-gray-600 font-pj focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
-                                        role="button"
-                                    >
-                                    Register for free
-                                    </a>
-                                </div>
-                            </div>
-                        </nav>
                     </div>
                 </div>
                 <!-- home -->
@@ -129,18 +91,21 @@
                 </section>
             </div>
 
+            <!-- how it works -->
             <section class="py-10 sm:py-16 lg:py-24">
                 <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div class="max-w-2xl mx-auto text-center">
-                        <h2 class="text-3xl font-bold leading-tight text-accent sm:text-4xl lg:text-5xl">How does it work?</h2>
+                        <h2 class="text-3xl font-bold leading-tight text-accent sm:text-4xl lg:text-5xl">
+                            How does it work?
+                        </h2>
                         <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">Below are the simple steps to get you started.</p>
                     </div>
 
                     <div class="relative mt-12 lg:mt-20">
                         <div class="absolute inset-x-0 hidden xl:px-44 top-2 md:block md:px-20 lg:px-28">
-                        <svg width="875" height="48" viewBox="0 0 875 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2 29C20.2154 33.6961 38.9915 35.1324 57.6111 37.5555C80.2065 40.496 102.791 43.3231 125.556 44.5555C163.184 46.5927 201.26 45 238.944 45C312.75 45 385.368 30.7371 458.278 20.6666C495.231 15.5627 532.399 11.6429 569.278 6.11109C589.515 3.07551 609.767 2.09927 630.222 1.99998C655.606 1.87676 681.208 1.11809 706.556 2.44442C739.552 4.17096 772.539 6.75565 805.222 11.5C828 14.8064 850.34 20.2233 873 24" stroke="#035AA6" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 12"/>
-                        </svg>
+                            <svg width="875" height="48" viewBox="0 0 875 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 29C20.2154 33.6961 38.9915 35.1324 57.6111 37.5555C80.2065 40.496 102.791 43.3231 125.556 44.5555C163.184 46.5927 201.26 45 238.944 45C312.75 45 385.368 30.7371 458.278 20.6666C495.231 15.5627 532.399 11.6429 569.278 6.11109C589.515 3.07551 609.767 2.09927 630.222 1.99998C655.606 1.87676 681.208 1.11809 706.556 2.44442C739.552 4.17096 772.539 6.75565 805.222 11.5C828 14.8064 850.34 20.2233 873 24" stroke="#035AA6" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 12"/>
+                            </svg>
                         </div>
 
                         <div class="relative grid grid-cols-1 text-center gap-y-12 md:grid-cols-3 gap-x-12">
@@ -148,89 +113,64 @@
                                 <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-accent rounded-full shadow">
                                     <span class="text-xl font-semibold text-gray-700"> 1 </span>
                                 </div>
-                                <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Create a free account</h3>
-                                <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
+                                <h3 class="mt-6 text-xl font-semibold leading-tight text-primary md:mt-10">Create a free account</h3>
+                                <p class="mt-4 text-base text-gray-600">By creating an account, you can freely register to campus events and manage them easily.</p>
                             </div>
 
                             <div>
                                 <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-accent rounded-full shadow">
                                     <span class="text-xl font-semibold text-gray-700"> 2 </span>
                                 </div>
-                                <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Build your website</h3>
-                                <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
+                                <h3 class="mt-6 text-xl font-semibold leading-tight text-primary md:mt-10">Browse events</h3>
+                                <p class="mt-4 text-base text-gray-600">You can browse events and find the one that suits you best.</p>
                             </div>
 
                             <div>
                                 <div class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-accent rounded-full shadow">
                                     <span class="text-xl font-semibold text-gray-700"> 3 </span>
                                 </div>
-                                <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Release & Launch</h3>
-                                <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
+                                <h3 class="mt-6 text-xl font-semibold leading-tight text-primary md:mt-10">Leave a review</h3>
+                                <p class="mt-4 text-base text-gray-600">You can leave a review for the event you attended.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-
-            
-            <!-- how it all started -->
-            <section id="how-it-all-started">
-                <div class="relative min-h-[70dvh] flex flex-col items-center justify-center text-center w-full pb-10 text-primary tracking-widest px-4 sm:pt-10">
-                    <div class="bg-patten-blue p-8 rounded-lg mb-6 sm:p-16">
-                        <h2 class="text-2xl font-bold mx-auto sm:text-4xl">
-                            <span class="bg-primary text-white px-2">How</span> it all started 🚀
-                        </h2>
-                        <div class="flex flex-col items-center justify-between space-y-4 pt-6 sm:pt-10 sm:space-y-0 sm:space-x-10 sm:flex-row">
-                            <p class="text-justify text-sm w-full mx-auto tracking-normal leading-8 mb-0 h-auto text-center sm:text-normal sm:w-[30dvw] sm:h-[300px]">
-                                Our journey began with a simple idea: <span class="text-accent">to create a platform that connects people through events</span>. 
-                                As students, we encountered various challenges in organizing and promoting events. 
-                                This experience motivated us to develop a solution that simplifies event management. 
-                                Through collaboration and innovation, we aimed to enhance the event experience for everyone involved. 
-                                With dedication and a passion for technology, we turned our vision into a reality. 💻✨
-                            </p>
-                            <div class="px-4 mb-0 w-full sm:w-[30dvw]">
-                                <iframe class="border rounded-2xl" width="100%" height="300" sandbox="allow-same-origin allow-scripts" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                            </div>
+            <!-- meet the team -->
+            <section class="py-10 sm:py-16 lg:py-24">
+                <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 relative flex flex-col items-center justify-center text-primary">
+                    <h2 class="text-3xl font-bold leading-tight text-accent sm:text-4xl lg:text-5xl">
+                        Meet the team
+                    </h2>
+                    <p class="max-w-xl mt-4 text-base leading-relaxed text-gray-600 text-justify">We are a team of 3 students from <a href="https://www.facebook.com/LaConsolacionU" target="_blank" class="text-accent">La Consolacion University Philippines</a>, taking up Bachelor of Science in Information Technology.</p>
+                    <div class="flex flex-col mt-8 sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-20 text-primary text-center">
+                        <div class="is-hidden avatar text-center flex flex-col items-center justify-center">
+                            <img src="{{ Vite::asset('resources/images/boy1.png') }}" alt="Placeholder Image" class="h-[150px] transition-transform duration-300 ease-in-out hover:scale-110 sm:h-[200px]">
+                            <p class="text-lg font-bold mt-2 sm:text-2xl">Shawne Nuque</p>
+                            <p class="text-sm sm:mt-2">Web Developer</p>
                         </div>
-                    </div>
-                </div>
-                </section>
-                <!-- meet the team -->
-            <section id="meet-the-team">
-                <div class="min-h-[70dvh] w-full flex flex-col items-center pt-4 pb-8 justify-center bg-alice-blue px-4 sm:pt-8 sm:pb-16">
-                    <div class="relative flex flex-col items-center justify-center text-primary tracking-widest">
-                        <h1 class="text-2xl font-bold relative mb-6 sm:text-4xl">
-                            Meet the <span class="bg-primary text-white px-2">team</span> 👋
-                        </h1>
-                        <p class="text-justify text-sm w-full mx-auto tracking-normal px-4 leading-8 mb-8 sm:mb-16 sm:w-[40dvw] sm:text-normal">We are a team of 3 students from <a href="https://www.facebook.com/LaConsolacionU" target="_blank" class="text-accent">La Consolacion University Philippines</a>, taking up Bachelor of Science in Information Technology. This system is part of our final capstone project.</p>
-                        <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-20 text-primary text-center">
-                            <div class="is-hidden avatar text-center flex flex-col items-center justify-center">
-                                <img src="{{ Vite::asset('resources/images/boy1.png') }}" alt="Placeholder Image" class="h-[150px] transition-transform duration-300 ease-in-out hover:scale-110 sm:h-[200px]">
-                                <p class="text-lg font-bold mt-2 sm:text-2xl">Shawne Nuque</p>
-                                <p class="text-sm">Web Developer</p>
-                            </div>
-                            <div class="is-hidden avatar text-center flex flex-col items-center justify-center">
-                                <img src="{{ Vite::asset('resources/images/girl1.png') }}" alt="Placeholder Image" class="h-[150px] transition-transform duration-300 ease-in-out hover:scale-110 sm:h-[200px]">
-                                <p class="text-lg font-bold mt-2 sm:text-2xl">Lorrea Delos Reyes</p>
-                                <p class="text-sm">Project Researcher</p>
-                            </div>
-                            <div class="is-hidden avatar text-center flex flex-col items-center justify-center">
-                                <img src="{{ Vite::asset('resources/images/girl2.png') }}" alt="Placeholder Image" class="h-[150px] transition-transform duration-300 ease-in-out hover:scale-110 sm:h-[200px]">
-                                <p class="text-lg font-bold mt-2 sm:text-2xl">Pauline Joy Panillo</p>
-                                <p class="text-sm">Project Researcher</p>
-                            </div>
+                        <div class="is-hidden avatar text-center flex flex-col items-center justify-center">
+                            <img src="{{ Vite::asset('resources/images/girl1.png') }}" alt="Placeholder Image" class="h-[150px] transition-transform duration-300 ease-in-out hover:scale-110 sm:h-[200px]">
+                            <p class="text-lg font-bold mt-2 sm:text-2xl">Lorrea Delos Reyes</p>
+                            <p class="text-sm sm:mt-2">Project Researcher</p>
+                        </div>
+                        <div class="is-hidden avatar text-center flex flex-col items-center justify-center">
+                            <img src="{{ Vite::asset('resources/images/girl2.png') }}" alt="Placeholder Image" class="h-[150px] transition-transform duration-300 ease-in-out hover:scale-110 sm:h-[200px]">
+                            <p class="text-lg font-bold mt-2 sm:text-2xl">Pauline Joy Panillo</p>
+                            <p class="text-sm sm:mt-2">Project Researcher</p>
                         </div>
                     </div>
                 </div>
             </section>
+
             <!-- contact section -->
-            <section id="contact">
-                <div class="min-h-[70dvh] w-full flex flex-col items-center py-8 px-4 bg-patten-blue sm:py-16">
-                    <h1 class="text-2xl font-bold relative mb-6 text-primary sm:text-4xl">
-                        <span class="bg-primary text-white px-2">Connect</span> with us 🤝
-                    </h1>
-                    <div class="mb-6 text-center text-primary sm:mb-10">
+            <section class="py-10 sm:py-16 lg:py-24">
+                <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 relative flex flex-col items-center justify-center text-primary">
+                    <h2 class="text-3xl font-bold leading-tight text-accent sm:text-4xl lg:text-5xl">
+                        Contact us
+                    </h2>
+                    <div class="mt-4 text-center text-gray-600 sm:mb-10">
                         <p class="text-sm sm:text-base">For inquiries, you can reach us at:</p>
                         <p class="text-sm sm:text-base">Email: <a href="mailto:team@example.com" class="text-accent">team@example.com</a></p>
                         <p class="text-sm sm:text-base">Phone: <a href="tel:+1234567890" class="text-accent">+1 (234) 567-890</a></p>
@@ -241,7 +181,7 @@
             </section>
 
             <!-- footer -->
-            <footer class="py-6 px-4 sm:px-10 mx-auto flex flex-col items-center justify-between text-xs text-primary max-w-screen bg-alice-blue sm:text-sm sm:flex-row">
+            <footer class="py-6 px-4 sm:px-10 mx-auto flex flex-col items-center justify-between text-xs text-primary max-w-screen bg-white sm:text-sm sm:flex-row">
                 <div class="flex items-center">
                     <img src="{{ Vite::asset('resources/images/LCUP.png') }}" alt="Logo" class="w-10 h-10 rounded-full">
                     <p class="font-logo text-lg ml-2">eventsphere</p>
@@ -253,6 +193,7 @@
                     </a>
                 </div>
             </footer>
+
         </div>
     </body>
 </html>
