@@ -32,7 +32,7 @@ class UserEventController extends Controller
 
             $departments = Department::all();
 
-            return view('dashboard', compact('registeredEvents', 'allEvents', 'departments'));
+            return view('events', compact('registeredEvents', 'allEvents', 'departments'));
         }
 
         return redirect()->route('login')->with('error', 'Please log in to view your registered events.');

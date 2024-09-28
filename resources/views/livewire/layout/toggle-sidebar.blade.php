@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Http\Livewire\Dashboard;
-
 use Livewire\Component;
 
 class SidebarToggle extends Component

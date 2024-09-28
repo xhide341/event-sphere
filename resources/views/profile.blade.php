@@ -18,7 +18,7 @@
                 </h2>
             </nav>
             <div class="block xl:hidden">
-                <livewire:dashboard.toggle-sidebar/>
+                <livewire:layout.toggle-sidebar/>
             </div>
         </div>
     </x-slot>
