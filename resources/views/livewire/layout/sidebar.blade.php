@@ -26,16 +26,16 @@ new class extends Component
 
     <div class="flex flex-col justify-between flex-1 mt-6">
         <nav>
-            <a href="{{ route('dashboard') }}" wire:navigate 
-                class="flex items-center px-4 py-2 mt-5 {{ request()->routeIs('dashboard') ? 'text-gray-200 bg-gray-800 active:bg-gray-800 focus:bg-gray-800' : 'text-primary' }} transition-colors duration-300 transform rounded-lg hover:bg-gray-800 hover:text-gray-200 active:text-white">
+            <a href="/events" wire:navigate 
+                class="flex items-center px-4 py-2 mt-5 {{ request()->routeIs('events') ? 'text-gray-200 bg-gray-800 active:bg-gray-800 focus:bg-gray-800' : 'text-primary' }} transition-colors duration-300 transform rounded-lg hover:bg-gray-800 hover:text-gray-200 active:text-white">
                 <svg class="w-5 h-5 transition-colors duration-300 hover:stroke-gray-200" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19 11H5M19 11C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11M19 11V9C19 7.89543 18.1046 7 17 7M5 11V9C5 7.89543 5.89543 7 7 7M7 7V5C7 3.89543 7.89543 3 9 3H15C16.1046 3 17 3.89543 17 5V7M7 7H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M15 5V7M15 11V13M15 17V19M5 5C3.89543 5 3 5.89543 3 7V10C4.10457 10 5 10.8954 5 12C5 13.1046 4.10457 14 3 14V17C3 18.1046 3.89543 19 5 19H19C20.1046 19 21 18.1046 21 17V14C19.8954 14 19 13.1046 19 12C19 10.8954 19.8954 10 21 10V7C21 5.89543 20.1046 5 19 5H5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
 
-                <span class="mx-4 font-medium">Dashboard</span>
+                <span class="mx-4 font-medium">Events</span>
             </a>
 
-            <a href="{{ route('profile') }}" wire:navigate 
+            <a href="/profile" wire:navigate 
                 class="flex items-center px-4 py-2 mt-5 {{ request()->routeIs('profile') ? 'text-gray-200 bg-gray-800 active:bg-gray-800 focus:bg-gray-800' : 'text-primary' }} transition-colors duration-300 transform rounded-lg hover:bg-gray-800 hover:text-gray-200">
                 <svg class="w-5 h-5 transition-colors duration-300 hover:stroke-gray-200" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -45,13 +45,26 @@ new class extends Component
                 <span class="mx-4 font-medium">Profile</span>
             </a>
 
-            <a href="{{ route('events') }}" wire:navigate 
-                class="flex items-center px-4 py-2 mt-5 {{ request()->routeIs('events') ? 'text-gray-200 bg-gray-800 active:bg-gray-800 focus:bg-gray-800' : 'text-primary' }} transition-colors duration-300 transform rounded-lg hover:bg-gray-800 hover:text-gray-200 active:text-white">
+            <a href="/venues" wire:navigate 
+                class="flex items-center px-4 py-2 mt-5 {{ request()->routeIs('venues') ? 'text-gray-200 bg-gray-800 active:bg-gray-800 focus:bg-gray-800' : 'text-primary' }} transition-colors duration-300 transform rounded-lg hover:bg-gray-800 hover:text-gray-200 active:text-white">
                 <svg class="w-5 h-5 transition-colors duration-300 hover:stroke-gray-200" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M15 5V7M15 11V13M15 17V19M5 5C3.89543 5 3 5.89543 3 7V10C4.10457 10 5 10.8954 5 12C5 13.1046 4.10457 14 3 14V17C3 18.1046 3.89543 19 5 19H19C20.1046 19 21 18.1046 21 17V14C19.8954 14 19 13.1046 19 12C19 10.8954 19.8954 10 21 10V7C21 5.89543 20.1046 5 19 5H5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M19 10H5C3.89543 10 3 10.8954 3 12V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V12C21 10.8954 20.1046 10 19 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7 10V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
 
-                <span class="mx-4 font-medium">Events</span>
+                <span class="mx-4 font-medium">Venues</span>
+            </a>
+
+            <a href="/speakers" wire:navigate 
+                class="flex items-center px-4 py-2 mt-5 {{ request()->routeIs('speakers') ? 'text-gray-200 bg-gray-800 active:bg-gray-800 focus:bg-gray-800' : 'text-primary' }} transition-colors duration-300 transform rounded-lg hover:bg-gray-800 hover:text-gray-200 active:text-white">
+                <svg class="w-5 h-5 transition-colors duration-300 hover:stroke-gray-200" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+
+                <span class="mx-4 font-medium">Speakers</span>
             </a>
 
             <a class="flex items-center px-4 py-2 mt-5 text-primary transition-colors duration-300 transform rounded-lg hover:bg-gray-800 hover:text-gray-200 active:text-white" 

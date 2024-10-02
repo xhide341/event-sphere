@@ -36,7 +36,7 @@ new class extends Component
     }
 }; ?>
 
-<section x-data="{ showModal: @entangle('showModal') }">
+<section x-data="{ showModal: @entangle('showModal') }" x-cloak>
     <div class="relative flex w-[21rem] h-[32rem] flex-col rounded-xl bg-gray-300 bg-clip-border text-gray-700 shadow-lg border-2 border-gray-400 cursor-pointer"
          @click="showModal = true">
       <div class="relative mx-4 mt-4 overflow-hidden rounded-md bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
@@ -74,7 +74,7 @@ new class extends Component
           <h5 class="block text-xl font-medium leading-snug tracking-normal text-blue-gray-900 antialiased truncate">
             {{ $event->name }}
           </h5>
-          <p class="text-sm font-light text-primary">
+          <p class="text-sm font-light text-primary overflow-hidden truncate">
             {{ $event->venue }}
           </p>
         </div>
@@ -192,6 +192,7 @@ new class extends Component
 
     <!-- Modal -->
     <div x-show="showModal" 
+         x-cloak
          x-transition:enter="transition ease-out duration-300"
          x-transition:enter-start="opacity-0"
          x-transition:enter-end="opacity-100"

@@ -1,7 +1,7 @@
 <nav class="hidden lg:ml-auto lg:flex lg:items-center lg:space-x-10">
     @auth
         <a
-            href="{{ url('/dashboard') }}"
+            href="{{ url('/events') }}"
             class="rounded-md px-3 py-2 text-white ring-none bg-primary transition"
         >
             Dashboard

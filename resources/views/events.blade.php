@@ -10,7 +10,7 @@
                         Pages
                     </li>
                     <li class="text-sm pl-2 capitalize leading-normal before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">
-                        Dashboard
+                        Events
                     </li>
                 </ol>
                 <h2 class="font-semibold text-3xl capitalize">
