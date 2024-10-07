@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Event;
 use App\Models\Registration;
+use Carbon\Carbon;
 
 class RegistrationSeeder extends Seeder
 {
@@ -26,6 +27,7 @@ class RegistrationSeeder extends Seeder
                 Registration::create([
                     'user_id' => $user->id,
                     'event_id' => $event->id,
+                    'registration_date' => Carbon::now(),
                 ]);
             }
         }

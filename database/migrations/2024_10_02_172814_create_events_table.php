@@ -19,12 +19,11 @@ return new class extends Migration
             $table->string('description');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
-            $table->string('venue');
-            $table->string('category');
-            $table->integer('capacity');
-            $table->string('status');
+            $table->foreignId('venue_id')->constrained()->unsigned();
+            $table->foreignId('department_id')->constrained()->unsigned();
+            $table->foreignId('speaker_id')->constrained()->onDelete('cascade');
             $table->string('image')->nullable();
-            $table->foreignId('department_id')->constrained()->onDelete('cascade');
+            $table->string('status');
             $table->timestamps();
         });
 

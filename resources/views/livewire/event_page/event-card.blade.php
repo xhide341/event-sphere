@@ -1,38 +1,72 @@
 <?php
 
 use Livewire\Volt\Component;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Event;
 
 new class extends Component
 {
     public $event;
     public $showModal = false;
     public $modalContent = null;
+    public $isUserRegistered = false;
 
-    public function mount($event)
+    public function mount(Event $event)
     {
         $this->event = $event;
         $this->preloadModalContent();
+        $this->checkUserRegistration();
     }
 
     public function preloadModalContent()
     {
-        // Fetch and prepare all the data needed for the modal
         $this->modalContent = [
-            'name' => $this->event->name,
+            'event_name' => $this->event->name,
             'image' => $this->event->image,
-            'department' => $this->event->department->name,
+            'department_name' => $this->event->department->name ?? 'N/A',
             'description' => $this->event->description,
-            'venue' => $this->event->venue,
-            'participant_count' => $this->event->participant_count,
-            'capacity' => $this->event->capacity,
+            'venue_name' => $this->event->venue->name ?? 'N/A',
+            'speaker' => $this->event->speaker->name ?? 'N/A',
+            'participant_count' => $this->event->users_count,
+            'capacity' => $this->event->venue->capacity ?? 'N/A',
             'status' => $this->event->status,
-            'category' => $this->event->category,
+            'category' => $this->event->department->name ?? 'N/A',
+            'start_date' => $this->event->start_date,
+            'end_date' => $this->event->end_date,
         ];
     }
 
     public function toggleModal()
     {
         $this->showModal = !$this->showModal;
+    }
+
+    public function checkUserRegistration()
+    {
+        $user = Auth::user();
+        if ($user) {
+            $this->isUserRegistered = $this->event->users()->where('user_id', $user->id)->exists();
+        }
+    }
+
+    public function registerForEvent()
+    {
+        $user = Auth::user();
+        if ($user && !$this->isUserRegistered) {
+            $this->event->users()->attach($user->id, ['registration_date' => now()]);
+            $this->isUserRegistered = true;
+            $this->event->users_count++;
+        }
+    }
+
+    public function cancelRegistration()
+    {
+        $user = Auth::user();
+        if ($user && $this->isUserRegistered) {
+            $this->event->users()->detach($user->id);
+            $this->isUserRegistered = false;
+            $this->event->users_count--;
+        }
     }
 }; ?>
 
@@ -41,8 +75,8 @@ new class extends Component
          @click="showModal = true">
       <div class="relative mx-4 mt-4 overflow-hidden rounded-md bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
         <img
-          src="{{ $event->image }}"
-          alt="{{ $event->name }}"
+          src="{{ $modalContent['image'] }}"
+          alt="{{ $modalContent['event_name'] }}"
           class="w-full h-[10rem] object-cover"
         />
         <div class="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
@@ -65,17 +99,17 @@ new class extends Component
         </button>
         <div class="absolute bottom-0 left-0 p-2">
           <span class="bg-white rounded-full px-3 py-1 text-sm font-semibold text-primary">
-            {{ $event->department->name }}
+            {{ $modalContent['department_name'] }}
           </span>
         </div>
       </div>
       <div class="p-6">
         <div class="mb-3 flex flex-col justify-between">
           <h5 class="block text-xl font-medium leading-snug tracking-normal text-blue-gray-900 antialiased truncate">
-            {{ $event->name }}
+            {{ $modalContent['event_name'] }}
           </h5>
           <p class="text-sm font-light text-primary overflow-hidden truncate">
-            {{ $event->venue }}
+            {{ $modalContent['venue_name'] }}
           </p>
         </div>
         <div class="min-h-[2.5rem]">
@@ -117,7 +151,7 @@ new class extends Component
             >
               <path
                 fill-rule="evenodd"
-                d="M1.371 8.143c5.858-5.857 15.356-5.857 21.213 0a.75.75 0 010 1.061l-.53.53a.75.75 0 01-1.06 0c-4.98-4.979-13.053-4.979-18.032 0a.75.75 0 01-1.06 0l-.53-.53a.75.75 0 010-1.06zm3.182 3.182c4.1-4.1 10.749-4.1 14.85 0a.75.75 0 010 1.061l-.53.53a.75.75 0 01-1.062 0 8.25 8.25 0 00-11.667 0 .75.75 0 01-1.06 0l-.53-.53a.75.75 0 010-1.06zm3.204 3.182a6 6 0 018.486 0 .75.75 0 010 1.061l-.53.53a.75.75 0 01-1.061 0 3.75 3.75 0 00-5.304 0 .75.75 0 01-1.06 0l-.53-.53a.75.75 0 010-1.06zm3.182 3.182a1.5 1.5 0 012.122 0 .75.75 0 010 1.061l-.53.53a.75.75 0 01-1.061 0l-.53-.53a.75.75 0 010-1.06z"
+                d="M1.371 8.143c5.858-5.857 15.356-5.857 21.213 0a.75.75 0 010 1.061l-.53.53a.75.75 0 01-1.06 0c-4.98-4.979-13.053-4.979-18.032 0a.75.75 0 01-1.06 0l-.53-.53a.75.75 0 010-1.06zm3.182 3.182c4.1-4.1 10.749-4.1 14.85 0a.75.75 0 010 1.061l-.53.53a.75.75 0 01-1.062 0 8.25 8.25 0 00-11.667 0 .75.75 0 01-1.06 0l-.53-.53a.75.75 0 010-1.06zm3.204 3.182a6 6 0 018.486 0 .75.75 0 010 1.061l-.53.53a.75.75 0 01-1.061 0l-.53-.53a.75.75 0 010-1.06zm3.182 3.182a1.5 1.5 0 012.122 0 .75.75 0 010 1.061l-.53.53a.75.75 0 01-1.061 0l-.53-.53a.75.75 0 010-1.06z"
                 clip-rule="evenodd"
               ></path>
             </svg>
@@ -184,8 +218,9 @@ new class extends Component
           class="block w-full select-none rounded-lg bg-primary py-3.5 px-7 text-center align-middle text-sm font-bold uppercase text-white shadow-md shadow-primary-500/20 transition-all hover:shadow-lg hover:shadow-primary-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           type="button"
           data-ripple-light="true"
+          @if($isUserRegistered) disabled @endif
         >
-          Register
+          {{ $isUserRegistered ? 'Registered' : 'Register' }}
         </button>
       </div>
     </div>
@@ -216,7 +251,7 @@ new class extends Component
                 <div class="leading-normal font-poppins bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg leading-6 font-medium text-primary" id="modal-title">
-                            {{ $modalContent['name'] }}
+                            {{ $modalContent['event_name'] }}
                         </h3>
                         <button type="button" class="text-gray-400 hover:text-gray-500" @click="showModal = false">
                             <span class="sr-only">Close</span>
@@ -227,8 +262,8 @@ new class extends Component
                     </div>
                     <div class="mt-2 break-words text-pretty font-normal">
                         <div class="relative">
-                          <img src="{{ $modalContent['image'] }}" alt="{{ $modalContent['name'] }}" class="w-full h-48 object-cover rounded-md">
-                          <p class="absolute bottom-0 left-0 m-2 bg-white rounded-full px-3 py-1 text-sm font-semibold text-primary">{{ $modalContent['department'] }}</p>
+                          <img src="{{ $modalContent['image'] }}" alt="{{ $modalContent['event_name'] }}" class="w-full h-48 object-cover rounded-md">
+                          <p class="absolute bottom-0 left-0 m-2 bg-white rounded-full px-3 py-1 text-sm font-semibold text-primary">{{ $modalContent['department_name'] }}</p>
                         </div>
                         <div class="mt-2 p-2">
                           <h5 class="text-lg font-semibold text-primary">Details:</h5>
@@ -236,7 +271,7 @@ new class extends Component
                         </div>
                         <div class="flex items-center space-x-2 mt-2 px-2">
                           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0B2147"><path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 400Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Z"/></svg>
-                          <p class="text-sm tracking-wide font-normal text-primary">{{ $modalContent['venue'] }}</p>
+                          <p class="text-sm tracking-wide font-normal text-primary">{{ $modalContent['venue_name'] }}</p>
                         </div>
                         <div class="flex items-center space-x-2 mt-2 px-2">
                           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0B2147"><path d="M0-240v-63q0-43 44-70t116-27q13 0 25 .5t23 2.5q-14 21-21 44t-7 48v65H0Zm240 0v-65q0-32 17.5-58.5T307-410q32-20 76.5-30t96.5-10q53 0 97.5 10t76.5 30q32 20 49 46.5t17 58.5v65H240Zm540 0v-65q0-26-6.5-49T754-397q11-2 22.5-2.5t23.5-.5q72 0 116 26.5t44 70.5v63H780ZM160-440q-33 0-56.5-23.5T80-520q0-34 23.5-57t56.5-23q34 0 57 23t23 57q0 33-23 56.5T160-440Zm640 0q-33 0-56.5-23.5T720-520q0-34 23.5-57t56.5-23q34 0 57 23t23 57q0 33-23 56.5T800-440Zm-320-40q-50 0-85-35t-35-85q0-51 35-85.5t85-34.5q51 0 85.5 34.5T600-600q0 50-34.5 85T480-480Z"/></svg>
@@ -255,13 +290,21 @@ new class extends Component
                     </div>
                 </div>
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:ml-3 sm:w-auto sm:text-sm">
-                        Register
-                    </button>
+                    @if(!$isUserRegistered)
+                        <button type="button" 
+                                wire:click="registerForEvent"
+                                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:ml-3 sm:w-auto sm:text-sm">
+                            Register
+                        </button>
+                    @else
+                        <button type="button" 
+                                wire:click="cancelRegistration"
+                                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+                            Cancel Registration
+                        </button>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-

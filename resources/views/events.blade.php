@@ -37,7 +37,7 @@
                     <div class="flex pb-2 xl:pb-4 flex-row space-x-4 overflow-x-auto">
                         @foreach($registeredEvents as $event)
                             <div class="flex-shrink-0">
-                                <livewire:event_page.events :event="$event" />
+                                <livewire:event_page.event-card :event="$event" :wire:key="'registered_'.$event->id" />
                             </div>
                         @endforeach
                     </div>
@@ -60,7 +60,7 @@
                         <div class="flex pb-2 xl:pb-4 flex-row space-x-4 overflow-x-auto">
                             @foreach($allEvents as $event)
                             <div class="flex-shrink-0">
-                                <livewire:event_page.events :event="$event" />
+                                <livewire:event_page.event-card :event="$event" :wire:key="'all_'.$event->id"/>
                             </div>
                             @endforeach
                         </div>

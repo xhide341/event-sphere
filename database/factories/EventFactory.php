@@ -4,9 +4,10 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\Event;
 use App\Models\Department;
-
+use App\Models\Event;
+use App\Models\Venue;
+use App\Models\Speaker;
 class EventFactory extends Factory
 {
     /**
@@ -22,19 +23,21 @@ class EventFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->sentence(3, true),
-            'description' => $this->faker->paragraph(2),
-            'start_date' => $this->faker->dateTimeBetween('now', '+1 month'),
-            'end_date' => $this->faker->dateTimeBetween('+1 month', '+2 months'),
-            'capacity' => $this->faker->numberBetween(10, 100),
-            'venue' => $this->faker->randomElement([
-                $this->faker->sentence(3),
-                'Online Event'
+            'name' => $this->faker->randomElement(['Senior Highschool Graduation', 'Semester Orientation', 'Coding Workshop', 'Career Conference']),
+            'description' => $this->faker->randomElement(
+                ['"The annual cultural festival brings together students from various departments, filling the campus courtyard with vibrant booths showcasing art, music, and traditional cuisine."',
+                "The auditorium buzzes with excitement as students gather for the highly anticipated guest lecture, with rows of chairs neatly arranged in front of the large projection screen.",
+                "The charity marathon kicks off early in the morning, with participants warming up along the campus pathways, marked by colorful banners and hydration stations.",
+                "The outdoor concert on the central lawn features local bands, with students lounging on blankets under string lights, enjoying the cool evening breeze.",
+                "The science fair displays innovative student projects, with each booth equipped with detailed posters and interactive demos, attracting curious visitors throughout the day."
             ]),
-            'category' => $this->faker->randomElement(['Workshop', 'Seminar', 'Conference', 'Festival', 'Party', 'Concert', 'Sports', 'Other']),
-            'status' => $this->faker->randomElement(['Scheduled', 'Cancelled', 'Postponed']),
+            'start_date' => $this->faker->dateTime(),
+            'end_date' => $this->faker->dateTime(),
+            'venue_id' => Venue::factory(),
+            'department_id' => Department::factory(),
+            'speaker_id' => Speaker::factory(),
             'image' => 'https://unsplash.it/640/480?random=' . Str::random(10),
-            'department_id' => Department::factory()->create()->id,
+            'status' => $this->faker->randomElement(['Archived', 'Upcoming', 'Ongoing', 'Completed']),
         ];
     }
 }

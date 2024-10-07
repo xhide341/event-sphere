@@ -4,7 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title>Welcome! - eventsphere</title>
+        <title>Welcome! | eventsphere</title>
+        <link rel="icon" href="{{ Vite::asset('resources/images/LCUP.ico') }}" type="image/x-icon" sizes="16x16">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

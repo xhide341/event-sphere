@@ -21,10 +21,11 @@ class Event extends Model
         'description',
         'start_date',
         'end_date',
-        'venue',
-        'status',
+        'venue_id',
+        'department_id',
+        'speaker_id',
         'image',
-        'capacity',
+        'status',
     ];
 
     /**
@@ -35,21 +36,15 @@ class Event extends Model
     protected $casts = [
         'id' => 'integer',
         'start_date' => 'datetime',
-        'start_time' => 'string',
-        'end_time' => 'string',
-        'capacity' => 'integer',
-        'venue' => 'string',
+        'end_date' => 'datetime',
+        'venue_id' => 'integer',
+        'department_id' => 'integer',
+        'speaker_id' => 'integer',
     ];
 
-
-    public function users(): BelongsToMany
+    public function venue(): BelongsTo
     {
-        return $this->belongsToMany(User::class);
-    }
-
-    public function registrants()
-    {
-        return $this->hasMany(Registration::class, 'event_id');
+        return $this->belongsTo(Venue::class);
     }
 
     public function department(): BelongsTo
@@ -57,13 +52,18 @@ class Event extends Model
         return $this->belongsTo(Department::class);
     }
 
-    /**
-     * Get the number of participants for the event.
-     *
-     * @return int
-     */
-    public function getParticipantCountAttribute(): int
+    public function users(): BelongsToMany
     {
-        return $this->registrants()->count();
+        return $this->belongsToMany(User::class, 'registrations')->withPivot('registration_date');
+    }
+
+    public function speaker(): BelongsTo
+    {
+        return $this->belongsTo(Speaker::class);
+    }
+
+    public function getUsersCountAttribute(): int
+    {
+        return $this->users()->count();
     }
 }

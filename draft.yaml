@@ -6,9 +6,10 @@ models:
     start_date: datetime
     end_date: datetime
     venue_id: id foreign unsigned
+    department_id: id foreign unsigned
     status: string
     relationships:
-      belongsTo: Venue
+      belongsTo: Venue, Department
       belongsToMany: User
 
   Venue:
@@ -28,6 +29,5 @@ models:
   Department:
     name: string
     relationships:
-      hasMany: User
-
+      hasMany: User, Event
   # Additional models can be added here as needed

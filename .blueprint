@@ -1,9 +1,20 @@
-created: 'database/factories/EventFactory.php database/factories/VenueFactory.php database/factories/RegistrationFactory.php database/factories/DepartmentFactory.php app/Models/Event.php app/Models/Venue.php app/Models/Registration.php app/Models/Department.php'
-deleted: 'database/migrations\2024_08_31_145528_create_events_table.php database/migrations\2024_08_31_145529_create_venues_table.php database/migrations\2024_08_31_145530_create_registrations_table.php database/migrations\2024_08_31_145531_create_departments_table.php'
-updated: 'database/migrations\2024_08_26_134149_create_events_table.php database/migrations\2024_08_26_134150_create_venues_table.php database/migrations\2024_08_26_134151_create_registrations_table.php database/migrations\2024_08_26_134152_create_departments_table.php database/migrations\2024_08_31_145532_create_event_user_table.php'
+created:
+    - database/factories/EventFactory.php
+    - database/factories/VenueFactory.php
+    - database/factories/RegistrationFactory.php
+    - database/factories/DepartmentFactory.php
+    - database/migrations/2024_10_02_172814_create_events_table.php
+    - database/migrations/2024_10_02_172815_create_venues_table.php
+    - database/migrations/2024_10_02_172816_create_registrations_table.php
+    - database/migrations/2024_10_02_172817_create_departments_table.php
+    - database/migrations/2024_10_02_172818_create_event_user_table.php
+    - app/Models/Event.php
+    - app/Models/Venue.php
+    - app/Models/Registration.php
+    - app/Models/Department.php
 models:
-    Department: { name: string }
-    Event: { name: string, description: string, start_date: datetime, end_date: datetime, organizer_id: 'biginteger unsigned', venue_id: 'biginteger unsigned', status: string }
-    Registration: { event_id: 'biginteger unsigned', student_id: 'biginteger unsigned', registration_date: datetime }
-    User: { name: string, email: string, email_verified_at: 'timestamp nullable', password: string, role: string, remember_token: 'string:100 nullable' }
-    Venue: { name: string, location: string, capacity: integer }
+    User: { name: string, email: string, department_id: 'id foreign unsigned', relationships: { belongsTo: Department, hasMany: Registration } }
+    Event: { name: string, description: string, start_date: datetime, end_date: datetime, venue_id: 'id foreign unsigned', department_id: 'id foreign unsigned', status: string, relationships: { belongsTo: 'Venue, Department', belongsToMany: User } }
+    Venue: { name: string, location: string, capacity: integer, relationships: { hasMany: Event } }
+    Department: { name: string, relationships: { hasMany: 'User, Event' } }
+    Registration: { event_id: 'id foreign unsigned', user_id: 'id foreign unsigned', registration_date: datetime, relationships: { belongsTo: 'Event, User' } }

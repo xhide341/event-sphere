@@ -9,20 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::disableForeignKeyConstraints();
-
-        Schema::create('departments', function (Blueprint $table) {
+        Schema::create('speakers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('start_date');
-            $table->string('start_time');
-            $table->string('end_time');
+            $table->string('email')->unique();
+            $table->text('bio')->nullable();
+            $table->string('profile_picture')->nullable();
             $table->timestamps();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('departments');
+        Schema::dropIfExists('speakers');
     }
 };
