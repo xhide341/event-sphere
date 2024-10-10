@@ -1,0 +1,61 @@
+<?php
+
+namespace App\Http\Livewire;
+
+use Livewire\Component;
+use App\Models\Event;
+use App\Models\Department;
+use Illuminate\Support\Facades\Auth;
+
+class EventsPage extends Component
+{
+    public $selectedRegisteredDepartment = '';
+    public $selectedDepartment = '';
+    public $departments;
+    public $uniqueDepartments;
+
+    protected $queryString = [
+        'selectedRegisteredDepartment' => ['except' => ''],
+        'selectedDepartment' => ['except' => ''],
+    ];
+
+    protected $listeners = [
+        'departmentSelected' => 'updateDepartment',
+        'registeredDepartmentSelected' => 'updateRegisteredDepartment',
+    ];
+
+    public function mount()
+    {
+        $this->selectedRegisteredDepartment = request()->query('selectedRegisteredDepartment', '');
+        $this->selectedDepartment = request()->query('selectedDepartment', '');
+        $this->departments = Department::all();        
+        $this->uniqueDepartments = $this->departments->unique('name')->values();
+    }
+
+    public function updateDepartment($departmentName)
+    {
+        $this->selectedDepartment = $departmentName;
+    }
+
+    public function updateRegisteredDepartment($departmentName)
+    {
+        $this->selectedRegisteredDepartment = $departmentName;
+    }
+
+    public function resetFilter($type)
+    {
+        if ($type === 'registered') {
+            $this->selectedRegisteredDepartment = '';
+        } elseif ($type === 'all') {
+            $this->selectedDepartment = '';
+        }
+    }
+
+    public function render()
+    {
+        return view('livewire.events-page', [
+            'departments' => $this->departments,
+            'uniqueDepartments' => $this->uniqueDepartments,
+        ]);
+    }
+}

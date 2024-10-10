@@ -19,33 +19,41 @@ class UserEventController extends Controller
      *
      * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
      */
-    public function showEvents() {
+    public function showEvents(Request $request)
+    {
         $user = Auth::user();
+        $departmentId = $request->input('department');
 
         if ($user) {
-            $registeredEvents = Event::select('events.*', 'registrations.registration_date')
+            $registeredEvents = Event::select('events.*')
                 ->join('registrations', 'events.id', '=', 'registrations.event_id')
                 ->where('registrations.user_id', $user->id)
-                ->with(['department:id,name', 'venue:id,name,capacity', 'speaker:id,name'])
+                ->when($departmentId, function ($query) use ($departmentId) {
+                    return $query->where('events.department_id', $departmentId);
+                })
+                ->with(['department:id,name', 'venue:id,name,capacity', 'speaker:id,name', 'users'])
                 ->withCount('users')
                 ->orderBy('events.start_date', 'asc')
                 ->paginate(5, ['*'], 'registeredEventsPage');
 
-            $allEvents = Event::with('department', 'venue', 'speaker')
+            $allEvents = Event::with(['department:id,name', 'venue:id,name,capacity', 'speaker:id,name', 'users'])
                 ->withCount('users')
+                ->when($departmentId, function ($query) use ($departmentId) {
+                    return $query->where('department_id', $departmentId);
+                })
+                ->orderBy('start_date', 'asc')
                 ->paginate(5, ['*'], 'allEventsPage');
+
             $departments = Department::all();
-            $venues = Venue::all();
 
             return view('events', [
                 'registeredEvents' => $registeredEvents,
                 'allEvents' => $allEvents,
                 'departments' => $departments,
-                'venues' => $venues
+                'selectedDepartmentId' => $departmentId
             ]);
         }
 
         return redirect()->route('login')->with('error', 'Please log in to view your registered events.');
     }
 }
-

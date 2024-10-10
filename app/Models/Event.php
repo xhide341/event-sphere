@@ -66,4 +66,9 @@ class Event extends Model
     {
         return $this->users()->count();
     }
+
+    public function isUserRegistered($userId)
+    {
+        return $this->users()->where('user_id', $userId)->exists();
+    }
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserEventController;
+use Livewire\Volt\Volt;
 
 Route::view('/', 'welcome');
 
@@ -16,7 +17,7 @@ Route::view('events', 'events')
 Route::get('/events', [UserEventController::class, 'showEvents'])
     ->middleware(['auth', 'verified'])
     ->name('events');
-
+    
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');

@@ -6,16 +6,14 @@ use App\Models\Event;
 
 new class extends Component
 {
-    public $event;
+    public Event $event;
     public $showModal = false;
     public $modalContent = null;
-    public $isUserRegistered = false;
 
     public function mount(Event $event)
     {
         $this->event = $event;
         $this->preloadModalContent();
-        $this->checkUserRegistration();
     }
 
     public function preloadModalContent()
@@ -41,32 +39,24 @@ new class extends Component
         $this->showModal = !$this->showModal;
     }
 
-    public function checkUserRegistration()
+    public function toggleRegistration()
     {
         $user = Auth::user();
         if ($user) {
-            $this->isUserRegistered = $this->event->users()->where('user_id', $user->id)->exists();
+            if ($this->event->users->contains($user->id)) {
+                $this->event->users()->detach($user->id);
+                $this->event->users_count--;
+            } else {
+                $this->event->users()->attach($user->id, ['registration_date' => now()]);
+                $this->event->users_count++;
+            }
+            $this->emit('eventRegistrationChanged');
         }
     }
 
-    public function registerForEvent()
+    public function isUserRegistered()
     {
-        $user = Auth::user();
-        if ($user && !$this->isUserRegistered) {
-            $this->event->users()->attach($user->id, ['registration_date' => now()]);
-            $this->isUserRegistered = true;
-            $this->event->users_count++;
-        }
-    }
-
-    public function cancelRegistration()
-    {
-        $user = Auth::user();
-        if ($user && $this->isUserRegistered) {
-            $this->event->users()->detach($user->id);
-            $this->isUserRegistered = false;
-            $this->event->users_count--;
-        }
+        return Auth::check() && $this->event->users->contains(Auth::id());
     }
 }; ?>
 
@@ -218,9 +208,9 @@ new class extends Component
           class="block w-full select-none rounded-lg bg-primary py-3.5 px-7 text-center align-middle text-sm font-bold uppercase text-white shadow-md shadow-primary-500/20 transition-all hover:shadow-lg hover:shadow-primary-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           type="button"
           data-ripple-light="true"
-          @if($isUserRegistered) disabled @endif
+          wire:click.stop="toggleRegistration"
         >
-          {{ $isUserRegistered ? 'Registered' : 'Register' }}
+          {{ $this->isUserRegistered() ? 'Cancel Registration' : 'Register' }}
         </button>
       </div>
     </div>
@@ -274,7 +264,7 @@ new class extends Component
                           <p class="text-sm tracking-wide font-normal text-primary">{{ $modalContent['venue_name'] }}</p>
                         </div>
                         <div class="flex items-center space-x-2 mt-2 px-2">
-                          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0B2147"><path d="M0-240v-63q0-43 44-70t116-27q13 0 25 .5t23 2.5q-14 21-21 44t-7 48v65H0Zm240 0v-65q0-32 17.5-58.5T307-410q32-20 76.5-30t96.5-10q53 0 97.5 10t76.5 30q32 20 49 46.5t17 58.5v65H240Zm540 0v-65q0-26-6.5-49T754-397q11-2 22.5-2.5t23.5-.5q72 0 116 26.5t44 70.5v63H780ZM160-440q-33 0-56.5-23.5T80-520q0-34 23.5-57t56.5-23q34 0 57 23t23 57q0 33-23 56.5T160-440Zm640 0q-33 0-56.5-23.5T720-520q0-34 23.5-57t56.5-23q34 0 57 23t23 57q0 33-23 56.5T800-440Zm-320-40q-50 0-85-35t-35-85q0-51 35-85.5t85-34.5q51 0 85.5 34.5T600-600q0 50-34.5 85T480-480Z"/></svg>
+                          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0B2147"><path d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v11.25C1.5 17.16 2.34 18 3.375 18H9.75v1.5H6A.75.75 0 006 21h12a.75.75 0 000-1.5h-3.75V18h6.375c1.035 0 1.875-.84 1.875-1.875V4.875C22.5 3.839 21.66 3 20.625 3H3.375zm0 13.5h17.25a.375.375 0 00.375-.375V4.875a.375.375 0 00-.375-.375H3.375A.375.375 0 003 4.875v11.25c0 .207.168.375.375.375z"/></svg>
                           <p class="text-sm tracking-wide font-normal text-primary">{{ $modalContent['participant_count'] }} / {{ $modalContent['capacity'] }}</p>
                         </div>
                         <div class="flex items-center space-x-2 mt-2 px-2">
@@ -290,15 +280,15 @@ new class extends Component
                     </div>
                 </div>
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    @if(!$isUserRegistered)
+                    @if(!$this->isUserRegistered())
                         <button type="button" 
-                                wire:click="registerForEvent"
+                                wire:click="toggleRegistration"
                                 class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:ml-3 sm:w-auto sm:text-sm">
                             Register
                         </button>
                     @else
                         <button type="button" 
-                                wire:click="cancelRegistration"
+                                wire:click="toggleRegistration"
                                 class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
                             Cancel Registration
                         </button>
