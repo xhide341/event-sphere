@@ -31,8 +31,10 @@ class EventFactory extends Factory
                 "The outdoor concert on the central lawn features local bands, with students lounging on blankets under string lights, enjoying the cool evening breeze.",
                 "The science fair displays innovative student projects, with each booth equipped with detailed posters and interactive demos, attracting curious visitors throughout the day."
             ]),
-            'start_date' => $this->faker->dateTime(),
-            'end_date' => $this->faker->dateTime(),
+            'start_date' => $start_date = $this->faker->dateTimeBetween('now', '+2 years')->setTime(
+                $this->faker->numberBetween(8, 20), 0, 0
+            ),
+            'end_date' => $this->faker->dateTimeInInterval($start_date, '+2 hours'),
             'venue_id' => Venue::factory(),
             'department_id' => Department::factory(),
             'speaker_id' => Speaker::factory(),

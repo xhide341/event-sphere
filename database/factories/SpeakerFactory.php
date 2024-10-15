@@ -17,7 +17,10 @@ class SpeakerFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name,
+            'name' => function () {
+                $title = $this->faker->title;
+                return $title . ' ' . $this->faker->name;
+            },
             'email' => $this->faker->unique()->safeEmail,
             'bio' => $this->faker->paragraph,
             'profile_picture' => $this->faker->imageUrl(200, 200, 'people'),

@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Event;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class EventCard extends Component
 {
@@ -32,7 +33,8 @@ class EventCard extends Component
             'venue_name' => $this->event->venue->name,
             'capacity' => $this->event->venue->capacity,
             'status' => $this->event->status,
-            'category' => $this->event->department->name,
+            'schedule' => Carbon::parse($this->event->start_date)->format('M j, Y g:i A'),
+            'speaker' => $this->event->speaker ? $this->event->speaker->name : 'No speaker assigned'
         ];
     }
     

@@ -202,13 +202,13 @@
                    x-transition:leave="transition ease-in duration-200"
                    x-transition:leave-start="opacity-100 scale-100"
                    x-transition:leave-end="opacity-0 scale-95"
-                   class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                   class="inline-block align-bottom bg-white rounded-lg border-2 border-primary text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
                   <div class="leading-normal font-poppins bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                       <div class="flex justify-between items-center mb-4">
-                          <h3 class="text-lg leading-6 font-medium text-primary" id="modal-title">
+                          <h3 class="text-2xl leading-6 font-semibold text-primary" id="modal-title">
                               {{ $this->modalContent['event_name'] }}
                           </h3>
-                          <button type="button" class="text-gray-400 hover:text-gray-500" @click="showModal = false">
+                          <button type="button" class="text-gray-400 transition-colors duration-200 hover:text-gray-500" @click="showModal = false">
                               <span class="sr-only">Close</span>
                               <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -216,10 +216,10 @@
                           </button>
                       </div>
                       <div class="mt-2 break-words text-pretty font-normal">
-                          <div class="relative">
+                          <div class="relative mb-4">
                             <div
                               x-data="{ modalImageLoaded: false }"
-                              class="w-full h-48"
+                              class="w-full h-64 rounded-lg overflow-hidden shadow-md"
                             >
                               <div
                                 x-show="!modalImageLoaded"
@@ -233,35 +233,91 @@
                               <img
                                 src="{{ $this->modalContent['image'] }}"
                                 alt="{{ $this->modalContent['event_name'] }}"
-                                class="w-full h-48 object-cover rounded-md"
+                                class="w-full h-64 object-cover rounded-md"
                                 x-on:load="modalImageLoaded = true"
                                 x-bind:class="{ 'opacity-0': !modalImageLoaded, 'opacity-100': modalImageLoaded }"
                               >
                             </div>
-                            <p class="absolute bottom-0 left-0 m-2 bg-white rounded-full px-3 py-1 text-sm font-semibold text-primary">{{ $this->modalContent['department_name'] }}</p>
+                            <p class="absolute bottom-2 left-2 bg-white rounded-full px-3 py-1 text-sm font-semibold text-primary shadow">{{ $this->modalContent['department_name'] }}</p>
                           </div>
-                          <div class="mt-2 px-2">
-                            <h5 class="text-lg font-semibold text-primary">Details:</h5>
-                            <p class="text-base text-primary font-normal">{{ $this->modalContent['description'] }}</p>
-                          </div>
-                          <hr class="my-2 border-t border-gray-200 w-full" />
-                          <div class="flex items-center space-x-2 mt-2 px-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0B2147"><path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 400Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Z"/></svg>
-                            <p class="text-sm tracking-wide font-normal text-primary">{{ $this->modalContent['venue_name'] }}</p>
-                          </div>
-                          <div class="flex items-center space-x-2 mt-2 px-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0B2147"><path d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v11.25C1.5 17.16 2.34 18 3.375 18H9.75v1.5H6A.75.75 0 006 21h12a.75.75 0 000-1.5h-3.75V18h6.375c1.035 0 1.875-.84 1.875-1.875V4.875C22.5 3.839 21.66 3 20.625 3H3.375zm0 13.5h17.25a.375.375 0 00.375-.375V4.875a.375.375 0 00-.375-.375H3.375A.375.375 0 003 4.875v11.25c0 .207.168.375.375.375z"/></svg>
-                            <p class="text-sm tracking-wide font-normal text-primary">{{ $this->getParticipantCount() }} / {{ $this->modalContent['capacity'] }}</p>
-                          </div>
-                          <div class="flex items-center space-x-2 mt-2 px-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0B2147"><path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>
-                            <p class="text-sm tracking-wide font-normal {{ $this->modalContent['status'] === 'Postponed' ? 'text-danger' : ($this->modalContent['status'] === 'Delayed' ? 'text-warning' : ($this->modalContent['status'] === 'Scheduled' ? 'text-success' : 'text-primary')) }}">
-                                {{ $this->modalContent['status'] }}
-                            </p>
-                          </div>
-                          <div class="flex items-center space-x-2 mt-2 px-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0B2147"><path d="M240-120q-66 0-113-47T80-280q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47Zm480 0q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM480-520q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47Z"/></svg>
-                            <p class="text-sm tracking-wide font-normal text-primary">{{ $this->modalContent['category'] }}</p>
+                          <div class="mt-4">
+                              <h5 class="text-xl font-semibold text-primary mb-3">Event Details</h5>
+                              <div class="bg-gray-100 rounded-lg p-4 shadow-sm">
+                                  <p class="text-base text-primary font-normal mb-4">{{ $this->modalContent['description'] }}</p>
+                                  
+                                  <div class="flex justify-center">
+                                    <div class="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="bg-primary bg-opacity-10 rounded-full p-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-gray-500 font-medium">Venue</p>
+                                                <p class="text-sm font-semibold text-primary">{{ $this->modalContent['venue_name'] }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-3">
+                                            <div class="bg-primary bg-opacity-10 rounded-full p-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-gray-500 font-medium">Schedule</p>
+                                                <p class="text-sm font-semibold text-primary">{{ $this->modalContent['schedule'] }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-3">
+                                            <div class="bg-primary bg-opacity-10 rounded-full p-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-gray-500 font-medium">Status</p>
+                                                <p class="text-sm font-semibold {{ $this->modalContent['status'] === 'Postponed' ? 'text-red-500' : ($this->modalContent['status'] === 'Delayed' ? 'text-yellow-500' : ($this->modalContent['status'] === 'Scheduled' ? 'text-green-500' : 'text-primary')) }}">
+                                                    {{ $this->modalContent['status'] }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-3">
+                                            <div class="bg-primary bg-opacity-10 rounded-full p-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-gray-500 font-medium">Department</p>
+                                                <p class="text-sm font-semibold text-primary">{{ $this->modalContent['department_name'] }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-3">
+                                            <div class="bg-primary bg-opacity-10 rounded-full p-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-gray-500 font-medium">Capacity</p>
+                                                <p class="text-sm font-semibold text-primary">{{ $this->getParticipantCount() }} / {{ $this->modalContent['capacity'] }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-3">
+                                            <div class="bg-primary bg-opacity-10 rounded-full p-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-gray-500 font-medium">Speaker</p>
+                                                <p class="text-sm font-semibold text-primary">{{ $this->modalContent['speaker'] }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  </div>
+                              </div>
                           </div>
                       </div>
                   </div>
