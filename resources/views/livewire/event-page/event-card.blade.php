@@ -176,26 +176,33 @@
       <!-- Modal -->
       <div x-show="showModal"
            x-cloak
-           x-transition:enter="transition ease-out duration-300"
-           x-transition:enter-start="opacity-0"
-           x-transition:enter-end="opacity-100"
-           x-transition:leave="transition ease-in duration-200"
-           x-transition:leave-start="opacity-100"
-           x-transition:leave-end="opacity-0"
            class="fixed inset-0 z-50 overflow-y-auto"
            aria-labelledby="modal-title"
            role="dialog"
            aria-modal="true">
           <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-              <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-              <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-              <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+              <!-- Backdrop -->
+              <div x-show="showModal"
                    x-transition:enter="transition ease-out duration-300"
-                   x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                   x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                   x-transition:enter-start="opacity-0"
+                   x-transition:enter-end="opacity-100"
                    x-transition:leave="transition ease-in duration-200"
-                   x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-                   x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
+                   x-transition:leave-start="opacity-100"
+                   x-transition:leave-end="opacity-0"
+                   class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" 
+                   aria-hidden="true"></div>
+
+              <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+              <!-- Modal content -->
+              <div x-show="showModal"
+                   x-transition:enter="transition ease-out duration-300"
+                   x-transition:enter-start="opacity-0 scale-95"
+                   x-transition:enter-end="opacity-100 scale-100"
+                   x-transition:leave="transition ease-in duration-200"
+                   x-transition:leave-start="opacity-100 scale-100"
+                   x-transition:leave-end="opacity-0 scale-95"
+                   class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
                   <div class="leading-normal font-poppins bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                       <div class="flex justify-between items-center mb-4">
                           <h3 class="text-lg leading-6 font-medium text-primary" id="modal-title">
@@ -233,10 +240,11 @@
                             </div>
                             <p class="absolute bottom-0 left-0 m-2 bg-white rounded-full px-3 py-1 text-sm font-semibold text-primary">{{ $this->modalContent['department_name'] }}</p>
                           </div>
-                          <div class="mt-2 p-2">
+                          <div class="mt-2 px-2">
                             <h5 class="text-lg font-semibold text-primary">Details:</h5>
                             <p class="text-base text-primary font-normal">{{ $this->modalContent['description'] }}</p>
                           </div>
+                          <hr class="my-2 border-t border-gray-200 w-full" />
                           <div class="flex items-center space-x-2 mt-2 px-2">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0B2147"><path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 400Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Z"/></svg>
                             <p class="text-sm tracking-wide font-normal text-primary">{{ $this->modalContent['venue_name'] }}</p>
