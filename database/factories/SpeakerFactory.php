@@ -18,8 +18,15 @@ class SpeakerFactory extends Factory
     {
         return [
             'name' => function () {
+                $name = $this->faker->name;
                 $title = $this->faker->title;
-                return $title . ' ' . $this->faker->name;
+                
+                // Check if the name already starts with an abbreviated title
+                if (!preg_match('/^(Mr\.|Mrs\.|Ms\.|Dr\.|Prof\.)/', $name)) {
+                    $name = $title . ' ' . $name;
+                }
+                
+                return $name;
             },
             'email' => $this->faker->unique()->safeEmail,
             'bio' => $this->faker->paragraph,

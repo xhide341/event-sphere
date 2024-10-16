@@ -29,10 +29,25 @@
                     <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#0B2147"><path d="M434.67-227.33 295.33-366l47.34-47.33 92 90.66 178.66-178.66 47.34 48-226 226ZM186.67-80q-27 0-46.84-19.83Q120-119.67 120-146.67v-600q0-27 19.83-46.83 19.84-19.83 46.84-19.83h56.66V-880h70v66.67h333.34V-880h70v66.67h56.66q27 0 46.84 19.83Q840-773.67 840-746.67v600q0 27-19.83 46.84Q800.33-80 773.33-80H186.67Zm0-66.67h586.66v-420H186.67v420Z"/></svg>
                     <p class="ml-2 text-2xl">My Events</p>
                 </div>
+
+                <!-- Department buttons for Registered Events -->
+                <div class="flex flex-wrap gap-2">
+                    <button wire:click="$set('registeredEventsDepartmentName', '')" 
+                            class="px-4 py-2 text-sm font-medium {{ $registeredEventsDepartmentName === '' ? 'bg-indigo-100 text-indigo-800' : 'text-gray-700 bg-white' }} border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        All
+                    </button>
+                    @foreach($uniqueDepartments as $departmentName)
+                        <button wire:click="$set('registeredEventsDepartmentName', '{{ $departmentName }}')" 
+                                class="px-4 py-2 text-sm font-medium {{ $registeredEventsDepartmentName === $departmentName ? 'bg-indigo-100 text-indigo-800' : 'text-gray-700 bg-white' }} border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            {{ $departmentName }}
+                        </button>
+                    @endforeach
+                </div>
+
                 @if($registeredEvents->isEmpty())
                     <p>No registered events found.</p>
                 @else
-                    <div class="flex pb-2 xl:pb-4 flex-row space-x-4 overflow-x-auto">
+                    <div class="flex p-2 xl:p-4 flex-row space-x-4 overflow-x-auto">
                         @foreach($registeredEvents as $event)
                             <div class="flex-shrink-0" wire:key="registered-event-wrapper-{{ $event->id }}">
                                 <livewire:event-page.event-card 
@@ -54,10 +69,25 @@
                     <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#0B2147"><path d="M280-413.33V-480h400v66.67H280ZM280-240v-66.67h279.33V-240H280ZM186.67-80q-27 0-46.84-19.83Q120-119.67 120-146.67v-600q0-27 19.83-46.83 19.84-19.83 46.84-19.83h56.66V-880h70v66.67h333.34V-880h70v66.67h56.66q27 0 46.84 19.83Q840-773.67 840-746.67v600q0 27-19.83 46.84Q800.33-80 773.33-80H186.67Zm0-66.67h586.66v-420H186.67v420Z"/></svg>
                     <p class="ml-2 text-2xl">All Events</p>
                 </div>
+                
+                <!-- Department buttons for All Events -->
+                <div class="flex flex-wrap gap-2">
+                    <button wire:click="$set('allEventsDepartmentName', '')" 
+                            class="px-4 py-2 text-sm font-medium {{ $allEventsDepartmentName === '' ? 'bg-indigo-100 text-indigo-800' : 'text-gray-700 bg-white' }} border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        All
+                    </button>
+                    @foreach($uniqueDepartments as $departmentName)
+                        <button wire:click="$set('allEventsDepartmentName', '{{ $departmentName }}')" 
+                                class="px-4 py-2 text-sm font-medium {{ $allEventsDepartmentName === $departmentName ? 'bg-indigo-100 text-indigo-800' : 'text-gray-700 bg-white' }} border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            {{ $departmentName }}
+                        </button>
+                    @endforeach
+                </div>
+
                 @if($allEvents->isEmpty())
                     <p>No events found.</p>
                 @else
-                    <div class="flex pb-2 xl:pb-4 flex-row space-x-4 overflow-x-auto">
+                    <div class="flex p-2 xl:p-4 flex-row space-x-4 overflow-x-auto">
                         @foreach($allEvents as $event)
                             <div class="flex-shrink-0" wire:key="all-event-wrapper-{{ $event->id }}">                                
                                 <livewire:event-page.event-card 

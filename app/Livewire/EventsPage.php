@@ -13,7 +13,9 @@ class EventsPage extends Component
 {
     use WithPagination;
 
-    public $selectedDepartmentId = '';
+    public $registeredEventsDepartmentName = '';
+    public $allEventsDepartmentName = '';
+    public $uniqueDepartments;
     
     protected $layout = 'layouts.app';
 
@@ -23,9 +25,12 @@ class EventsPage extends Component
         $this->dispatch('$refresh');
     }
 
-    public function mount($selectedDepartmentId = null)
+    public function mount()
     {
-        $this->selectedDepartmentId = $selectedDepartmentId;
+        $this->uniqueDepartments = Department::select('name')
+            ->distinct()
+            ->orderBy('name')
+            ->pluck('name');
     }
 
     public function render()
@@ -39,8 +44,10 @@ class EventsPage extends Component
         $registeredEvents = Event::select('events.*')
             ->join('registrations', 'events.id', '=', 'registrations.event_id')
             ->where('registrations.user_id', $user->id)
-            ->when($this->selectedDepartmentId, function ($query) {
-                return $query->where('events.department_id', $this->selectedDepartmentId);
+            ->when($this->registeredEventsDepartmentName, function ($query) {
+                return $query->whereHas('department', function ($q) {
+                    $q->where('name', $this->registeredEventsDepartmentName);
+                });
             })
             ->with(['department:id,name', 'venue:id,name,capacity', 'speaker:id,name', 'users'])
             ->withCount('users')
@@ -49,8 +56,10 @@ class EventsPage extends Component
 
         $allEvents = Event::with(['department:id,name', 'venue:id,name,capacity', 'speaker:id,name', 'users'])
             ->withCount('users')
-            ->when($this->selectedDepartmentId, function ($query) {
-                return $query->where('department_id', $this->selectedDepartmentId);
+            ->when($this->allEventsDepartmentName, function ($query) {
+                return $query->whereHas('department', function ($q) {
+                    $q->where('name', $this->allEventsDepartmentName);
+                });
             })
             ->orderBy('start_date', 'asc')
             ->paginate(5, ['*'], 'allEventsPage');

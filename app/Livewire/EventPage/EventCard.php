@@ -48,6 +48,31 @@ class EventCard extends Component
         return Auth::check() && $this->event->isUserRegistered(Auth::user()->id);
     }
 
+    public function getCountdown()
+    {
+        $eventDate = Carbon::parse($this->modalContent['schedule']);
+        $now = Carbon::now();
+        $eventEndDate = $eventDate->copy()->addHours(2); // Assuming events last 2 hours, adjust as needed
+
+        if ($now->gt($eventEndDate)) {
+            return 'Event has ended';
+        }
+
+        if ($now->gt($eventDate)) {
+            return 'Event in progress';
+        }
+
+        $diff = $now->diff($eventDate);
+
+        if ($diff->days > 0) {
+            return 'Starts in: ' . $diff->format('%d days, %h hrs');
+        } elseif ($diff->h > 0) {
+            return 'Starts in: ' . $diff->format('%h hrs, %i mins');
+        } else {
+            return 'Starts in: ' . $diff->format('%i mins');
+        }
+    }
+
     public function toggleRegistration()
     {
         if (!Auth::check()) {

@@ -17,7 +17,10 @@ export default {
                 logo: ['McLaren', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                primary: '#0B2147',
+                primary: {
+                    DEFAULT: '#0B2147',
+                    dark: '#081832',
+                },
                 secondary: '#000000',
                 tertiary: '#000000',
                 accent: '#035AA6',            
