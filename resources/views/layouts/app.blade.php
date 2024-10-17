@@ -22,7 +22,7 @@
         @livewireStyles
     </head>
     <body class="font-poppins antialiased">
-        <div class="relative flex bg-[#91AAB4] max-w-full w-full">
+        <div class="relative flex bg-muted-teal max-w-full w-full">
             
             @livewire('layout.sidebar')
             

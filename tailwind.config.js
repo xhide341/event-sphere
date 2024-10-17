@@ -18,7 +18,7 @@ export default {
             },
             colors: {
                 primary: {
-                    DEFAULT: '#0B2147',
+                    DEFAULT: '#032859',
                     dark: '#081832',
                 },
                 secondary: '#000000',
@@ -35,7 +35,11 @@ export default {
                 'patten-blue': '#D5E7F1',
                 'angora-blue': '#B8C6D9',
                 'buzz': '#F2C744',
-                'blueberry': '#568EBF',           
+                'blueberry': '#568EBF',  
+                'muted-teal': '#91AAB4',
+                'broad-blue': '#074973',
+                'clarinet': '#032859',
+                'navy-blue': '#0B2147'         
             },
             animation: {
                 'spin-fast': 'spin 0.5s linear infinite',

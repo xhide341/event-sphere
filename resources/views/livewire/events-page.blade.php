@@ -33,12 +33,12 @@
                 <!-- Department buttons for Registered Events -->
                 <div class="flex flex-wrap gap-2">
                     <button wire:click="$set('registeredEventsDepartmentName', '')" 
-                            class="px-4 py-2 text-sm font-medium {{ $registeredEventsDepartmentName === '' ? 'bg-indigo-100 text-indigo-800' : 'text-gray-700 bg-white' }} border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        All
+                            class="px-4 py-2 text-sm font-medium {{ $registeredEventsDepartmentName === '' ? 'bg-indigo-100 text-indigo-800' : 'text-gray-700 bg-white' }} border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none">
+                        ALL
                     </button>
                     @foreach($uniqueDepartments as $departmentName)
                         <button wire:click="$set('registeredEventsDepartmentName', '{{ $departmentName }}')" 
-                                class="px-4 py-2 text-sm font-medium {{ $registeredEventsDepartmentName === $departmentName ? 'bg-indigo-100 text-indigo-800' : 'text-gray-700 bg-white' }} border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                class="px-4 py-2 text-sm font-medium {{ $registeredEventsDepartmentName === $departmentName ? 'bg-indigo-100 text-indigo-800' : 'text-gray-700 bg-white' }} border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none">
                             {{ $departmentName }}
                         </button>
                     @endforeach
@@ -73,12 +73,12 @@
                 <!-- Department buttons for All Events -->
                 <div class="flex flex-wrap gap-2">
                     <button wire:click="$set('allEventsDepartmentName', '')" 
-                            class="px-4 py-2 text-sm font-medium {{ $allEventsDepartmentName === '' ? 'bg-indigo-100 text-indigo-800' : 'text-gray-700 bg-white' }} border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        All
+                            class="px-4 py-2 text-sm font-medium {{ $allEventsDepartmentName === '' ? 'bg-indigo-100 text-indigo-800' : 'text-gray-700 bg-white' }} border border-gray-300 rounded-md hover:bg-gray-50">
+                        ALL
                     </button>
                     @foreach($uniqueDepartments as $departmentName)
                         <button wire:click="$set('allEventsDepartmentName', '{{ $departmentName }}')" 
-                                class="px-4 py-2 text-sm font-medium {{ $allEventsDepartmentName === $departmentName ? 'bg-indigo-100 text-indigo-800' : 'text-gray-700 bg-white' }} border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                class="px-4 py-2 text-sm font-medium {{ $allEventsDepartmentName === $departmentName ? 'bg-indigo-100 text-indigo-800' : 'text-gray-700 bg-white' }} border border-gray-300 rounded-md hover:bg-gray-50">
                             {{ $departmentName }}
                         </button>
                     @endforeach

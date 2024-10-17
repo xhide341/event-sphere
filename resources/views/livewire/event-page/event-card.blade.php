@@ -1,6 +1,6 @@
 <div>
   <section x-data="{ showModal: @entangle('showModal') }" x-cloak>
-      <div class="relative flex w-[21rem] h-[32rem] flex-col rounded-xl bg-gray-300 bg-clip-border text-gray-700 shadow-lg border-2 border-gray-400 transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer"
+      <div class="relative flex w-[21rem] h-[32rem] flex-col rounded-xl bg-gray-300 bg-clip-border text-gray-700 shadow-lg border-2 border-muted-teal"
            @click="showModal = true">
         <div class="relative mx-4 mt-4 overflow-hidden rounded-md bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
           <div class="relative w-full h-[10rem]">
@@ -164,12 +164,13 @@
           </div>
         </div>
         <div class="p-6 pt-3">
-          <button
-            class="block w-full rounded-lg bg-primary hover:bg-primary-dark py-3.5 px-7 text-center text-sm font-semibold uppercase text-white"
-            type="button"
-          >
-            View Event Details
-          </button>
+        <button
+          class="block w-full relative overflow-hidden rounded-lg bg-broad-blue hover:bg-clarinet py-3.5 px-7 text-center text-sm font-semibold uppercase text-white transition-all duration-500 ease-out"
+          type="button"
+        >
+          View Event Details
+        </button>
+
         </div>
       </div>
   
