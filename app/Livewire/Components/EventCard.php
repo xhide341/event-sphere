@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\EventPage;
+namespace App\Livewire\Components;
 
 use Livewire\Component;
 use App\Models\Event;
@@ -94,6 +94,6 @@ class EventCard extends Component
 
     public function render()
     {
-        return view('livewire.event-page.event-card');
+        return view('livewire.components.event-card');
     }
 }

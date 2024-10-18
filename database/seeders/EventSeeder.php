@@ -19,13 +19,13 @@ class EventSeeder extends Seeder
         $venues = Venue::factory()->count(8)->create();
 
         // Create a limited number of departments
-        $departments = Department::factory()->count(4)->create();
+        $departments = Department::factory()->count(5)->create();
 
         // Create a limited number of speakers
         $speakers = Speaker::factory()->count(10)->create();
 
         // Create events
-        Event::factory()->count(10)->make()->each(function ($event) use ($venues, $departments, $speakers) {
+        Event::factory()->count(20)->make()->each(function ($event) use ($venues, $departments, $speakers) {
             $event->venue_id = $venues->random()->id;
             $event->department_id = $departments->random()->id;
             $event->speaker_id = $speakers->random()->id;

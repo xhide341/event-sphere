@@ -21,7 +21,7 @@
         <!-- Add Livewire Styles -->
         @livewireStyles
     </head>
-    <body class="font-poppins antialiased">
+    <body class="font-poppins antialiased bg-muted-teal">
         <div class="relative flex bg-muted-teal max-w-full w-full">
             
             @livewire('layout.sidebar')

@@ -21,7 +21,7 @@ class RegistrationSeeder extends Seeder
 
         foreach ($users as $user) {
             // Randomly assign each user to 1-3 events
-            $eventsToRegister = $events->random(rand(3, 5));
+            $eventsToRegister = $events->random(rand(5, 10));
             
             foreach ($eventsToRegister as $event) {
                 Registration::create([

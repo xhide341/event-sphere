@@ -164,14 +164,14 @@
           </div>
         </div>
         <div class="p-6 pt-3">
-        <button
-          class="block w-full relative overflow-hidden rounded-lg bg-broad-blue hover:bg-clarinet py-3.5 px-7 text-center text-sm font-semibold uppercase text-white transition-all duration-500 ease-out"
-          type="button"
-        >
-          View Event Details
-        </button>
-
+          <button
+            class="block w-full relative overflow-hidden rounded-lg bg-broad-blue hover:bg-clarinet py-3.5 px-7 text-center text-sm font-semibold uppercase text-white transition-all duration-500 ease-out wave-effect"
+            type="button"
+          >
+            <span class="relative z-10">View Event Details</span>
+          </button>
         </div>
+
       </div>
   
       <!-- Modal -->

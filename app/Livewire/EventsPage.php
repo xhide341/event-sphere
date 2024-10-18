@@ -36,10 +36,6 @@ class EventsPage extends Component
     public function render()
     {
         $user = Auth::user();
-        
-        if (!$user) {
-            return $this->redirect(route('/'));
-        }
 
         $registeredEvents = Event::select('events.*')
             ->join('registrations', 'events.id', '=', 'registrations.event_id')

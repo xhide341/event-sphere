@@ -72,3 +72,23 @@
       transition: all 1s;
     }
 }
+
+/* wave effect for event detail button */
+.wave-effect {
+    position: relative;
+}
+.wave-effect::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 0;
+    background: #032859;
+    opacity: 0.8;
+    transition: height 0.2s ease-out;
+}
+
+.wave-effect:hover::before {
+    height: 100%;
+}
