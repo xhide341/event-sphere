@@ -9,7 +9,15 @@
         </div>
 
         <div class="flex flex-col items-center mt-6 -mx-2">
-            <img class="object-cover w-24 h-24 mx-2 rounded-full" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="avatar">
+            @if($avatarUrl)
+                <img class="object-cover w-24 h-24 mx-2 rounded-full border-2 border-primary" src="{{ $avatarUrl }}" alt="avatar">
+            @else
+                <div class="w-24 h-24 mx-2 rounded-full bg-gray-200 border-2 border-primary flex items-center justify-center">
+                    <svg class="w-16 h-16 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+            @endif
             <h4 class="mx-2 mt-2 font-medium text-primary" x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name"></h4>
             <p class="mx-2 mt-1 text-sm font-medium text-gray-600">{{ auth()->user()->email }}</p>
         </div>
@@ -25,7 +33,7 @@
                     <span class="mx-4 font-medium">Events</span>
                 </a>
 
-                <a wire:navigate href="/profile" 
+                <a href="/profile" 
                     class="flex items-center px-4 py-2 mt-5 {{ request()->routeIs('profile') ? 'text-gray-200 bg-gray-800 active:bg-gray-800 focus:bg-gray-800' : 'text-primary' }} transition-colors duration-300 transform rounded-lg hover:bg-gray-800 hover:text-gray-200">
                     <svg class="w-5 h-5 transition-colors duration-300 hover:stroke-gray-200" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

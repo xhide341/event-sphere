@@ -3,21 +3,54 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Livewire\Volt\Component;
+use Livewire\WithFileUploads;
 
 new class extends Component
 {
+    use WithFileUploads;
+
     public string $name = '';
     public string $email = '';
+    public $avatar;
+    public $avatarUrl;
 
     /**
      * Mount the component.
      */
     public function mount(): void
     {
-        $this->name = Auth::user()->name;
-        $this->email = Auth::user()->email;
+        $user = Auth::user();
+        $this->name = $user->name;
+        $this->email = $user->email;
+        $this->generateAvatarUrl();
+    }
+
+    /**
+     * Generate a temporary URL for the user's avatar.
+     */
+    public function generateAvatarUrl(): void
+    {
+        $user = Auth::user();
+        if ($user->avatar) {
+            $path = $user->avatar;
+            try {
+                if (Storage::disk('s3')->exists($path)) {
+                    $this->avatarUrl = Storage::disk('s3')->temporaryUrl($path, now()->addMinutes(60));
+                    Log::info('Avatar URL generated successfully', ['user_id' => $user->id, 'path' => $path]);
+                } else {
+                    throw new \Exception('Avatar file does not exist in S3');
+                }
+            } catch (\Exception $e) {
+                $this->avatarUrl = null;
+                Log::warning('Failed to generate avatar URL', ['user_id' => $user->id, 'error' => $e->getMessage()]);
+            }
+        } else {
+            $this->avatarUrl = null;
+            Log::info('No avatar set for user', ['user_id' => $user->id]);
+        }
     }
 
     /**
@@ -25,6 +58,7 @@ new class extends Component
      */
     public function updateProfileInformation(): void
     {
+        Log::info('updateProfileInformation called', ['avatar' => $this->avatar ? 'present' : 'not present']);
         $user = Auth::user();
 
         $validated = $this->validate([
@@ -32,13 +66,51 @@ new class extends Component
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($user->id)],
         ]);
 
+        if ($this->avatar) {
+            $this->validate(['avatar' => ['image', 'max:1024']]);
+            try {
+                $filename = 'avatar-' . $user->id . '-' . time() . '.' . $this->avatar->getClientOriginalExtension();
+                
+                // Store the file in S3
+                $path = $this->avatar->storePubliclyAs('avatars', $filename, 's3');
+                Log::info('S3 upload result', ['path' => $path]);
+                
+                if (!Storage::disk('s3')->exists($path)) {
+                    Log::error('File not found in S3 after upload', ['path' => $path]);
+                    throw new \Exception('Failed to upload file to S3');
+                }
+
+                // Update the user's avatar field with the S3 path
+                $user->avatar = $path;
+
+            } catch (\Exception $e) {
+                Log::error('Avatar upload failed', [
+                    'error' => $e->getMessage(),
+                    'user_id' => $user->id,
+                    'file_path' => $this->avatar ? $this->avatar->getPathname() : 'N/A',
+                    'file_exists' => $this->avatar && file_exists($this->avatar->getPathname()) ? 'Yes' : 'No'
+                ]);
+                return;
+            }
+        }
+
         $user->fill($validated);
 
         if ($user->isDirty('email')) {
             $user->email_verified_at = null;
         }
 
-        $user->save();
+        try {
+            $user->save();
+            Log::info('User profile updated successfully', ['user_id' => $user->id, 'avatar' => $user->avatar]);
+        } catch (\Exception $e) {
+            Log::error('Failed to save user profile', ['error' => $e->getMessage(), 'user_id' => $user->id]);
+            session()->flash('error', 'Failed to update profile: ' . $e->getMessage());
+            return;
+        }
+
+        // Regenerate the avatar URL after successful update
+        $this->generateAvatarUrl();
 
         $this->dispatch('profile-updated', name: $user->name);
     }
@@ -73,7 +145,76 @@ new class extends Component
         </p>
     </header>
 
-    <form wire:submit="updateProfileInformation" class="mt-6 space-y-6">
+    <form wire:submit="updateProfileInformation" class="mt-6 space-y-6" enctype="multipart/form-data">
+        <!-- Avatar Display and Upload Field -->
+        <div x-data="{ 
+            dragOver: false,
+            handleDrop(e) {
+                this.dragOver = false;
+                if (e.dataTransfer.files.length) {
+                    this.$refs.fileInput.files = e.dataTransfer.files;
+                    this.$refs.fileInput.dispatchEvent(new Event('change'));
+                }
+            }
+        }" class="mb-6">
+            <x-input-label for="avatar" :value="__('Avatar')" />
+            
+            <!-- Current Avatar Display -->
+            <div class="mt-2 mb-4 flex items-center">
+                <div class="mr-4 relative">
+                    @if ($avatar)
+                        <img src="{{ $avatar->temporaryUrl() }}" alt="New Avatar" class="h-20 w-20 rounded-full object-cover mb-4 border-2 border-primary">
+                    @elseif ($avatarUrl)
+                        <img src="{{ $avatarUrl }}" alt="Current Avatar" class="h-20 w-20 rounded-full object-cover mb-4 border-2 border-primary">
+                    @else
+                        <div class="h-20 w-20 rounded-full border-2 border-primary bg-gray-200 flex items-center justify-center">
+                            <svg class="h-12 w-12 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                        </div>
+                    @endif
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-900">{{ __('Current Avatar') }}</p>
+                    <p class="text-xs text-gray-500">{{ $avatarUrl || $avatar ? __('Your current profile picture') : __('No avatar set') }}</p>
+                </div>
+            </div>
+
+            <!-- Drag and Drop Upload Area -->
+            <div
+                x-on:dragover.prevent="dragOver = true"
+                x-on:dragleave.prevent="dragOver = false"
+                x-on:drop.prevent="handleDrop($event)"
+                :class="{ 'border-blue-500 bg-blue-50': dragOver }"
+                class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-primary border-dashed rounded-md relative"
+            >
+                <div class="space-y-1 text-center">
+                    <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <div class="flex text-sm text-gray-600">
+                        <label for="avatar" class="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none">
+                            <span>{{ __('Upload a new avatar') }}</span>
+                            <input 
+                                id="avatar" 
+                                name="avatar" 
+                                type="file" 
+                                wire:model="avatar"
+                                x-ref="fileInput"
+                                class="sr-only"
+                                accept="image/*"
+                            >
+                        </label>
+                        <p class="pl-1">{{ __('or drag and drop') }}</p>
+                    </div>
+                    <p class="text-xs text-gray-500">
+                        {{ __('PNG, JPG, WEBP up to 1MB') }}
+                    </p>
+                </div>
+            </div>
+            <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
+        </div>
+
         <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full" required autofocus autocomplete="name" />
@@ -107,9 +248,20 @@ new class extends Component
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 
-            <x-action-message class="me-3" on="profile-updated">
+            <x-action-message class="me-3 text-success" on="profile-updated">
                 {{ __('Saved.') }}
             </x-action-message>
+        </div>
+
+        <!-- Loading Modal -->
+        <div wire:loading.flex wire:target="avatar" class="fixed inset-0 items-center justify-center z-50 bg-black bg-opacity-50">
+            <div class="bg-white p-8 rounded-lg shadow-lg text-center">
+                <svg class="animate-spin h-12 w-12 text-primary mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <p class="text-gray-700">{{ __('Uploading avatar...') }}</p>
+            </div>
         </div>
     </form>
 </section>

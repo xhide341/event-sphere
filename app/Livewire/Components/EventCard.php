@@ -10,7 +10,6 @@ use Carbon\Carbon;
 
 class EventCard extends Component
 {
-    public $showModal = false;
     public Event $event;
     public $type;
     public $modalContent;
@@ -85,10 +84,7 @@ class EventCard extends Component
             $this->event->users()->attach(Auth::user()->id, ['registration_date' => now()]);
         }
 
-        // Refresh the event model
         $this->event->refresh();
-
-        // Dispatch event updated
         $this->dispatch('eventUpdated');
     }
 

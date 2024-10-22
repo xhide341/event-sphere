@@ -1,7 +1,11 @@
 <div>
-  <section x-data="{ showModal: @entangle('showModal') }" x-cloak>
+  <section x-data="{ 
+    showModal: false,
+    imageLoaded: false,
+    modalImageLoaded: false 
+  }" x-cloak>
       <div class="relative flex w-[21rem] h-[32rem] flex-col rounded-xl bg-gray-300 bg-clip-border text-gray-700 shadow-lg border-2 border-muted-teal"
-           @click="showModal = true">
+           @click="showModal = true; imageLoaded = false; modalImageLoaded = false;">
         <div class="relative mx-4 mt-4 overflow-hidden rounded-md bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
           <div class="relative w-full h-[10rem]">
             <div
@@ -209,7 +213,7 @@
                           <h3 class="text-2xl leading-6 font-semibold text-primary" id="modal-title">
                               {{ $this->modalContent['event_name'] }}
                           </h3>
-                          <button type="button" class="text-gray-400 transition-colors duration-200 hover:text-gray-500" @click="showModal = false">
+                          <button type="button" class="text-gray-400 transition-colors duration-200 hover:text-gray-500" @click="showModal = false; imageLoaded = false; modalImageLoaded = false;">
                               <span class="sr-only">Close</span>
                               <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
