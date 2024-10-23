@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Livewire\Volt\Component;
 use Livewire\WithFileUploads;
+use Intervention\Image\Laravel\Facades\Image;
+use Intervention\Image\Encoders\WebpEncoder;
+use Illuminate\Support\Facades\Log;
 
 new class extends Component
 {
@@ -37,15 +40,24 @@ new class extends Component
         if ($user->avatar) {
             $path = $user->avatar;
             try {
-                if (Storage::disk('s3')->exists($path)) {
-                    $this->avatarUrl = Storage::disk('s3')->temporaryUrl($path, now()->addMinutes(60));
-                    Log::info('Avatar URL generated successfully', ['user_id' => $user->id, 'path' => $path]);
-                } else {
-                    throw new \Exception('Avatar file does not exist in S3');
-                }
+                // Log the path we're checking for debugging
+                Log::info('Attempting to generate avatar URL', [
+                    'user_id' => $user->id,
+                    'path' => $path,
+                    'file_extension' => pathinfo($path, PATHINFO_EXTENSION)
+                ]);
+    
+                // Don't check existence - just try to generate URL
+                $this->avatarUrl = Storage::disk('s3')->temporaryUrl($path, now()->addMinutes(5));
+                Log::info('Avatar URL generated successfully', ['user_id' => $user->id, 'path' => $path]);
+                
             } catch (\Exception $e) {
                 $this->avatarUrl = null;
-                Log::warning('Failed to generate avatar URL', ['user_id' => $user->id, 'error' => $e->getMessage()]);
+                Log::warning('Failed to generate avatar URL', [
+                    'user_id' => $user->id, 
+                    'error' => $e->getMessage(),
+                    'path' => $path
+                ]);
             }
         } else {
             $this->avatarUrl = null;
@@ -58,7 +70,6 @@ new class extends Component
      */
     public function updateProfileInformation(): void
     {
-        Log::info('updateProfileInformation called', ['avatar' => $this->avatar ? 'present' : 'not present']);
         $user = Auth::user();
 
         $validated = $this->validate([
@@ -69,28 +80,39 @@ new class extends Component
         if ($this->avatar) {
             $this->validate(['avatar' => ['image', 'max:1024']]);
             try {
-                $filename = 'avatar-' . $user->id . '-' . time() . '.' . $this->avatar->getClientOriginalExtension();
-                
-                // Store the file in S3
-                $path = $this->avatar->storePubliclyAs('avatars', $filename, 's3');
-                Log::info('S3 upload result', ['path' => $path]);
-                
-                if (!Storage::disk('s3')->exists($path)) {
-                    Log::error('File not found in S3 after upload', ['path' => $path]);
-                    throw new \Exception('Failed to upload file to S3');
-                }
+                // Assign path to a filename
+                $filename = 'avatar-' . $user->id . '-' . time() . '.webp';
 
-                // Update the user's avatar field with the S3 path
-                $user->avatar = $path;
+                // Get file contents from temporary URL
+                $contents = file_get_contents($this->avatar->temporaryUrl());
+
+                // Use the temporary path
+                $image = Image::read($contents);
+
+                // Encode the image to WebP format
+                $encoded = $image->encode(new WebpEncoder(65));
+
+                // Store the encoded image content in S3
+                $success = Storage::disk('s3')->put('avatars/' . $filename, $encoded->toString(), 'public');
+
+                if ($success) {
+                    // Update the user's avatar field with the S3 filename
+                    $user->avatar = 'avatars/' . $filename;
+                    Log::info('Avatar uploaded successfully to S3', ['user_id' => $user->id, 'filename' => $filename]);
+                } else {
+                    throw new \Exception('Failed to store file in S3');
+                }
 
             } catch (\Exception $e) {
                 Log::error('Avatar upload failed', [
                     'error' => $e->getMessage(),
                     'user_id' => $user->id,
-                    'file_path' => $this->avatar ? $this->avatar->getPathname() : 'N/A',
-                    'file_exists' => $this->avatar && file_exists($this->avatar->getPathname()) ? 'Yes' : 'No'
+                    'file_path' => $this->avatar->path(),
+                    'file_exists' => file_exists($this->avatar->path()) ? 'Yes' : 'No',
+                    'mime_type' => $this->avatar->getMimeType()
                 ]);
-                return;
+                session()->flash('error', 'Failed to upload avatar: ' . $e->getMessage());
+                // Don't return here, allow the rest of the profile update to continue
             }
         }
 
