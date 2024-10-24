@@ -22,7 +22,6 @@
     </head>
     <body class="font-poppins antialiased bg-muted-teal">
         <div class="relative flex bg-muted-teal max-w-full w-full">
-            
             @livewire('layout.sidebar')
             
             <div class="max-w-full w-full py-4 p-4 xl:py-6 xl:pl-0 xl:pr-6 xl:ml-[280px] overflow-x-hidden">
@@ -36,12 +35,11 @@
                     </div>
                 </header>
                 @endif
-
                 <!-- Page Content -->
                 <main>
                     {{ $slot }}
                 </main>
-            </div>            
+            </div>
         </div>
         @livewireScripts
     </body>

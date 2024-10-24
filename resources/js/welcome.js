@@ -1,20 +1,10 @@
-// Export a default function that initializes everything
 export default function initializeWelcome() {
-    // Intersection Observer
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-shown');
-            } else {
-                entry.target.classList.remove('is-shown');
-            }
-        });
-    }, { threshold: 0.1 });
+    startTypingEffect();
+    setupIntersectionObserver();
+}
 
-    const hiddenElements = document.querySelectorAll('.is-hidden');
-    hiddenElements.forEach((el) => observer.observe(el));
 
-    // Typing effect
+export function startTypingEffect() {
     const text = "Streamline your events. Amplify your impact.";
     let index = 0;
     const cursor = document.getElementById("cursor");
@@ -33,13 +23,19 @@ export default function initializeWelcome() {
     type();
 }
 
-// You can also export individual functions if needed
-export function startTypingEffect() {
-    // ... typing effect code here
-}
-
 export function setupIntersectionObserver() {
-    // ... intersection observer code here
+    const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('is-shown');
+        } else {
+            entry.target.classList.remove('is-shown');
+        }
+    });
+    }, { threshold: 0.1 });
+
+    const hiddenElements = document.querySelectorAll('.is-hidden');
+    hiddenElements.forEach((el) => observer.observe(el));
 }
 
 document.addEventListener('DOMContentLoaded', initializeWelcome);

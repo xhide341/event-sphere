@@ -1,4 +1,38 @@
 <div>
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('screenWidth', () => ({
+                isResizing: false,
+                resizeTimer: null,
+                init() {
+                    this.updateWidth();
+                    window.addEventListener('resize', () => {
+                        this.isResizing = true;
+                        clearTimeout(this.resizeTimer);
+                        this.resizeTimer = setTimeout(() => {
+                            this.updateWidth();
+                            this.isResizing = false;
+                        }, 250);
+                    });
+                },
+                updateWidth() {
+                    Livewire.dispatch('screenResize', { width: window.innerWidth });
+                }
+            }));
+        });
+    </script>
+    <div x-data="screenWidth">
+        <div x-show="isResizing" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50">
+            <div class="bg-white p-8 rounded-lg shadow-lg flex flex-col items-center">
+                <svg class="animate-spin h-16 w-16 text-primary mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <p class="text-md font-base text-gray-700">Resizing screen...</p>
+            </div>
+        </div>
+    </div>
+    
     <x-slot name="header">
         <div class="rounded-lg flex flex-row flex-wrap items-center">
             <nav class="bg-transparent antialiased text-[#193441]">
@@ -47,9 +81,9 @@
                 @if($registeredEvents->isEmpty())
                     <p>No registered events found.</p>
                 @else
-                    <div class="flex p-2 xl:p-4 flex-row space-x-4 overflow-x-auto">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-2 xl:p-4" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
                         @foreach($registeredEvents as $event)
-                            <div class="flex-shrink-0" wire:key="registered-event-wrapper-{{ $event->id }}">
+                            <div wire:key="registered-event-wrapper-{{ $event->id }}">
                                 <livewire:components.event-card 
                                     :event="$event"
                                     :type="'registered'"
@@ -87,9 +121,9 @@
                 @if($allEvents->isEmpty())
                     <p>No events found.</p>
                 @else
-                    <div class="flex p-2 xl:p-4 flex-row space-x-4 overflow-x-auto">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-2 xl:p-4" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
                         @foreach($allEvents as $event)
-                            <div class="flex-shrink-0" wire:key="all-event-wrapper-{{ $event->id }}">                                
+                            <div wire:key="all-event-wrapper-{{ $event->id }}">                                
                                 <livewire:components.event-card 
                                     :event="$event"
                                     :type="'all'"
