@@ -1,77 +1,77 @@
-<div>
-  <section x-data="{ 
-    showModal: false,
-    imageLoaded: false,
-    modalImageLoaded: false 
-  }" x-cloak>
-      <div class="h-full">
-        <div class="relative flex h-full flex-col rounded-xl bg-gray-300 bg-clip-border text-gray-700 shadow-lg border-2 border-muted-teal"
-             @click="showModal = true; imageLoaded = false; modalImageLoaded = false;">
-          <div class="relative mx-4 mt-4 overflow-hidden rounded-md bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
-            <div class="relative w-full h-[10rem]">
+<div x-data="{ 
+  showModal: false,
+  imageLoaded: false,
+  modalImageLoaded: false 
+}" x-cloak>
+    <div class="h-full">
+      <div class="relative flex h-full flex-col rounded-xl bg-gray-300 bg-clip-border text-gray-700 shadow-lg border-2 border-muted-teal"
+            @click="showModal = true; imageLoaded = false; modalImageLoaded = false;">
+        <div class="relative mx-4 mt-4 overflow-hidden rounded-md bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
+          <div class="relative w-full h-[10rem]">
+            <div
+              x-data="{ imageLoaded: false }"
+              class="w-full h-full"
+            >
               <div
-                x-data="{ imageLoaded: false }"
-                class="w-full h-full"
+                x-show="!imageLoaded"
+                class="absolute inset-0 flex items-center justify-center bg-gray-200"
               >
-                <div
-                  x-show="!imageLoaded"
-                  class="absolute inset-0 flex items-center justify-center bg-gray-200"
-                >
-                  <svg class="animate-spin h-8 w-8 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                </div>
-                <img
-                  src="{{ $this->modalContent['image'] }}"
-                  alt="{{ $this->modalContent['event_name'] }}"
-                  class="w-full h-full object-cover"
-                  x-on:load="imageLoaded = true"
-                  x-bind:class="{ 'opacity-0': !imageLoaded, 'opacity-100': imageLoaded }"
-                />
+                <svg class="animate-spin h-8 w-8 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
               </div>
-            </div>
-            <div class="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
-            @if($this->isUserRegistered())
-              <button
-                class="!absolute top-4 right-4 h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-full text-center align-middle text-xs font-medium uppercase text-red-500 transition-all hover:bg-red-500/10 active:bg-red-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                type="button"
-                data-ripple-dark="true"
-                wire:poll.5s
-              >
-                <span class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 transform">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                    class="h-6 w-6"
-                  >
-                    <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"></path>
-                  </svg>
-                </span>
-              </button>
-            @endif
-            <div class="absolute bottom-0 left-0 p-2">
-              <span class="bg-white rounded-full px-3 py-1 text-sm font-semibold text-primary">
-                {{ $this->modalContent['department_name'] }}
-              </span>
+              <img
+                src="{{ $modalContent['image'] }}"
+                alt="{{ $modalContent['event_name'] }}"
+                class="w-full h-full object-cover"
+                x-on:load="imageLoaded = true"
+                x-bind:class="{ 'opacity-0': !imageLoaded, 'opacity-100': imageLoaded }"
+              />
             </div>
           </div>
-          <div class="p-6">
-            <div class="mb-3 flex flex-col justify-between">
-              <h5 class="block text-xl font-medium leading-snug tracking-normal text-blue-gray-900 antialiased truncate">
-                {{ $this->modalContent['event_name'] }}
-              </h5>
-              <p class="text-sm font-light text-primary overflow-hidden truncate">
-                {{ $this->modalContent['venue_name'] }}
-              </p>
-            </div>
-            <div class="min-h-[2.5rem]">
-              <p class="line-clamp-2 text-sm font-light text-gray-700">
-                {{ $this->modalContent['description'] }}
-              </p>
-            </div>
+          <div class="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
+          @if($modalContent['is_user_registered'])
+            <button
+              class="!absolute top-4 right-4 h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-full text-center align-middle text-xs font-medium uppercase text-red-500 transition-all hover:bg-red-500/10 active:bg-red-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              type="button"
+              data-ripple-dark="true"
+              wire:poll.5s
+            >
+              <span class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 transform">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                  class="h-6 w-6"
+                >
+                  <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"></path>
+                </svg>
+              </span>
+            </button>
+          @endif
+          <div class="absolute bottom-0 left-0 p-2">
+            <span class="bg-white rounded-full px-3 py-1 text-sm font-semibold text-primary">
+              {{ $modalContent['department_name'] }}
+            </span>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="mb-3 flex flex-col justify-between">
+            <h5 class="block text-xl font-medium leading-snug tracking-normal text-blue-gray-900 antialiased truncate">
+              {{ $modalContent['event_name'] }}
+            </h5>
+            <p class="text-sm font-light text-primary overflow-hidden truncate">
+              {{ $modalContent['venue_name'] }}
+            </p>
+          </div>
+          <div class="min-h-[2.5rem]">
+            <p class="line-clamp-2 text-sm font-light text-gray-700">
+              {{ $modalContent['description'] }}
+            </p>
+          </div>
+          <div class="flex">
             <div class="flex justify-center">
               <div class="group mt-8 inline-flex flex-wrap items-center justify-between gap-2 sm:gap-3">
                 <span
@@ -167,217 +167,217 @@
               </div>
             </div>
           </div>
-          <div class="p-6 pt-3">
-            <button
-              class="block w-full relative overflow-hidden rounded-lg bg-broad-blue hover:bg-clarinet py-3.5 px-7 text-center text-sm font-semibold uppercase text-white transition-all duration-500 ease-out wave-effect"
-              type="button"
-            >
-              <span class="relative z-10">View Event Details</span>
-            </button>
-          </div>
+        </div>
+        <div class="p-6 pt-3">
+          <button
+            class="block w-full relative overflow-hidden rounded-lg bg-broad-blue hover:bg-clarinet py-3.5 px-7 text-center text-sm font-semibold uppercase text-white transition-all duration-500 ease-out wave-effect"
+            type="button"
+          >
+            <span class="relative z-10">View Event Details</span>
+          </button>
         </div>
       </div>
-  
-      <!-- Modal -->
-      <div x-show="showModal"
-           x-cloak
-           class="fixed inset-0 z-50 overflow-y-auto"
-           aria-labelledby="modal-title"
-           role="dialog"
-           aria-modal="true">
-          <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-              <!-- Backdrop -->
-              <div x-show="showModal"
-                   x-transition:enter="transition ease-out duration-300"
-                   x-transition:enter-start="opacity-0"
-                   x-transition:enter-end="opacity-100"
-                   x-transition:leave="transition ease-in duration-200"
-                   x-transition:leave-start="opacity-100"
-                   x-transition:leave-end="opacity-0"
-                   class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" 
-                   aria-hidden="true"></div>
+    </div>
 
-              <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+    <!-- Modal -->
+    <div x-show="showModal"
+          x-cloak
+          class="fixed inset-0 z-50 overflow-y-auto"
+          aria-labelledby="modal-title"
+          role="dialog"
+          aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <!-- Backdrop -->
+            <div x-show="showModal"
+                  x-transition:enter="transition ease-out duration-300"
+                  x-transition:enter-start="opacity-0"
+                  x-transition:enter-end="opacity-100"
+                  x-transition:leave="transition ease-in duration-200"
+                  x-transition:leave-start="opacity-100"
+                  x-transition:leave-end="opacity-0"
+                  class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" 
+                  aria-hidden="true"></div>
 
-              <!-- Modal content -->
-              <div x-show="showModal"
-                   x-transition:enter="transition ease-out duration-300"
-                   x-transition:enter-start="opacity-0 scale-95"
-                   x-transition:enter-end="opacity-100 scale-100"
-                   x-transition:leave="transition ease-in duration-200"
-                   x-transition:leave-start="opacity-100 scale-100"
-                   x-transition:leave-end="opacity-0 scale-95"
-                   class="inline-block align-bottom bg-white rounded-lg border-2 border-primary text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                  <div class="leading-normal font-poppins bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                      <div class="flex justify-between items-center mb-4">
-                          <h3 class="text-2xl leading-6 font-semibold text-primary" id="modal-title">
-                              {{ $this->modalContent['event_name'] }}
-                          </h3>
-                          <button type="button" class="text-gray-400 transition-colors duration-200 hover:text-gray-500" @click="showModal = false; imageLoaded = false; modalImageLoaded = false;">
-                              <span class="sr-only">Close</span>
-                              <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                              </svg>
-                          </button>
-                      </div>
-                      <div class="mt-2 break-words text-pretty font-normal">
-                          <div class="relative mb-4">
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <!-- Modal content -->
+            <div x-show="showModal"
+                  x-transition:enter="transition ease-out duration-300"
+                  x-transition:enter-start="opacity-0 scale-95"
+                  x-transition:enter-end="opacity-100 scale-100"
+                  x-transition:leave="transition ease-in duration-200"
+                  x-transition:leave-start="opacity-100 scale-100"
+                  x-transition:leave-end="opacity-0 scale-95"
+                  class="inline-block align-bottom bg-white rounded-lg border-2 border-primary text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div class="leading-normal font-poppins bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-2xl leading-6 font-semibold text-primary" id="modal-title">
+                            {{ $modalContent['event_name'] }}
+                        </h3>
+                        <button type="button" class="text-gray-400 transition-colors duration-200 hover:text-gray-500" @click="showModal = false; imageLoaded = false; modalImageLoaded = false;">
+                            <span class="sr-only">Close</span>
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="mt-2 break-words text-pretty font-normal">
+                        <div class="relative mb-4">
+                          <div
+                            x-data="{ modalImageLoaded: false }"
+                            class="w-full h-64 rounded-lg overflow-hidden shadow-md"
+                          >
                             <div
-                              x-data="{ modalImageLoaded: false }"
-                              class="w-full h-64 rounded-lg overflow-hidden shadow-md"
+                              x-show="!modalImageLoaded"
+                              class="absolute inset-0 flex items-center justify-center bg-gray-200"
                             >
-                              <div
-                                x-show="!modalImageLoaded"
-                                class="absolute inset-0 flex items-center justify-center bg-gray-200"
-                              >
-                                <svg class="animate-spin h-8 w-8 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                </svg>
-                              </div>
-                              <div class="w-full h-64 rounded-md overflow-hidden">
-                                <img
-                                  src="{{ $this->modalContent['image'] }}"
-                                  alt="{{ $this->modalContent['event_name'] }}"
-                                  class="w-full h-full object-cover"
-                                  x-on:load="modalImageLoaded = true"
-                                  x-bind:class="{ 'opacity-0': !modalImageLoaded, 'opacity-100': modalImageLoaded }"
-                                >
-                              </div>
-                            </div>
-                            <p class="absolute bottom-2 left-2 bg-white rounded-full px-3 py-1 text-sm font-semibold text-primary shadow">{{ $this->modalContent['department_name'] }}</p>
-  
-                            <!-- New countdown section -->
-                            <div class="absolute top-2 right-2 bg-white rounded-full px-3 py-1 text-sm font-semibold text-primary shadow flex items-center">
-                              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              <svg class="animate-spin h-8 w-8 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                               </svg>
-                              <span>{{ $this->getCountdown() }}</span>
+                            </div>
+                            <div class="w-full h-64 rounded-md overflow-hidden">
+                              <img
+                                src="{{ $modalContent['image'] }}"
+                                alt="{{ $modalContent['event_name'] }}"
+                                class="w-full h-full object-cover"
+                                x-on:load="modalImageLoaded = true"
+                                x-bind:class="{ 'opacity-0': !modalImageLoaded, 'opacity-100': modalImageLoaded }"
+                              >
                             </div>
                           </div>
-                          <div class="mt-4">
-                              <h5 class="text-xl font-semibold text-primary mb-3">Event Details</h5>
-                              <div class="bg-gray-100 rounded-lg p-4 shadow-sm">
-                                  <p class="text-base text-primary font-normal mb-4">{{ $this->modalContent['description'] }}</p>
-                                  
-                                  <div class="flex justify-between">
-                                    <div class="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">
-                                        <div class="flex items-center space-x-3">
-                                            <div class="bg-primary bg-opacity-10 rounded-full p-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-                                                </svg>
-                                            </div>
-                                            <div>
-                                                <p class="text-xs text-gray-500 font-medium">Venue</p>
-                                                <p class="text-sm font-semibold text-primary">{{ $this->modalContent['venue_name'] }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center space-x-3">
-                                            <div class="bg-primary bg-opacity-10 rounded-full p-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
-                                                </svg>
-                                            </div>
-                                            <div>
-                                                <p class="text-xs text-gray-500 font-medium">Schedule</p>
-                                                <p class="text-sm font-semibold text-primary text-nowrap">{{ $this->modalContent['schedule'] }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center space-x-3">
-                                            <div class="bg-primary bg-opacity-10 rounded-full p-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                                                </svg>
-                                            </div>
-                                            <div>
-                                                <p class="text-xs text-gray-500 font-medium">Status</p>
-                                                <p class="text-sm font-semibold {{ $this->modalContent['status'] === 'Postponed' ? 'text-red-500' : ($this->modalContent['status'] === 'Delayed' ? 'text-yellow-500' : ($this->modalContent['status'] === 'Scheduled' ? 'text-green-500' : 'text-primary')) }}">
-                                                    {{ $this->modalContent['status'] }}
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center space-x-3">
-                                            <div class="bg-primary bg-opacity-10 rounded-full p-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-                                                </svg>
-                                            </div>
-                                            <div>
-                                                <p class="text-xs text-gray-500 font-medium">Department</p>
-                                                <p class="text-sm font-semibold text-primary">{{ $this->modalContent['department_name'] }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center space-x-3">
-                                            <div class="bg-primary bg-opacity-10 rounded-full p-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
-                                                </svg>
-                                            </div>
-                                            <div>
-                                                <p class="text-xs text-gray-500 font-medium">Capacity</p>
-                                                <p class="text-sm font-semibold text-primary">{{ $this->getParticipantCount() }} / {{ $this->modalContent['capacity'] }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center space-x-3">
-                                            <div class="bg-primary bg-opacity-10 rounded-full p-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                                                </svg>
-                                            </div>
-                                            <div>
-                                                <p class="text-xs text-gray-500 font-medium">Speaker</p>
-                                                <p class="text-sm font-semibold text-primary">{{ $this->modalContent['speaker'] }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                  </div>
-                              </div>
+                          <p class="absolute bottom-2 left-2 bg-white rounded-full px-3 py-1 text-sm font-semibold text-primary shadow">{{ $modalContent['department_name'] }}</p>
+
+                          <!-- New countdown section -->
+                          <div class="absolute top-2 right-2 bg-white rounded-full px-3 py-1 text-sm font-semibold text-primary shadow flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>{{ $modalContent['countdown'] }}</span>
                           </div>
-                      </div>
-                  </div>
-                  <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                      @if(!$this->isUserRegistered())
-                          <button type="button"
-                                  wire:click="toggleRegistration"
-                                  wire:loading.attr="disabled"
-                                  wire:target="toggleRegistration"
-                                  wire:loading.class="opacity-50 cursor-not-allowed"
-                                  class="w-full inline-flex justify-center items-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-primary-dark focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
-                              <span wire:loading.remove wire:target="toggleRegistration">Register</span>
-                              <span wire:loading wire:target="toggleRegistration" class="flex items-center justify-between">
-                                  <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                  </svg>
-                              </span>
-                          </button>
-                      @else
-                          <button type="button"
-                                  wire:click="toggleRegistration"
-                                  wire:loading.attr="disabled"
-                                  wire:target="toggleRegistration"
-                                  wire:loading.class="opacity-50 cursor-not-allowed"
-                                  class="w-full inline-flex justify-center items-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
-                              <span wire:loading.remove wire:target="toggleRegistration">Cancel Registration</span>
-                              <span wire:loading wire:target="toggleRegistration" class="flex items-center justify-between">
-                                  <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                  </svg>
-                              </span>
-                          </button>
-                      @endif
-                      
-                      <!-- New Submit a Feedback button -->
-                      <button type="button"
-                              wire:click="submitFeedback"
-                              class="mt-3 w-full inline-flex justify-center rounded-md border border-primary shadow-sm px-4 py-2 bg-white text-base font-medium text-primary hover:bg-gray-100 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                          Submit a Feedback
-                      </button>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </section>
+                        </div>
+                        <div class="mt-4">
+                            <h5 class="text-xl font-semibold text-primary mb-3">Event Details</h5>
+                            <div class="bg-gray-100 rounded-lg p-4 shadow-sm">
+                                <p class="text-base text-primary font-normal mb-4">{{ $modalContent['description'] }}</p>
+                                
+                                <div class="flex justify-between">
+                                  <div class="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">
+                                      <div class="flex items-center space-x-3">
+                                          <div class="bg-primary bg-opacity-10 rounded-full p-2">
+                                              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" viewBox="0 0 20 20" fill="currentColor">
+                                                  <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                              </svg>
+                                          </div>
+                                          <div>
+                                              <p class="text-xs text-gray-500 font-medium">Venue</p>
+                                              <p class="text-sm font-semibold text-primary">{{ $modalContent['venue_name'] }}</p>
+                                          </div>
+                                      </div>
+                                      <div class="flex items-center space-x-3">
+                                          <div class="bg-primary bg-opacity-10 rounded-full p-2">
+                                              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" viewBox="0 0 20 20" fill="currentColor">
+                                                  <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+                                              </svg>
+                                          </div>
+                                          <div>
+                                              <p class="text-xs text-gray-500 font-medium">Schedule</p>
+                                              <p class="text-sm font-semibold text-primary text-nowrap">{{ $modalContent['schedule'] }}</p>
+                                          </div>
+                                      </div>
+                                      <div class="flex items-center space-x-3">
+                                          <div class="bg-primary bg-opacity-10 rounded-full p-2">
+                                              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                                                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                              </svg>
+                                          </div>
+                                          <div>
+                                              <p class="text-xs text-gray-500 font-medium">Status</p>
+                                              <p class="text-sm font-semibold {{ $modalContent['status'] === 'Postponed' ? 'text-red-500' : ($modalContent['status'] === 'Delayed' ? 'text-yellow-500' : ($modalContent['status'] === 'Scheduled' ? 'text-green-500' : 'text-primary')) }}">
+                                                  {{ $modalContent['status'] }}
+                                              </p>
+                                          </div>
+                                      </div>
+                                      <div class="flex items-center space-x-3">
+                                          <div class="bg-primary bg-opacity-10 rounded-full p-2">
+                                              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" viewBox="0 0 20 20" fill="currentColor">
+                                                  <path fill-rule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                                              </svg>
+                                          </div>
+                                          <div>
+                                              <p class="text-xs text-gray-500 font-medium">Department</p>
+                                              <p class="text-sm font-semibold text-primary">{{ $modalContent['department_name'] }}</p>
+                                          </div>
+                                      </div>
+                                      <div class="flex items-center space-x-3">
+                                          <div class="bg-primary bg-opacity-10 rounded-full p-2">
+                                              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                                                  <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                                              </svg>
+                                          </div>
+                                          <div>
+                                              <p class="text-xs text-gray-500 font-medium">Capacity</p>
+                                              <p class="text-sm font-semibold text-primary">{{ $modalContent['participant_count'] }} / {{ $modalContent['capacity'] }}</p>
+                                          </div>
+                                      </div>
+                                      <div class="flex items-center space-x-3">
+                                          <div class="bg-primary bg-opacity-10 rounded-full p-2">
+                                              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
+                                                  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                              </svg>
+                                          </div>
+                                          <div>
+                                              <p class="text-xs text-gray-500 font-medium">Speaker</p>
+                                              <p class="text-sm font-semibold text-primary">{{ $modalContent['speaker'] }}</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    @if(!$modalContent['is_user_registered'])
+                        <button type="button"
+                                wire:click="toggleRegistration"
+                                wire:loading.attr="disabled"
+                                wire:target="toggleRegistration"
+                                wire:loading.class="opacity-50 cursor-not-allowed"
+                                class="w-full inline-flex justify-center items-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-primary-dark focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
+                            <span wire:loading.remove wire:target="toggleRegistration">Register</span>
+                            <span wire:loading wire:target="toggleRegistration" class="flex items-center justify-between">
+                                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                            </span>
+                        </button>
+                    @else
+                        <button type="button"
+                                wire:click="toggleRegistration"
+                                wire:loading.attr="disabled"
+                                wire:target="toggleRegistration"
+                                wire:loading.class="opacity-50 cursor-not-allowed"
+                                class="w-full inline-flex justify-center items-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
+                            <span wire:loading.remove wire:target="toggleRegistration">Cancel Registration</span>
+                            <span wire:loading wire:target="toggleRegistration" class="flex items-center justify-between">
+                                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                            </span>
+                        </button>
+                    @endif
+                    
+                    <!-- New Submit a Feedback button -->
+                    <button type="button"
+                            wire:click="submitFeedback"
+                            class="mt-3 w-full inline-flex justify-center rounded-md border border-primary shadow-sm px-4 py-2 bg-white text-base font-medium text-primary hover:bg-gray-100 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        Submit a Feedback
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

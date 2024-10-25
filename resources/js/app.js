@@ -5,3 +5,4 @@ import.meta.glob([
     '../fonts/**',
 ]);
 
+import './initAlpine';

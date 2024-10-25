@@ -33,7 +33,10 @@ class EventCard extends Component
             'capacity' => $this->event->venue->capacity,
             'status' => $this->event->status,
             'schedule' => Carbon::parse($this->event->start_date)->format('M j, Y g:i A'),
-            'speaker' => $this->event->speaker ? $this->event->speaker->name : 'No speaker assigned'
+            'speaker' => $this->event->speaker ? $this->event->speaker->name : 'No speaker assigned',
+            'participant_count' => $this->getParticipantCount(),
+            'is_user_registered' => $this->isUserRegistered(),
+            'countdown' => $this->getCountdown(),
         ];
     }
     
@@ -49,9 +52,9 @@ class EventCard extends Component
 
     public function getCountdown()
     {
-        $eventDate = Carbon::parse($this->modalContent['schedule']);
+        $eventDate = Carbon::parse($this->event->start_date)->format('M j, Y g:i A');
         $now = Carbon::now();
-        $eventEndDate = $eventDate->copy()->addHours(2); // Assuming events last 2 hours, adjust as needed
+        $eventEndDate = Carbon::parse($eventDate)->addHours(2);
 
         if ($now->gt($eventEndDate)) {
             return 'Event has ended';
