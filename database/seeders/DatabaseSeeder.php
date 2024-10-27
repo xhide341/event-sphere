@@ -19,14 +19,12 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
             'password' => Hash::make('asdfasdf'),
         ]);
-
-        // Create additional users
         User::factory(10)->create();
-
-        // Seed events (which will also create venues, departments, and speakers)
-        $this->call(EventSeeder::class);
-
-        // Seed registrations
-        $this->call(RegistrationSeeder::class);
+        
+        $this->call([
+            VenueSeeder::class,
+            EventSeeder::class,
+            RegistrationSeeder::class,
+        ]);
     }
 }

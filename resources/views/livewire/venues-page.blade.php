@@ -17,9 +17,6 @@
                     {{ __('Venues') }}
                 </h2>
             </nav>
-            <div class="block xl:hidden">
-                <livewire:layout.toggle-sidebar/>
-            </div>
         </div>
     </x-slot>
     <div class="mt-4">
@@ -33,22 +30,23 @@
                 @if($venues->isEmpty())
                     <p>No venues found.</p>
                 @else
-                    <div class="flex p-2 xl:p-4 flex-row space-x-4 overflow-x-auto">
-                        @foreach($venues as $venue)
-                            <div class="flex-shrink-0" wire:key="venue-{{ $venue->id }}">
-                                <livewire:components.venue-card
-                                    :venue="$venue"
-                                    :key="'venue-'.$venue->id"
-                                />
-                            </div>
-                        @endforeach
+                    <div class="flex p-2 xl:p-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full">
+                            @foreach($venues as $venue)
+                                <div wire:key="venue-{{ $venue->id }}">
+                                    <livewire:components.venue-card
+                                        :venue="$venue"
+                                        :key="'venue-'.$venue->id"
+                                    />
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                     <div class="mt-4">
                         {{ $venues->links() }}
                     </div>
                 @endif
             </div>
-
         </div>
     </div>
 </div>

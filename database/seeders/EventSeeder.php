@@ -15,13 +15,13 @@ class EventSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create a limited number of venues
-        $venues = Venue::factory()->count(8)->create();
+        // Get existing venues instead of creating new ones
+        $venues = Venue::all();
 
-        // Create a limited number of departments
+        // Create departments
         $departments = Department::factory()->count(5)->create();
 
-        // Create a limited number of speakers
+        // Create speakers
         $speakers = Speaker::factory()->count(10)->create();
 
         // Create events
@@ -33,4 +33,3 @@ class EventSeeder extends Seeder
         });
     }
 }
-

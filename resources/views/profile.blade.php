@@ -3,7 +3,7 @@
         <!--  -->
         <div class="rounded-lg flex flex-row flex-wrap items-center">
             <nav class="bg-transparent antialiased text-[#193441]">
-                <ol class="flex flex-wrap pt-1 mr-8 bg-transparent">
+                <ol class="flex flex-wrap mr-8 bg-transparent">
                     <li class="text-sm breadcrumb-item">
                         <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#0B2147"><path d="M149-100v-521l331-249 331 248.67V-100H564v-316H396v316H149Z"/></svg>
                     <li class="text-sm pl-2 capitalize leading-normal before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">
@@ -17,9 +17,6 @@
                     {{ __('Profile') }}
                 </h2>
             </nav>
-            <div class="block xl:hidden">
-                <livewire:layout.toggle-sidebar/>
-            </div>
         </div>
     </x-slot>
 
