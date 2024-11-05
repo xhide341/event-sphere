@@ -22,7 +22,4 @@ Route::get('/venues', VenuesPage::class)
     ->middleware(['auth', 'verified'])
     ->name('venues');
 
-Route::redirect('/admin/login', '/login');
-
-
 require __DIR__.'/auth.php';

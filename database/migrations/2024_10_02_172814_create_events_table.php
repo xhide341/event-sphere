@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('description');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
-            $table->foreignId('venue_id')->constrained()->unsigned();
-            $table->foreignId('department_id')->constrained()->unsigned();
-            $table->foreignId('speaker_id')->constrained()->onDelete('cascade');
+            $table->foreignId('venue_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('department_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('speaker_id')->nullable()->constrained()->nullOnDelete();
             $table->string('image')->nullable();
             $table->string('status');
             $table->timestamps();
