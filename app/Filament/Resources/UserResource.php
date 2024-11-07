@@ -34,6 +34,14 @@ class UserResource extends Resource
                 TextInput::make('name')->required(),
                 TextInput::make('email')->required(),
                 TextInput::make('password')->required(),
+                Select::make('role')
+                    ->label('Role')
+                    ->options([
+                        'admin' => 'Admin',
+                        'user' => 'User',
+                    ])
+                    ->default('user')
+                    ->required(),
                 FileUpload::make('avatar')
                     ->image()
                     ->imageEditor()
@@ -42,12 +50,8 @@ class UserResource extends Resource
                     ->visibility('public')
                     ->disk('s3')
                     ->maxSize(5120)
-                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp']),
-                Select::make('role')
-                    ->options([
-                        'admin' => 'Admin',
-                        'user' => 'User',
-                    ]),
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -69,7 +73,6 @@ class UserResource extends Resource
                 TextColumn::make('role')
                     ->alignCenter()
                     ->sortable(),
-
             ])
             ->filters([
                 SelectFilter::make('role')
