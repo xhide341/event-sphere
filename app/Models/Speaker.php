@@ -9,10 +9,22 @@ class Speaker extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'email', 'bio', 'profile_picture'];
+    protected $fillable = ['name', 'email', 'bio', 'avatar'];
 
     public function events()
     {
         return $this->hasMany(Event::class);
+    }
+
+    public function isAvailable($startDate, $endDate, $startTime, $endTime, $excludeEventId = null)
+    {
+        $query = $this->events()
+            ->conflictingWith($startDate, $endDate, $startTime, $endTime);
+
+        if ($excludeEventId) {
+            $query->where('id', '!=', $excludeEventId);
+        }
+
+        return $query->count() === 0;
     }
 }

@@ -19,10 +19,10 @@ class EventSeeder extends Seeder
         $venues = Venue::all();
 
         // Create departments
-        $departments = Department::factory()->count(5)->create();
+        $departments = Department::all();
 
-        // Create speakers
-        $speakers = Speaker::factory()->count(10)->create();
+        // Get all speakers
+        $speakers = Speaker::all();
 
         // Create events
         Event::factory()->count(20)->make()->each(function ($event) use ($venues, $departments, $speakers) {

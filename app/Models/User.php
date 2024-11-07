@@ -15,9 +15,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Facades\Log;
 use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
 
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable implements FilamentUser, HasAvatar
 {
     use HasFactory, Notifiable;
 
@@ -72,6 +73,11 @@ class User extends Authenticatable implements FilamentUser
         return $this->belongsToMany(Event::class, 'registrations', 'user_id', 'event_id')
                     ->withPivot('registration_date')
                     ->withTimestamps();
+    }
+
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->avatar_url ?? null;
     }
 
     public function canAccessPanel(Panel $panel): bool

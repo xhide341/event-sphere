@@ -8,6 +8,7 @@ use App\Models\Department;
 use App\Models\Event;
 use App\Models\Venue;
 use App\Models\Speaker;
+
 class EventFactory extends Factory
 {
     /**
@@ -34,12 +35,16 @@ class EventFactory extends Factory
                 "The art exhibition showcases student artwork, with each piece displayed in a designated area, attracting art enthusiasts and potential buyers.",
                 "The music festival features local and international bands, with students dancing in the aisles, enjoying the diverse music lineup.",
             ]),
-            'start_date' => $start_date = $this->faker->dateTimeBetween('now', '+2 years')->setTime(
-                $this->faker->numberBetween(8, 20), 0, 0
-            ),
-            'end_date' => $this->faker->dateTimeInInterval($start_date, '+2 hours'),
+            'start_date' => $start_date = $this->faker->dateTimeBetween('now', '+2 years')->format('d-m-Y'),
+            'end_date' => $start_date,
+            'start_time' => $start_time = $this->faker->dateTimeBetween('08:00', '20:00')->format('H:i:s'),
+            'end_time' => (new \DateTime($start_time))->add(new \DateInterval('PT' . $this->faker->numberBetween(1, 3) . 'H'))->format('H:i:s'),
             'image' => 'https://unsplash.it/640/480?random=' . Str::random(10),
             'status' => $this->faker->randomElement(['Archived', 'Upcoming', 'Ongoing', 'Completed']),
+            'speaker_id' => function () {
+                return Speaker::query()->inRandomOrder()->first()?->id 
+                    ?? Speaker::factory()->create()->id;
+            },
         ];
     }
 }

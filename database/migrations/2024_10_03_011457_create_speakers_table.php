@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->text('bio')->nullable();
-            $table->string('profile_picture')->nullable();
+            $table->string('avatar')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('availability_status')->default('Available');
             $table->timestamps();
         });
     }

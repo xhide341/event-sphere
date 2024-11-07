@@ -27,7 +27,7 @@ class Sidebar extends Component
                 $this->avatarUrl = null;                
             }
         } else {
-            $this->avatarUrl = null;
+            $this->avatarUrl = $user->getFilamentAvatarUrl();
         }
     }
 

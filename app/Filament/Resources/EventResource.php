@@ -24,9 +24,12 @@ use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\DatePicker as FormDatePicker;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\DatePicker;
+use Filament\Forms\Components\TimePicker;
+use App\Rules\VenueHasNoConflictingEvents;
 
 
 class EventResource extends Resource
@@ -34,6 +37,8 @@ class EventResource extends Resource
     protected static ?string $model = Event::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $navigationGroup = 'Event Management';
 
     public static function form(Form $form): Form
     {
@@ -46,24 +51,78 @@ class EventResource extends Resource
                             ->maxLength(255),
                         RichEditor::make('description')
                             ->required()
-                            ->maxLength(65535)
+                            ->maxLength(500)
+                            ->helperText('Please keep the description concise and to the point. It should be no more than 500 characters.')
                             ->columnSpanFull(),
-                        DateTimePicker::make('start_date')
-                            ->required()
+                        FormDatePicker::make('start_date')
                             ->native(false)
-                            ->afterOrEqual(now()),
-                        DateTimePicker::make('end_date')
+                            ->prefix('Starts')
                             ->required()
-                            ->after('start_date'),
-                        Select::make('venue_id')
+                            ->format('d-m-Y')
+                            ->minDate(now())
+                            ->suffixIcon('heroicon-o-calendar')
+                            ->placeholder('Select start date')
+                            ->closeOnDateSelection()
+                            ->live(),
+                        FormDatePicker::make('end_date')
+                            ->native(false)
+                            ->prefix('Ends')
+                            ->required()                    
+                            ->format('d-m-Y')
+                            ->suffixIcon('heroicon-o-calendar')
+                            ->placeholder('Select end date')
+                            ->closeOnDateSelection()
+                            ->live(),
+                        TimePicker::make('start_time')
+                            ->prefix('Starts')
+                            ->required()
+                            ->format('H:i')
+                            ->suffixIcon('heroicon-o-clock')
+                            ->native(false)
+                            ->live()
+                            ->datalist([
+                                '08:00', '08:30', '09:00', '09:30', '10:00', '10:30',
+                                '11:00', '11:30', '12:00', '12:30', '13:00', '13:30',
+                                '14:00', '14:30', '15:00', '15:30', '16:00', '16:30',
+                                '17:00', '17:30', '18:00', '18:30', '19:00', '19:30',
+                                '20:00', '20:30', '21:00'
+                            ]),
+                        TimePicker::make('end_time')
+                            ->prefix('Ends')
+                            ->required()
+                            ->format('H:i')
+                            ->suffixIcon('heroicon-o-clock')
+                            ->native(false)
+                            ->live()
+                            ->datalist([
+                                '08:00', '08:30', '09:00', '09:30', '10:00', '10:30',
+                                '11:00', '11:30', '12:00', '12:30', '13:00', '13:30',
+                                '14:00', '14:30', '15:00', '15:30', '16:00', '16:30',
+                                '17:00', '17:30', '18:00', '18:30', '19:00', '19:30',
+                                '20:00', '20:30', '21:00'
+                            ]),
+                            Select::make('venue_id')
                             ->label('Venue')
                             ->options(Venue::all()->pluck('name', 'id'))
                             ->searchable()
-                            ->preload(),
+                            ->preload()
+                            ->rule(function ($attribute, $value, $fail) {
+                                $startDate = request()->input('start_date');
+                                $endDate = request()->input('end_date');
+                                $startTime = request()->input('start_time');
+                                $endTime = request()->input('end_time');
+                                
+                                $conflictingEvents = Event::where('venue_id', $value)
+                                    ->conflictingWith($startDate, $endDate, $startTime, $endTime)
+                                    ->count();
+                                
+                                if ($conflictingEvents > 0) {
+                                    $fail('The venue has conflicting events during the specified timeframe.');
+                                }
+                            }),
                         Select::make('department_id')
                             ->label('Department')
-                            ->options(Department::all()->pluck('name', 'id'))
-                            ->searchable()
+                            ->options(Department::query()->distinct()->pluck('name', 'id'))
                             ->preload(),
                         Select::make('speaker_id')
                             ->label('Speaker')
@@ -83,7 +142,7 @@ class EventResource extends Resource
                             ])
                             ->required()
                             ->default('Upcoming'),
-                        Select::make('capacity')
+                        TextInput::make('capacity')
                             ->numeric()
                             ->minValue(1)
                             ->required(),
@@ -136,15 +195,6 @@ class EventResource extends Resource
                     ->relationship('department', 'name'),
                 Tables\Filters\SelectFilter::make('venue')
                     ->relationship('venue', 'name'),
-                Tables\Filters\Filter::make('upcoming')
-                    ->query(fn (Builder $query): Builder => $query->where('start_date', '>', now())),
-                Tables\Filters\Filter::make('past')
-                    ->query(fn (Builder $query): Builder => $query->where('end_date', '<', now())),
-                Tables\Filters\Filter::make('date_range')
-                    ->form([
-                        Forms\Components\DatePicker::make('from'),
-                        Forms\Components\DatePicker::make('until'),
-                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -165,4 +215,5 @@ class EventResource extends Resource
             'edit' => Pages\EditEvent::route('/{record}/edit'),
         ];
     }
+
 }

@@ -1,6 +1,12 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 
+const refreshPaths = [
+    'app/Http/Livewire/**',
+    'resources/views/**',
+    'routes/**',
+];
+
 export default defineConfig({
     plugins: [
         laravel({
@@ -10,7 +16,10 @@ export default defineConfig({
                 'resources/js/initAlpine.js',
                 'resources/css/filament/admin/theme.css',
             ],
-            refresh: true,
+            refresh: [
+                ...refreshPaths,
+                'app/Filament/**',
+            ],
         }),
     ],
     server: {

@@ -18,7 +18,13 @@ class SpeakerFactory extends Factory
     {
         return [
             'name' => function () {
-                $name = $this->faker->name;
+                // Get a name and limit to first and last name only
+                $fullName = $this->faker->name;
+                $nameParts = explode(' ', $fullName);
+                $name = count($nameParts) > 2 
+                    ? $nameParts[0] . ' ' . end($nameParts)
+                    : $fullName;
+                
                 $title = $this->faker->title;
                 
                 // Check if the name already starts with an abbreviated title
@@ -29,8 +35,10 @@ class SpeakerFactory extends Factory
                 return $name;
             },
             'email' => $this->faker->unique()->safeEmail,
+            'phone_number' => $this->faker->unique()->phoneNumber,
             'bio' => $this->faker->paragraph,
-            'profile_picture' => $this->faker->imageUrl(200, 200, 'people'),
+            'avatar' => 'https://api.dicebear.com/7.x/avataaars/svg?seed=' . uniqid(),
+            'availability_status' => $this->faker->randomElement(['Available', 'Tentative', 'Confirmed', 'Cancelled'])
         ];
     }
 }

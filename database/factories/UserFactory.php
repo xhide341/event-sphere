@@ -28,8 +28,8 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
-            'role' => fake()->randomElement(['student', 'organizer']),
-            'avatar' => null,
+            'role' => fake()->randomElement(['user', 'admin']),
+            'avatar' => 'https://robohash.org/' . uniqid() . '?set=set4',
             'remember_token' => Str::random(10),
         ];
     }

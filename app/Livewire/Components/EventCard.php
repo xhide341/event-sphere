@@ -25,14 +25,14 @@ class EventCard extends Component
     public function getModalContent()
     {
         return [
-            'event_name' => $this->event->name,
+            'event_name' => $this->event->name ?? 'No name assigned',
             'description' => $this->event->description,
             'image' => $this->event->image,
-            'department_name' => $this->event->department->name,
-            'venue_name' => $this->event->venue->name,
-            'capacity' => $this->event->venue->capacity,
+            'department_name' => $this->event->department->name ?? 'No department assigned',
+            'venue_name' => $this->event->venue->name ?? 'No venue assigned',
+            'capacity' => $this->event->venue->capacity ?? 'No capacity',
             'status' => $this->event->status,
-            'schedule' => Carbon::parse($this->event->start_date)->format('M j, Y g:i A'),
+            'schedule' => $this->getSchedule(),
             'speaker' => $this->event->speaker ? $this->event->speaker->name : 'No speaker assigned',
             'participant_count' => $this->getParticipantCount(),
             'is_user_registered' => $this->isUserRegistered(),
@@ -52,26 +52,41 @@ class EventCard extends Component
 
     public function getCountdown()
     {
-        $eventDate = Carbon::parse($this->event->start_date)->format('M j, Y g:i A');
-        $now = Carbon::now();
-        $eventEndDate = Carbon::parse($eventDate)->addHours(2);
+        try {
+            // Start DateTime
+            $startDateTime = Carbon::parse($this->event->start_date->toDateString())
+                ->setHour($this->event->start_time->hour)
+                ->setMinute($this->event->start_time->minute)
+                ->setSecond($this->event->start_time->second);
 
-        if ($now->gt($eventEndDate)) {
-            return 'Event has ended';
-        }
+            // End DateTime
+            $endDateTime = Carbon::parse($this->event->start_date->toDateString())
+                ->setHour($this->event->end_time->hour)
+                ->setMinute($this->event->end_time->minute)
+                ->setSecond($this->event->end_time->second);
 
-        if ($now->gt($eventDate)) {
-            return 'Event in progress';
-        }
+            // Rest of your countdown logic remains the same
+            $now = Carbon::now();
+            
+            if ($now->gt($endDateTime)) {
+                return 'Event has ended';
+            }
 
-        $diff = $now->diff($eventDate);
+            if ($now->gt($startDateTime)) {
+                return 'Event in progress';
+            }
 
-        if ($diff->days > 0) {
-            return 'Starts in: ' . $diff->format('%d days, %h hrs');
-        } elseif ($diff->h > 0) {
-            return 'Starts in: ' . $diff->format('%h hrs, %i mins');
-        } else {
-            return 'Starts in: ' . $diff->format('%i mins');
+            $diff = $now->diff($startDateTime);
+
+            if ($diff->days > 0) {
+                return 'Starts in: ' . $diff->format('%d days, %h hrs');
+            } elseif ($diff->h > 0) {
+                return 'Starts in: ' . $diff->format('%h hrs, %i mins');
+            } else {
+                return 'Starts in: ' . $diff->format('%i mins');
+            }
+        } catch (\Exception $e) {
+            return 'Invalid date format';
         }
     }
 
@@ -89,6 +104,23 @@ class EventCard extends Component
 
         $this->event->refresh();
         $this->dispatch('eventUpdated');
+    }
+
+    public function getSchedule()
+    {
+        try {
+            // Create a new Carbon instance from the date
+            $dateTime = Carbon::parse($this->event->start_date->toDateString());
+            
+            // Set the time from the time object
+            $dateTime->setHour($this->event->start_time->hour)
+                    ->setMinute($this->event->start_time->minute)
+                    ->setSecond($this->event->start_time->second);
+            
+            return $dateTime->format('M j, Y g:i A');
+        } catch (\Exception $e) {
+            return 'Invalid date format';
+        }
     }
 
     public function render()

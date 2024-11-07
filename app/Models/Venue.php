@@ -82,4 +82,5 @@ class Venue extends Model
         return $this->hasOne(VenueImage::class)->where('is_primary', true);
     }
     
+    // task: add a scope to check if the venue has conflicting events
 }

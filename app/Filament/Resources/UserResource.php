@@ -18,7 +18,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Actions;
 use Filament\Tables\Columns\Visibility;
 use Filament\Tables\Filters\SelectFilter;
-
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Forms\Components\FileUpload;
 
 class UserResource extends Resource
 {
@@ -33,6 +34,15 @@ class UserResource extends Resource
                 TextInput::make('name')->required(),
                 TextInput::make('email')->required(),
                 TextInput::make('password')->required(),
+                FileUpload::make('avatar')
+                    ->image()
+                    ->imageEditor()
+                    ->circleCropper()
+                    ->directory('avatars')
+                    ->visibility('public')
+                    ->disk('s3')
+                    ->maxSize(5120)
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp']),
                 Select::make('role')
                     ->options([
                         'admin' => 'Admin',
@@ -45,9 +55,21 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->searchable()->sortable(),
-                TextColumn::make('email')->searchable()->sortable(),
-                TextColumn::make('role')->alignCenter()->sortable(),
+                TextColumn::make('name')
+                    ->searchable()
+                    ->sortable()
+                    ->alignCenter(),
+                ImageColumn::make('avatar')
+                    ->circular()
+                    ->alignCenter(),
+                TextColumn::make('email')
+                    ->searchable()
+                    ->sortable()
+                    ->alignCenter(),
+                TextColumn::make('role')
+                    ->alignCenter()
+                    ->sortable(),
+
             ])
             ->filters([
                 SelectFilter::make('role')
