@@ -35,7 +35,7 @@ class SpeakerFactory extends Factory
                 return $name;
             },
             'email' => $this->faker->unique()->safeEmail,
-            'phone_number' => $this->faker->unique()->phoneNumber,
+            'phone_number' => '09' . $this->faker->numerify('#########'), // Generates 9 random digits after '09'
             'bio' => $this->faker->paragraph,
             'avatar' => 'https://api.dicebear.com/7.x/avataaars/svg?seed=' . uniqid(),
             'availability_status' => $this->faker->randomElement(['Available', 'Tentative', 'Confirmed', 'Cancelled'])

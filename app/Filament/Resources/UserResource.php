@@ -64,8 +64,9 @@ class UserResource extends Resource
                     ->sortable()
                     ->alignCenter(),
                 ImageColumn::make('avatar')
-                    ->circular()
-                    ->alignCenter(),
+                    ->disk('s3')
+                    ->defaultImageUrl('/resources/images/image_placeholder.jpg')
+                    ->square(),
                 TextColumn::make('email')
                     ->searchable()
                     ->sortable()

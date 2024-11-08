@@ -9,85 +9,64 @@ class VenueSeeder extends Seeder
 {
     public function run(): void
     {
-        \Log::info('Before seeding - Venue count: ' . Venue::count());
-        // 1. Define your exact venues and their images
         $venues = [
             [
                 'name' => 'San Agustin Bldg',
                 'location' => 'San Agustin Building',
                 'capacity' => 200,
-                'description' => 'The San Agustin Building...',
+                'description' => 'The San Agustin Building is a historic structure that houses the university\'s administration offices and classrooms.',
                 'images' => [
-                    // Primary image
                     [
-                        'path' => 'venues/1/okarun.jpg',
+                        'path' => 'venues/san-agustin/primary.jpg',
                         'is_primary' => true,
                         'sort_order' => 0
                     ],
-                    // Additional image
                     [
-                        'path' => 'venues/1/okarun2.jpg',
+                        'path' => 'venues/san-agustin/image-2.jpg',
                         'is_primary' => false,
                         'sort_order' => 1
+                    ],
+                    [
+                        'path' => 'venues/san-agustin/image-3.jpg',
+                        'is_primary' => false,
+                        'sort_order' => 2
+                    ],
+                    [
+                        'path' => 'venues/san-agustin/image-4.jpg',
+                        'is_primary' => false,
+                        'sort_order' => 3
                     ]
                 ]
             ],
-            // You can add more predefined venues here
             [
-                'name' => 'MR Street',
-                'location' => 'Activity Center',
+                'name' => 'Activity Center',
+                'location' => 'MR Street',
                 'capacity' => 300,
-                'description' => 'The Activity Center...',
+                'description' => 'The Activity Center is a modern facility that hosts various events and activities throughout the year.',
                 'images' => [
                     [
-                        'path' => 'venues/2/ayase.jpg',
+                        'path' => 'venues/activity-center/primary.jpg',
                         'is_primary' => true,
                         'sort_order' => 0
                     ],
-                    [
-                        'path' => 'venues/2/ayase2.jpg',
-                        'is_primary' => false,
-                        'sort_order' => 1
-                    ]
+                    // ... other images
                 ]
             ],
-            [
-                'name' => 'Atis Hall',
-                'location' => 'Atis Hall',
-                'capacity' => 400,
-                'description' => 'The Atis Hall...',
-                'images' => [
-                    [
-                        'path' => 'venues/3/seiko.jpg',
-                        'is_primary' => true,
-                        'sort_order' => 0
-                    ],
-                    [
-                        'path' => 'venues/3/seiko2.jpg',
-                        'is_primary' => false,
-                        'sort_order' => 1
-                    ]
-                ]
-            ]
-            // Add more venues...
+            // ... more venues
         ];
 
-        // 2. Create each predefined venue with its images
         foreach ($venues as $venueData) {
+            // remove images from venue array
             $images = $venueData['images'];
             unset($venueData['images']);
             
-            $venue = Venue::create($venueData);
-            \Log::info('Created predefined venue: ' . $venue->name);
+            // create venue (without images)
+            $venue = Venue::create($venueData);    
             
+            // create venue images through venue model (images())
             foreach ($images as $imageData) {
                 $venue->images()->create($imageData);
             }
         }
-
-        // 3. Add additional random venues using the factory
-        \Log::info('Creating 5 random venues');
-        Venue::factory()->count(5)->create();
-        \Log::info('After seeding - Venue count: ' . Venue::count());
     }
 }

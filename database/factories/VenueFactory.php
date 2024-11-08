@@ -19,11 +19,21 @@ class VenueFactory extends Factory
     protected static $venueIndex = 0;
 
     protected static $venueImages = [
-        'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800', // Conference hall
-        'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=800', // Modern auditorium
-        'https://images.unsplash.com/photo-1517164850305-99a3e65bb47e?w=800', // Concert venue
-        'https://images.unsplash.com/photo-1526041092449-209d556f7a32?w=800', // Theater
-        'https://images.unsplash.com/photo-1517457210348-703079e57d4b?w=800', // Workshop space
+        // Venue 1's images
+        [
+            'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800', // Primary
+            'https://images.unsplash.com/photo-2...?w=800', // Second
+            'https://images.unsplash.com/photo-3...?w=800', // Third
+            'https://images.unsplash.com/photo-4...?w=800', // Fourth
+        ],
+        // Venue 2's images
+        [
+            'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=800', // Primary
+            'https://images.unsplash.com/photo-5...?w=800', // Second
+            'https://images.unsplash.com/photo-6...?w=800', // Third
+            'https://images.unsplash.com/photo-7...?w=800', // Fourth
+        ],
+        // ... repeat for other venues
     ];
 
     /**
@@ -73,24 +83,26 @@ class VenueFactory extends Factory
     public function configure()
     {
         return $this->afterCreating(function (Venue $venue) {
-            // Get the corresponding image path based on venue index
-            $imagePath = static::$venueImages[static::$venueIndex - 1] ?? "venues/default/noimage.webp";
-
+            $venueIndex = static::$venueIndex - 1;
+            $venueImages = static::$venueImages[$venueIndex] ?? [];
+            
             // Create primary image
             VenueImage::factory()
                 ->primary()
                 ->create([
                     'venue_id' => $venue->id,
-                    'path' => $imagePath,
+                    'path' => $venueImages[0] ?? "venues/default/noimage.webp",
                 ]);
 
-            // Create additional images (still using default noimage)
-            VenueImage::factory()
-                ->count(5)
-                ->create([
-                    'venue_id' => $venue->id,
-                    'path' => "venues/default/noimage.webp",
-                ]);
+            // Create 3 additional images
+            for ($i = 1; $i < 4; $i++) {
+                VenueImage::factory()
+                    ->create([
+                        'venue_id' => $venue->id,
+                        'path' => $venueImages[$i] ?? "venues/default/noimage.webp",
+                        'sort_order' => $i
+                    ]);
+            }
         });
     }
 }

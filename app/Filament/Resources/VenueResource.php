@@ -72,6 +72,12 @@ class VenueResource extends Resource
     {
         return $table
             ->columns([
+                ImageColumn::make('image')
+                    ->disk('s3')
+                    ->defaultImageUrl('/resources/images/image_placeholder.jpg')
+                    ->square()
+                    ->alignCenter(),
+                    
                 TextColumn::make('name')
                     ->searchable(),
                     
@@ -126,17 +132,25 @@ class VenueResource extends Resource
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist
+            ->columns(2)
             ->schema([
                 InfolistSection::make('Venue Images')
+                    ->columns([
+                        'sm' => 3,
+                        'xl' => 6,
+                        '2xl' => 8,
+                    ])
                     ->schema([
-                        Grid::make(3)
+                        Grid::make(['default' => 4])
                             ->schema([
-                                ImageEntry::make('images.path')
-                                    ->label('')
-                                    ->disk('public')
-                                    ->size(300)
-                                    ->extraAttributes(['class' => 'object-cover'])
-                            ])
+                                // Individual ImageEntry components for each image
+                                ...collect(range(0, 8))->map(fn ($index) => 
+                                    ImageEntry::make("images.{$index}.path")
+                                        ->label('')
+                                        ->disk('public')
+                                        ->size(300)                                      
+                                )
+                            ])                        
                     ])
             ]);
     }

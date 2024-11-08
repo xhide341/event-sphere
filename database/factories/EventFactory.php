@@ -39,7 +39,7 @@ class EventFactory extends Factory
             'end_date' => $start_date,
             'start_time' => $start_time = $this->faker->dateTimeBetween('08:00', '20:00')->format('H:i:s'),
             'end_time' => (new \DateTime($start_time))->add(new \DateInterval('PT' . $this->faker->numberBetween(1, 3) . 'H'))->format('H:i:s'),
-            'image' => 'https://unsplash.it/640/480?random=' . Str::random(10),
+            'image' => 'https://picsum.photos/seed/' . Str::uuid() . '/640/480',
             'status' => $this->faker->randomElement(['Archived', 'Upcoming', 'Ongoing', 'Completed']),
             'speaker_id' => function () {
                 return Speaker::query()->inRandomOrder()->first()?->id 

@@ -147,17 +147,17 @@
                     <p class="max-w-xl mt-4 text-base leading-relaxed text-gray-600 text-justify">We are a team of 3 students from <a href="https://www.facebook.com/LaConsolacionU" target="_blank" class="text-accent">La Consolacion University Philippines</a>, taking up Bachelor of Science in Information Technology.</p>
                     <div class="flex flex-col mt-8 sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-20 text-primary text-center">
                         <div class="is-hidden avatar text-center flex flex-col items-center justify-center">
-                            <img src="{{ Vite::asset('resources/images/boy1.png') }}" alt="Placeholder Image" class="h-[150px] transition-transform duration-300 ease-in-out hover:scale-110 sm:h-[200px]">
+                            <img src="{{ Vite::asset('resources/images/welcome-images/boy1.png') }}" alt="Placeholder Image" class="h-[150px] transition-transform duration-300 ease-in-out hover:scale-110 sm:h-[200px]">
                             <p class="text-lg font-bold mt-2 sm:text-2xl">Shawne Nuque</p>
                             <p class="text-sm sm:mt-2">Web Developer</p>
                         </div>
                         <div class="is-hidden avatar text-center flex flex-col items-center justify-center">
-                            <img src="{{ Vite::asset('resources/images/girl1.png') }}" alt="Placeholder Image" class="h-[150px] transition-transform duration-300 ease-in-out hover:scale-110 sm:h-[200px]">
+                            <img src="{{ Vite::asset('resources/images/welcome-images/girl1.png') }}" alt="Placeholder Image" class="h-[150px] transition-transform duration-300 ease-in-out hover:scale-110 sm:h-[200px]">
                             <p class="text-lg font-bold mt-2 sm:text-2xl">Lorrea Delos Reyes</p>
                             <p class="text-sm sm:mt-2">Project Researcher</p>
                         </div>
                         <div class="is-hidden avatar text-center flex flex-col items-center justify-center">
-                            <img src="{{ Vite::asset('resources/images/girl2.png') }}" alt="Placeholder Image" class="h-[150px] transition-transform duration-300 ease-in-out hover:scale-110 sm:h-[200px]">
+                            <img src="{{ Vite::asset('resources/images/welcome-images/girl2.png') }}" alt="Placeholder Image" class="h-[150px] transition-transform duration-300 ease-in-out hover:scale-110 sm:h-[200px]">
                             <p class="text-lg font-bold mt-2 sm:text-2xl">Pauline Joy Panillo</p>
                             <p class="text-sm sm:mt-2">Project Researcher</p>
                         </div>
@@ -173,7 +173,7 @@
                     </h2>
                     <div class="mt-4 text-center text-gray-600 sm:mb-10">
                         <p class="text-sm sm:text-base">For inquiries, you can reach us at:</p>
-                        <p class="text-sm sm:text-base">Email: <a href="mailto:team@example.com" class="text-accent">team@example.com</a></p>
+                        <p class="text-sm sm:text-base">Email: <a href="mailto:team@example.com" class="text-accent">team@eventsphere.com</a></p>
                         <p class="text-sm sm:text-base">Phone: <a href="tel:+1234567890" class="text-accent">+1 (234) 567-890</a></p>
                     </div>
                     <!-- Contact Form -->

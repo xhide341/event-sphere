@@ -6,7 +6,6 @@ use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\Storage;
 
-
 #[Layout('layouts.app')]
 class Sidebar extends Component
 {
@@ -20,11 +19,17 @@ class Sidebar extends Component
     public function generateAvatarUrl()
     {
         $user = auth()->user();
+
+        if ($user->id === 1) {
+            $this->avatarUrl = asset('demo-assets/avatars/' . basename($user->avatar));
+            return;
+        }
+
         if ($user->avatar) {
-            try {
+            try {            
                 $this->avatarUrl = Storage::disk('s3')->temporaryUrl($user->avatar, now()->addMinutes(60));
             } catch (\Exception $e) {
-                $this->avatarUrl = null;                
+                $this->avatarUrl = $user->avatar;
             }
         } else {
             $this->avatarUrl = $user->getFilamentAvatarUrl();
