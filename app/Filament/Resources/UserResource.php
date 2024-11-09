@@ -82,7 +82,16 @@ class UserResource extends Resource
                             ->visibility('private')
                             ->disk('s3')
                             ->maxSize(5120)
+                            ->imageResizeMode('cover')
+                            ->imageResizeTargetWidth('400')
+                            ->imageResizeTargetHeight('400')
                             ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                            ->afterStateUpdated(function ($state, callable $set) {
+                                // Clear old avatar if exists
+                                if ($state && $this->record && $this->record->avatar) {
+                                    Storage::disk('s3')->delete($this->record->avatar);
+                                }
+                            })
                             ->columnSpanFull(),
                     ]),
             ]);
@@ -98,8 +107,9 @@ class UserResource extends Resource
                     ->alignCenter(),
                 ImageColumn::make('avatar')
                     ->disk('s3')
+                    ->visibility('private')
                     ->defaultImageUrl('/resources/images/image_placeholder.jpg')
-                    ->square(),
+                    ->circular(),
                 TextColumn::make('email')
                     ->searchable()
                     ->sortable()
@@ -107,6 +117,14 @@ class UserResource extends Resource
                 TextColumn::make('role')
                     ->alignCenter()
                     ->sortable(),
+                TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(),
+                TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 SelectFilter::make('role')
