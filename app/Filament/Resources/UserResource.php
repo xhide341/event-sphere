@@ -20,6 +20,8 @@ use Filament\Tables\Columns\Visibility;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Toggle;
+use Illuminate\Support\Facades\Storage;
 
 class UserResource extends Resource
 {
@@ -27,31 +29,62 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
 
+
+    protected static ?string $recordTitleAttribute = 'name';
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'email', 'role'];
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('name')->required(),
-                TextInput::make('email')->required(),
-                TextInput::make('password')->required(),
-                Select::make('role')
-                    ->label('Role')
-                    ->options([
-                        'admin' => 'Admin',
-                        'user' => 'User',
-                    ])
-                    ->default('user')
-                    ->required(),
-                FileUpload::make('avatar')
-                    ->image()
-                    ->imageEditor()
-                    ->circleCropper()
-                    ->directory('avatars')
-                    ->visibility('public')
-                    ->disk('s3')
-                    ->maxSize(5120)
-                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
-                    ->columnSpanFull(),
+                Forms\Components\Section::make('User Information')
+                    ->description('Basic user information')
+                    ->schema([
+                        TextInput::make('name')
+                            ->required()
+                            ->maxLength(255),
+                        TextInput::make('email')
+                            ->email()
+                            ->required()
+                            ->unique(ignoreRecord: true)
+                            ->maxLength(255),
+                        TextInput::make('password')
+                            ->password()
+                            ->dehydrated(fn ($state) => filled($state))
+                            ->required(fn (string $context): bool => $context === 'create')
+                            ->minLength(8)
+                            ->same('passwordConfirmation'),
+                        TextInput::make('passwordConfirmation')
+                            ->password()
+                            ->dehydrated(false)
+                            ->required(fn (string $context): bool => $context === 'create'),
+                    ])->columns(2),
+                
+                Forms\Components\Section::make('Role & Profile Image')                
+                    ->schema([
+                        Select::make('role')
+                            ->label('Role')
+                            ->options([
+                                'admin' => 'Admin',
+                                'user' => 'User',
+                            ])
+                            ->default('user')
+                            ->required(),
+                        FileUpload::make('avatar')
+                            ->image()
+                            ->imageEditor()
+                            ->circleCropper()
+                            ->directory('avatars')
+                            ->visibility('private')
+                            ->disk('s3')
+                            ->maxSize(5120)
+                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                            ->columnSpanFull(),
+                    ]),
             ]);
     }
 

@@ -20,19 +20,14 @@ class Sidebar extends Component
     {
         $user = auth()->user();
 
-        if ($user->id === 1) {
-            $this->avatarUrl = asset('demo-assets/avatars/' . basename($user->avatar));
-            return;
-        }
-
         if ($user->avatar) {
             try {            
-                $this->avatarUrl = Storage::disk('s3')->temporaryUrl($user->avatar, now()->addMinutes(60));
+                $this->avatarUrl = Storage::disk('s3')->temporaryUrl('avatars/minion.jpg', now()->addMinutes(60));
             } catch (\Exception $e) {
-                $this->avatarUrl = $user->avatar;
+                $this->avatarUrl = "https://ui-avatars.com/api/?name=" . urlencode($user->name);
             }
         } else {
-            $this->avatarUrl = $user->getFilamentAvatarUrl();
+            $this->avatarUrl = "https://ui-avatars.com/api/?name=" . urlencode($user->name);
         }
     }
 

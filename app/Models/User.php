@@ -78,14 +78,10 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     public function getFilamentAvatarUrl(): ?string
     {
         if ($this->avatar) {
-            try {
-                return Storage::disk('s3')->temporaryUrl($this->avatar, now()->addMinutes(60));
-            } catch (\Exception $e) {
-                return "https://ui-avatars.com/api/?name=" . urlencode($this->name);
-            }
+            return Storage::disk('s3')->temporaryUrl($this->avatar, now()->addMinutes(60));
         }
         
-        return "https://ui-avatars.com/api/?name=" . urlencode($this->name);
+        return null;
     }
 
     public function canAccessPanel(Panel $panel): bool
