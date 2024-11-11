@@ -58,23 +58,6 @@
                                 >
                                    Register now
                                 </a>
-                                <a
-                                    href="#"
-                                    title=""
-                                    class="inline-flex items-center justify-center w-full px-6 py-3 mt-4 text-lg font-semibold text-gray-900 transition-all duration-200 border-2 border-gray-400 sm:w-auto sm:mt-0 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 hover:bg-gray-900 focus:bg-gray-900 hover:text-white focus:text-white hover:border-gray-900 focus:border-gray-900"
-                                    role="button"
-                                >
-                                <svg class="w-5 h-5 mr-2" viewBox="0 0 18 18" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                    d="M8.18003 13.4261C6.8586 14.3918 5 13.448 5 11.8113V5.43865C5 3.80198 6.8586 2.85821 8.18003 3.82387L12.5403 7.01022C13.6336 7.80916 13.6336 9.44084 12.5403 10.2398L8.18003 13.4261Z"
-                                    stroke-width="2"
-                                    stroke-miterlimit="10"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    />
-                                </svg>
-                                    Watch free demo
-                                </a>
                             </div>
                             <p class="mt-8 text-sm text-gray-500">This website is not affiliated with the official campus of La Consolacion University Philippines.</p>
                         </div>

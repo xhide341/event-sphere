@@ -27,6 +27,7 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Columns\ImageColumn;
 
 
 class VenueResource extends Resource
@@ -61,9 +62,22 @@ class VenueResource extends Resource
                             ->columnSpanFull(),
                             
                         FileUpload::make('image')
+                            ->disk('public')
                             ->image()
                             ->directory('venues')
-                            ->columnSpanFull(),
+                            ->multiple()
+                            ->columnSpanFull()
+                            ->afterStateUpdated(function ($state, $set) {
+                                if (!empty($state) && is_array($state)) {
+                                    collect($state)->each(function ($path, $index) use ($record) {
+                                        $record->images()->create([
+                                            'path' => $path,
+                                            'is_primary' => $index === 0,
+                                            'sort_order' => $index
+                                        ]);
+                                    });
+                                }
+                            }),
                     ])
             ]);
     }
@@ -72,9 +86,10 @@ class VenueResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('image')
-                    ->disk('s3')
-                    ->defaultImageUrl('/resources/images/image_placeholder.jpg')
+                ImageColumn::make('images.path')
+                    ->stacked()      
+                    ->disk('public')
+                    ->visibility('public')
                     ->square()
                     ->alignCenter(),
                     
@@ -131,27 +146,16 @@ class VenueResource extends Resource
 
     public static function infolist(Infolist $infolist): Infolist
     {
-        return $infolist
-            ->columns(2)
+        return $infolist        
             ->schema([
                 InfolistSection::make('Venue Images')
-                    ->columns([
-                        'sm' => 3,
-                        'xl' => 6,
-                        '2xl' => 8,
-                    ])
-                    ->schema([
-                        Grid::make(['default' => 4])
-                            ->schema([
-                                // Individual ImageEntry components for each image
-                                ...collect(range(0, 8))->map(fn ($index) => 
-                                    ImageEntry::make("images.{$index}.path")
-                                        ->label('')
-                                        ->disk('public')
-                                        ->size(300)                                      
-                                )
-                            ])                        
-                    ])
+                    ->schema([                        
+                        ImageEntry::make('images.path')
+                            ->label('')
+                            ->disk('public')
+                            ->visibility('public')
+                            ->size(400)                                                                                   
+                    ])               
             ]);
     }
 

@@ -81,23 +81,7 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <!-- Role Selection -->
-        <div class="mt-4">
-            <x-input-label :value="__('Role')" />
-            <div class="mt-2">
-                <label class="inline-flex items-center">
-                    <input type="radio" class="form-radio" name="role" wire:model="role" value="student" checked>
-                    <span class="ml-2">Student</span>
-                </label>
-                <label class="inline-flex items-center ml-6">
-                    <input type="radio" class="form-radio" name="role" wire:model="role" value="organizer">
-                    <span class="ml-2">Organizer</span>
-                </label>
-            </div>
-            <x-input-error :messages="$errors->get('role')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
+        <div class="flex items-center justify-end mt-6">
             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}" wire:navigate>
                 {{ __('Already registered?') }}
             </a>

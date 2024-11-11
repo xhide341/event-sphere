@@ -16,24 +16,44 @@ class VenueFactory extends Factory
      */
     protected $model = Venue::class;
 
-    protected static $venueIndex = 0;
+    protected $venueData = [
+        [
+            'name' => 'Carthage Activity Center',
+            'location' => 'LCUP Main Campus',
+            'capacity' => 100,
+            'description' => "The Carthage Activity Center is a historic building that serves as the hub for various university activities and events.",
+            'images' => [
+                'images/venues/1/activity-center-1.jpg',
+                'images/venues/1/activity-center-2.jpg',
+                'images/venues/1/activity-center-3.jpg',
+                'images/venues/1/activity-center-4.jpg',
+            ]
+        ],
+        [
+            'name' => 'BARCIE Atis Hall',
+            'location' => 'LCUP Main Campus',
+            'capacity' => 500,
+            'description' => "The BARCIE Atis Hall is a modern building that serves as the main venue for university events and ceremonies.",
+            'images' => [
+                'images/venues/2/atis-hall-1.jpg',
+                'images/venues/2/atis-hall-2.jpg',
+                'images/venues/2/atis-hall-3.jpg',
+                'images/venues/2/atis-hall-4.jpg',
+            ]
+        ],
+        [
+            'name' => 'BARCIE Rambutan Hall',
+            'location' => 'LCUP Main Campus',
+            'capacity' => 100,
+            'description' => "The BARCIE Rambutan Hall is a historic building that serves as the hub for various university activities and events.",
+            'images' => [
+                'images/venues/3/rambutan-hall-1.jpg',
+                'images/venues/3/rambutan-hall-2.jpg',
+                'images/venues/3/rambutan-hall-3.jpg',
+                'images/venues/3/rambutan-hall-4.jpg',
+            ]
+        ]
 
-    protected static $venueImages = [
-        // Venue 1's images
-        [
-            'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800', // Primary
-            'https://images.unsplash.com/photo-2...?w=800', // Second
-            'https://images.unsplash.com/photo-3...?w=800', // Third
-            'https://images.unsplash.com/photo-4...?w=800', // Fourth
-        ],
-        // Venue 2's images
-        [
-            'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=800', // Primary
-            'https://images.unsplash.com/photo-5...?w=800', // Second
-            'https://images.unsplash.com/photo-6...?w=800', // Third
-            'https://images.unsplash.com/photo-7...?w=800', // Fourth
-        ],
-        // ... repeat for other venues
     ];
 
     /**
@@ -41,66 +61,39 @@ class VenueFactory extends Factory
      */
     public function definition(): array
     {
-        $venueNames = [
-            'Predefined Venue 1',
-            'Predefined Venue 2',
-            'Predefined Venue 3',
-            'Predefined Venue 4',
-            'Predefined Venue 5'
-        ];
+        // Get a random venue data set
+        $venueData = array_shift($this->venueData);
         
-        $locations = [
-            'Predefined Location 1',
-            'Predefined Location 2',
-            'Predefined Location 3',
-            'Predefined Location 4',
-            'Predefined Location 5'
-        ];
-        
-        $descriptions = [
-            "The Predefined Venue 1 is a historic structure that houses the university's administration offices and classrooms.",
-            "The Predefined Venue 2 is a modern facility that hosts various events and activities throughout the year.",
-            "The Predefined Venue 3 is a versatile venue that can be used for a variety of events, including conferences, workshops, and concerts.",
-            "The Predefined Venue 4 is a state-of-the-art auditorium perfect for performances and large gatherings.",
-            "The Predefined Venue 5 is an innovative space designed for collaborative meetings and interactive workshops.",
-        ];
-
-        // Reset index if we've used all venues
-        if (static::$venueIndex >= count($venueNames)) {
-            static::$venueIndex = 0;
-        }
-
-        $index = static::$venueIndex++;
-
         return [
-            'name' => $venueNames[$index],
-            'location' => $locations[$index],
-            'capacity' => $this->faker->randomElement([100, 200, 300, 400, 500]),
-            'description' => $descriptions[$index],
-        ];
+            'name' => $venueData['name'],
+            'location' => $venueData['location'],
+            'capacity' => $venueData['capacity'],
+            'description' => $venueData['description'],
+        ];    
     }
 
     public function configure()
     {
         return $this->afterCreating(function (Venue $venue) {
-            $venueIndex = static::$venueIndex - 1;
-            $venueImages = static::$venueImages[$venueIndex] ?? [];
+            // Find the venue data that matches this venue's name
+            $venueData = collect($this->venueData)
+                ->firstWhere('name', $venue->name);
             
             // Create primary image
             VenueImage::factory()
                 ->primary()
                 ->create([
                     'venue_id' => $venue->id,
-                    'path' => $venueImages[0] ?? "venues/default/noimage.webp",
+                    'path' => $venueData['images'][0] ?? "default/noimage.jpg",
                 ]);
 
-            // Create 3 additional images
-            for ($i = 1; $i < 4; $i++) {
+            // Create additional images
+            foreach (array_slice($venueData['images'], 1) as $index => $path) {
                 VenueImage::factory()
                     ->create([
                         'venue_id' => $venue->id,
-                        'path' => $venueImages[$i] ?? "venues/default/noimage.webp",
-                        'sort_order' => $i
+                        'path' => $path,
+                        'sort_order' => $index + 1
                     ]);
             }
         });
