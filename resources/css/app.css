@@ -1,8 +1,6 @@
-/* Tailwind directives should follow the import */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@tailwind variants;
 
 @font-face {
   font-family: 'Poppins';

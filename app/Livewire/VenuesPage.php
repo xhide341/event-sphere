@@ -24,7 +24,7 @@ class VenuesPage extends Component
             'first_venue' => $venues->first()?->toArray()
         ]);
 
-        return view('livewire.venues-page', [
+        return view('livewire.pages.venues-page', [
             'venues' => $venues
         ]);
     }

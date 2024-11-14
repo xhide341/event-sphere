@@ -13,6 +13,6 @@ class VenueSeeder extends Seeder
      */
     public function run(): void
     {
-        Venue::factory()->count(2)->create();
+        Venue::factory()->count(9)->create();
     }
 }

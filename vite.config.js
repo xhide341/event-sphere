@@ -1,3 +1,4 @@
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 
@@ -20,6 +21,7 @@ export default defineConfig({
                 'app/Filament/**',
             ],
         }),
+        ViteImageOptimizer(),
     ],
     server: {
         hmr: {

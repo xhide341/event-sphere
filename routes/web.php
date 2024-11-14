@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Livewire\EventsPage;
 use App\Livewire\VenuesPage;
+use App\Livewire\SpeakersPage;
 
 Route::view('/', 'welcome');
 
@@ -14,12 +15,16 @@ Route::get('/events', EventsPage::class)
     ->middleware(['auth', 'verified'])
     ->name('events');
 
-Route::view('profile', 'profile')
+Route::view('profile', 'livewire.pages.profile')
     ->middleware(['auth'])
     ->name('profile');
 
 Route::get('/venues', VenuesPage::class)
     ->middleware(['auth', 'verified'])
     ->name('venues');
+
+Route::get('/speakers', SpeakersPage::class)
+    ->middleware(['auth', 'verified'])
+    ->name('speakers');
 
 require __DIR__.'/auth.php';

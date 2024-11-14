@@ -91,7 +91,7 @@ class EventsPage extends Component
 
         $departments = Department::all();
         
-        return view('livewire.events-page', [
+        return view('livewire.pages.events-page', [
             'registeredEvents' => $registeredEvents,
             'allEvents' => $allEvents,
             'departments' => $departments,

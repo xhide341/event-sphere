@@ -20,13 +20,11 @@
             <!-- Page Heading -->
             @if (isset($header))
             <header x-data="{ isToggled: false }" @toggle-sidebar.window="isToggled = !isToggled"
-                class="transition-all duration-300 ease-in-out flex items-center mb-4"
-                :class="{ 'ml-64': isToggled, 'ml-0': !isToggled }">
-                <div x-show="!isToggled || window.innerWidth >= 1280" 
-                     class="px-4 xl:px-0 flex-grow">
+                class="flex items-center mb-4 relative">
+                <div class="px-4 xl:px-0 flex-grow w-full">
                     {{ $header }}
                 </div>
-                <div class="block xl:hidden">
+                <div x-show="!isToggled" class="block xl:hidden">
                     <livewire:layout.toggle-sidebar/>
                 </div>
             </header>
