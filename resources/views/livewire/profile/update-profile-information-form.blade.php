@@ -52,15 +52,10 @@ new class extends Component
                 Log::info('Avatar URL generated successfully', ['user_id' => $user->id, 'path' => $path]);
                 
             } catch (\Exception $e) {
-                $this->avatarUrl = null;
-                Log::warning('Failed to generate avatar URL', [
-                    'user_id' => $user->id, 
-                    'error' => $e->getMessage(),
-                    'path' => $path
-                ]);
+                $this->avatarUrl = "https://ui-avatars.com/api/?name=" . urlencode($user->name);
             }
         } else {
-            $this->avatarUrl = null;
+            $this->avatarUrl = "https://ui-avatars.com/api/?name=" . urlencode($user->name);
             Log::info('No avatar set for user', ['user_id' => $user->id]);
         }
     }
@@ -158,12 +153,14 @@ new class extends Component
 
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
-        </h2>
-
+        <div class="flex flex-row items-center space-x-2">
+            <x-heroicon-s-user class="w-6 h-6 flex-shrink-0" />
+            <h2 class="text-lg font-medium text-gray-900 align-middle">
+                {{ __('Profile Information') }}
+            </h2>
+        </div>
         <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __("Update your profile information here.") }}
         </p>
     </header>
 
@@ -186,14 +183,8 @@ new class extends Component
                 <div class="mr-4 relative">
                     @if ($avatar)
                         <img src="{{ $avatar->temporaryUrl() }}" alt="New Avatar" class="h-20 w-20 rounded-full object-cover mb-4 border-2 border-primary">
-                    @elseif ($avatarUrl)
-                        <img src="{{ $avatarUrl }}" alt="Current Avatar" class="h-20 w-20 rounded-full object-cover mb-4 border-2 border-primary">
                     @else
-                        <div class="h-20 w-20 rounded-full border-2 border-primary bg-gray-200 flex items-center justify-center">
-                            <svg class="h-12 w-12 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                            </svg>
-                        </div>
+                        <img src="{{ $avatarUrl }}" alt="Current Avatar" class="h-20 w-20 rounded-full object-cover mb-4 border-2 border-primary">                    
                     @endif
                 </div>
                 <div>

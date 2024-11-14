@@ -6,7 +6,6 @@ use Livewire\Component;
 use App\Models\Venue;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
-use Illuminate\Support\Facades\Log;
 
 class VenuesPage extends Component
 {
@@ -18,11 +17,6 @@ class VenuesPage extends Component
         $venues = Venue::with(['primaryImage', 'images'])  // Load relationships
             ->orderBy('name')
             ->paginate(8);
-
-        Log::info('Venues Query:', [
-            'count' => $venues->count(),
-            'first_venue' => $venues->first()?->toArray()
-        ]);
 
         return view('livewire.pages.venues-page', [
             'venues' => $venues

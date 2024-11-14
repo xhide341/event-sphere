@@ -1,33 +1,89 @@
 <div>
     <x-slot name="header">
-        <div class="rounded-lg flex flex-row flex-wrap items-center">
-            <nav class="bg-transparent antialiased text-[#193441]">
-                <ol class="flex flex-wrap pt-1 mr-8 bg-transparent">
+        <div class="ml-1 rounded-lg flex flex-row flex-wrap items-center w-full">
+            <nav class="bg-transparent antialiased text-primary">
+                <ol class="flex flex-wrap mr-8 bg-transparent">
                     <li class="text-sm breadcrumb-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#0B2147"><path d="M149-100v-521l331-249 331 248.67V-100H564v-316H396v316H149Z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#0B2147""><path d="M149-100v-521l331-249 331 248.67V-100H564v-316H396v316H149Z"/></svg>
                     </li>
                     <li class="text-sm pl-2 capitalize leading-normal before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">
                         Pages
                     </li>
                     <li class="text-sm pl-2 capitalize leading-normal before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">
-                        Events
+                        Speakers
                     </li>
                 </ol>
-                <h2 class="font-semibold text-3xl capitalize">
+                <h2 class="font-semibold text-3xl capitalize mt-2">
                     {{ __('Speakers') }}
                 </h2>
             </nav>
         </div>
     </x-slot>
-    <div class="mt-4">
-        <div class="space-y-6 overflow-hidden">
-            
-            <div class="bg-white shadow-sm rounded-lg flex flex-col py-4 px-6 xl:py-6 xl:px-8 text-primary space-y-2 text-xl font-semibold">
-                <div class="flex flex-row items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#0B2147"><path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg>
-                    <h2 class="ml-2 text-2xl">Event Speakers</h2>                    
+    <div class="mt-4 font-poppins">
+        <div class="space-y-6 overflow-hidden">     
+            <div class="bg-white shadow-sm rounded-lg flex flex-col p-4 sm:p-8">
+                <header>
+                    <div class="flex flex-row items-center space-x-2">
+                        <x-heroicon-s-user-group class="w-6 h-6 flex-shrink-0" />
+                        <h2 class="text-lg font-medium text-gray-900 align-middle">
+                            {{ __('Event Speakers') }}
+                        </h2>
+                    </div>
+                    <p class="mt-1 text-sm text-gray-600">
+                        {{ __("Browse our list of speakers.") }}
+                    </p>
+                </header>
+
+                <div class="mt-6 flow-root">
+                    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                            <table class="min-w-full divide-y divide-gray-300">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Name</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Phone</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Events</th>
+                                        <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
+                                            <span class="sr-only">Actions</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    @forelse($speakers as $speaker)
+                                        <tr>
+                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">
+                                                {{ $speaker->name }}
+                                            </td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                {{ $speaker->email }}
+                                            </td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                {{ $speaker->phone }}
+                                            </td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                {{ $speaker->events_count }}
+                                            </td>
+                                            <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                                                <a href="#" class="text-primary hover:text-primary-600">Edit</a>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="5" class="px-3 py-4 text-sm text-gray-500 text-center">
+                                                {{ __('No speakers found.') }}
+                                            </td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
 
+                <div class="mt-6">
+                    {{ $speakers->links() }}
+                </div>
             </div>
         </div>
     </div>
