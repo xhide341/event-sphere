@@ -7,33 +7,42 @@
 
         <title>{{ config('app.name', 'eventsphere') }} | {{ ucfirst(Route::currentRouteName()) }}</title>
         <link rel="icon" href="{{ Vite::asset('resources/images/LCUP.ico') }}" type="image/x-icon" sizes="16x16">
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        
+        <!-- Add Livewire Styles -->
+        @livewireStyles
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-primary antialiased">
-        <div class="min-h-screen flex space-x-20 justify-center items-center pt-6 sm:pt-0 bg-alice-blue">
-            @if (Route::currentRouteName() === 'register')
-                <img src="{{ Vite::asset('resources/images/register-illustration.png') }}" alt="Illustration for Register" class="w-[600px] h-auto">
-            @endif
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                <div class="flex flex-col items-center justify-center">
-                    <a href="/" wire:navigate>
-                        <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                    </a>
-                    <p class="text-base text-primary font-logo mb-4">eventsphere</p>
+    <body class="font-poppins text-primary antialiased">
+        <div class="min-h-screen flex">
+            <div class="w-1/2 flex justify-center items-center bg-custom-white">
+                <div class="flex flex-col items-center justify-center p-4 md:p-6 rounded-lg">
+                    @if (Route::currentRouteName() === 'login')
+                        <div class="flex flex-col items-center justify-center">
+                            <h1 class="text-5xl text-accent font-bold mb-2">Welcome back</h1>
+                            <p class="text-gray-600 font-xs">Enter your credentials to sign in.</p>
+                        </div>
+                    @endif
+                    @if (Route::currentRouteName() === 'register')
+                        <div class="flex flex-col items-center justify-center">
+                            <h1 class="text-5xl text-accent font-bold mb-2">Create an account</h1>
+                            <p class="text-gray-600 font-xs">Fill in the form to create an account.</p>
+                        </div>
+                    @endif
+
+                    <div class="w-full sm:max-w-md mt-6 px-6 py-4 overflow-hidden sm:rounded-lg">
+                        {{ $slot }}
+                    </div>
                 </div>
-                {{ $slot }}
             </div>
             @if (Route::currentRouteName() === 'login')
-                <img src="{{ Vite::asset('resources/images/login-illustration.png') }}" alt="Illustration for Login" class="w-[800px] h-[520px]">
+                <div class="fixed top-0 right-0 h-screen w-1/2 hidden sm:block">
+                    <img src="{{ Vite::asset('resources/images/guest-images/login-image.jpg') }}" 
+                        alt="Illustration for Login" 
+                        class="w-full h-full object-cover">
+                    <div class="w-full h-full bg-gray-300 animate-pulse"></div>
+                </div>
             @endif
         </div>
     </body>

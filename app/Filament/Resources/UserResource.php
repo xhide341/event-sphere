@@ -86,12 +86,6 @@ class UserResource extends Resource
                             ->imageResizeTargetWidth('400')
                             ->imageResizeTargetHeight('400')
                             ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
-                            ->afterStateUpdated(function ($state, callable $set) {
-                                // Clear old avatar if exists
-                                if ($state && $this->record && $this->record->avatar) {
-                                    Storage::disk('s3')->delete($this->record->avatar);
-                                }
-                            })
                             ->columnSpanFull(),
                     ]),
             ]);

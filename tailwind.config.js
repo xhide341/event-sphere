@@ -28,6 +28,7 @@ export default {
                 warning: '#FF8B00',
                 info: '#0081C6',
                 'custom-white': '#F5F5F5',
+                'custom-black': '#0B1215',
                 'milk-white': '#FCFFF5',
                 'sky-blue': '#99CCFF',
                 'alice-blue': '#F0F8FF',
