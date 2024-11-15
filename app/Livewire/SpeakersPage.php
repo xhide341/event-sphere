@@ -7,6 +7,7 @@ use App\Models\Speaker;
 use Livewire\WithPagination;
 use Livewire\WithSorting;
 
+
 class SpeakersPage extends Component
 {    
     use WithPagination;
@@ -16,8 +17,7 @@ class SpeakersPage extends Component
 
     public function mount()
     {
-        $this->speakers = Speaker::all()            
-            ->paginate(10);
+        $this->speakers = Speaker::all();
     }
 
     public function render()
