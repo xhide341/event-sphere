@@ -35,7 +35,7 @@ new #[Layout('layouts.guest')] class extends Component
             <x-text-input 
                 wire:model="form.email" 
                 id="email" 
-                class="block mt-1 w-full text-custom-black" 
+                class="block mt-1 w-full text-custom-black text-base" 
                 type="email" 
                 name="email" 
                 required 
@@ -54,7 +54,7 @@ new #[Layout('layouts.guest')] class extends Component
                     wire:model="form.password" 
                     id="password" 
                     x-ref="passwordInput"
-                    class="block mt-1 w-full pr-10 text-custom-black" 
+                    class="block mt-1 w-full pr-10 text-custom-black text-base" 
                     type="password" 
                     name="password" 
                     required 

@@ -35,15 +35,19 @@
                         {{ $slot }}
                     </div>
                 </div>
-            </div>
-            @if (Route::currentRouteName() === 'login')
-                <div class="fixed top-0 right-0 h-screen w-1/2 hidden sm:block">
+            </div>            
+            <div class="fixed top-0 right-0 h-screen w-1/2 hidden sm:block">
+                @if (Route::currentRouteName() === 'login')
                     <img src="{{ Vite::asset('resources/images/guest-images/login-image.jpg') }}" 
                         alt="Illustration for Login" 
                         class="w-full h-full object-cover">
-                    <div class="w-full h-full bg-gray-300 animate-pulse"></div>
-                </div>
-            @endif
+                @elseif (Route::currentRouteName() === 'register')
+                    <img src="{{ Vite::asset('resources/images/guest-images/login-image.jpg') }}" 
+                        alt="Illustration for Register" 
+                        class="w-full h-full object-cover">
+                @endif
+                <div class="w-full h-full bg-gray-300 animate-pulse"></div>
+            </div>
         </div>
     </body>
 </html>
