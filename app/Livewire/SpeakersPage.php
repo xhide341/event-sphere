@@ -13,17 +13,16 @@ class SpeakersPage extends Component
     use WithPagination;
     protected $layout = 'layouts.app';
 
-    public $speakers;
-
     public function mount()
     {
-        $this->speakers = Speaker::all();
+        // Remove this line - we'll handle speakers in render()
     }
 
     public function render()
     {
         return view('livewire.pages.speakers-page', [
-            'speakers' => $this->speakers
+            'speakers' => Speaker::query()
+                ->paginate(10)
         ]);
     }
 }

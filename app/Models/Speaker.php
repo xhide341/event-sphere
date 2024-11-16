@@ -9,7 +9,7 @@ class Speaker extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'email', 'bio', 'avatar'];
+    protected $fillable = ['name', 'email', 'bio', 'phone_number', 'avatar'];
 
     public function events()
     {

@@ -1,4 +1,4 @@
-<div class="venue-card group hover:shadow-lg transition-shadow duration-300 rounded-lg overflow-hidden"
+<div class="venue-card group shadow-lg duration-300 rounded-lg overflow-hidden"
      x-data="{ 
         open: false,
         activeIndex: 0,

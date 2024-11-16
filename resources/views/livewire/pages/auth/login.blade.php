@@ -35,7 +35,7 @@ new #[Layout('layouts.guest')] class extends Component
             <x-text-input 
                 wire:model="form.email" 
                 id="email" 
-                class="block mt-1 w-full text-custom-black sm:text-base text-sm" 
+                class="block mt-1 w-full text-custom-black md:text-base text-sm" 
                 type="email" 
                 name="email" 
                 required 
@@ -54,7 +54,7 @@ new #[Layout('layouts.guest')] class extends Component
                     wire:model="form.password" 
                     id="password" 
                     x-ref="passwordInput"
-                    class="block mt-1 w-full pr-10 text-custom-black sm:text-base text-sm" 
+                    class="block mt-1 w-full pr-10 text-custom-black md:text-base text-sm" 
                     type="password" 
                     name="password" 
                     required 
@@ -93,10 +93,10 @@ new #[Layout('layouts.guest')] class extends Component
                     class="rounded border-gray-300 text-accent shadow-sm ring-0 focus:ring-0 focus:ring-offset-0"
                     name="remember"
                 >
-                <span class="ml-2 text-xs sm:text-sm text-gray-600">{{ __('Remember me') }}</span>
+                <span class="ml-2 text-xs md:text-sm text-gray-600">{{ __('Remember me') }}</span>
             </label>
             @if (Route::has('password.request'))
-                <a class="text-xs sm:text-sm text-accent hover:underline transition-colors duration-200" 
+                <a class="text-xs md:text-sm text-accent hover:underline transition-colors duration-200" 
                    href="{{ route('password.request') }}" 
                    wire:navigate>
                     {{ __('Forgot your password?') }}
@@ -106,7 +106,7 @@ new #[Layout('layouts.guest')] class extends Component
 
         <div>
             <x-primary-button 
-                class="w-full flex justify-center items-center px-4 py-3 relative"
+                class="w-full flex justify-center items-center relative"
                 wire:loading.attr="disabled"
             >
                 <span wire:loading.remove>{{ __('Log in') }}</span>
@@ -114,8 +114,7 @@ new #[Layout('layouts.guest')] class extends Component
                     <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    {{ __('Logging in...') }}
+                    </svg>                    
                 </span>
             </x-primary-button>
         </div>
