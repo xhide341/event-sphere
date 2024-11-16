@@ -35,7 +35,7 @@ new #[Layout('layouts.guest')] class extends Component
             <x-text-input 
                 wire:model="form.email" 
                 id="email" 
-                class="block mt-1 w-full text-custom-black text-base" 
+                class="block mt-1 w-full text-custom-black sm:text-base text-sm" 
                 type="email" 
                 name="email" 
                 required 
@@ -54,7 +54,7 @@ new #[Layout('layouts.guest')] class extends Component
                     wire:model="form.password" 
                     id="password" 
                     x-ref="passwordInput"
-                    class="block mt-1 w-full pr-10 text-custom-black text-base" 
+                    class="block mt-1 w-full pr-10 text-custom-black sm:text-base text-sm" 
                     type="password" 
                     name="password" 
                     required 
@@ -93,10 +93,10 @@ new #[Layout('layouts.guest')] class extends Component
                     class="rounded border-gray-300 text-accent shadow-sm ring-0 focus:ring-0 focus:ring-offset-0"
                     name="remember"
                 >
-                <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                <span class="ml-2 text-xs sm:text-sm text-gray-600">{{ __('Remember me') }}</span>
             </label>
             @if (Route::has('password.request'))
-                <a class="text-sm text-indigo-600 hover:text-indigo-500 hover:underline transition-colors duration-200" 
+                <a class="text-xs sm:text-sm text-accent hover:underline transition-colors duration-200" 
                    href="{{ route('password.request') }}" 
                    wire:navigate>
                     {{ __('Forgot your password?') }}

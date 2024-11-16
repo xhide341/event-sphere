@@ -50,7 +50,7 @@ new #[Layout('layouts.guest')] class extends Component
             <x-text-input 
                 wire:model="name" 
                 id="name" 
-                class="block mt-1 w-full text-custom-black text-base" 
+                class="block mt-1 w-full text-custom-black sm:text-base text-sm" 
                 type="text" 
                 name="name" 
                 required 
@@ -66,7 +66,7 @@ new #[Layout('layouts.guest')] class extends Component
             <x-text-input 
                 wire:model="email" 
                 id="email" 
-                class="block mt-1 w-full text-custom-black text-base" 
+                class="block mt-1 w-full text-custom-black sm:text-base text-sm" 
                 type="email" 
                 name="email" 
                 required 
@@ -81,7 +81,7 @@ new #[Layout('layouts.guest')] class extends Component
             <x-text-input 
                 wire:model="password" 
                 id="password" 
-                class="block mt-1 w-full text-custom-black text-base"
+                class="block mt-1 w-full text-custom-black sm:text-base text-sm"
                 type="password"
                 name="password"
                 required 
@@ -97,7 +97,7 @@ new #[Layout('layouts.guest')] class extends Component
             <x-text-input 
                 wire:model="password_confirmation" 
                 id="password_confirmation" 
-                class="block mt-1 w-full text-custom-black text-base"
+                class="block mt-1 w-full text-custom-black sm:text-base text-sm"
                 type="password"
                 name="password_confirmation" 
                 required 
@@ -107,13 +107,14 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <div>
+        <div x-data="{ loading: false }">
             <x-primary-button 
-                class="w-full flex justify-center items-center px-4 py-3 relative mt-4"
+                class="w-full flex justify-center items-center py-3 relative mt-4"
                 wire:loading.attr="disabled"
+                @click.prevent="loading = true; setTimeout(() => loading = false, 2000)"
             >
-                <span wire:loading.remove>{{ __('Register') }}</span>
-                <span wire:loading class="flex items-center">
+                <span x-show="!loading">{{ __('Register') }}</span>
+                <span x-show="loading" class="flex items-center">
                     <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>

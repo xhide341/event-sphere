@@ -16,18 +16,18 @@
     </head>
     <body class="font-poppins text-primary antialiased">
         <div class="min-h-screen flex">
-            <div class="w-1/2 flex justify-center items-center bg-custom-white">
-                <div class="flex flex-col items-center justify-center p-4 md:p-6 rounded-lg">
+            <div class="w-full px-6 sm:px-0 sm:w-1/2 flex justify-center items-center bg-custom-white">
+                <div class="flex flex-col items-center justify-center shadow-lg sm:shadow-none bg-white sm:bg-transparent p-4 md:p-6 rounded-lg">
                     @if (Route::currentRouteName() === 'login')
                         <div class="flex flex-col items-center justify-center">
-                            <h1 class="text-5xl text-accent font-bold mb-2">Welcome back</h1>
-                            <p class="text-gray-600 font-xs">Enter your credentials to sign in.</p>
+                            <h1 class="sm:text-5xl text-3xl text-accent font-bold mb-2">Welcome back</h1>
+                            <p class="sm:text-base text-sm text-gray-600 font-xs">Enter your credentials to sign in.</p>
                         </div>
                     @endif
                     @if (Route::currentRouteName() === 'register')
                         <div class="flex flex-col items-center justify-center">
-                            <h1 class="text-5xl text-accent font-bold mb-2">Create an account</h1>
-                            <p class="text-gray-600 font-xs">Fill in the form to create an account.</p>
+                            <h1 class="sm:text-5xl text-3xl text-accent font-bold mb-2">Create an account</h1>
+                            <p class="sm:text-base text-sm text-gray-600 font-xs">Fill in the form to create an account.</p>
                         </div>
                     @endif
 
