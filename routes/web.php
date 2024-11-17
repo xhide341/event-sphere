@@ -4,8 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\EventsPage;
 use App\Livewire\VenuesPage;
 use App\Livewire\SpeakersPage;
+use App\Livewire\SettingsPage;
+use App\Livewire\EventShowPage;
 
-Route::view('/', 'welcome');
+Route::view('/', 'livewire.pages.welcome')->name('welcome');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -26,5 +28,13 @@ Route::get('/venues', VenuesPage::class)
 Route::get('/speakers', SpeakersPage::class)
     ->middleware(['auth', 'verified'])
     ->name('speakers');
+
+Route::get('/settings', SettingsPage::class)
+    ->middleware(['auth', 'verified'])
+    ->name('settings');
+
+Route::get('/events/{event}',EventShowPage::class)
+    ->middleware(['auth', 'verified'])
+    ->name('events.show');
 
 require __DIR__.'/auth.php';

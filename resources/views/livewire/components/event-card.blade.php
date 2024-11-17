@@ -168,13 +168,23 @@
             </div>
           </div>
         </div>
-        <div class="p-6 pt-3">
-          <button
-            class="block w-full relative overflow-hidden rounded-lg bg-broad-blue hover:bg-clarinet py-3.5 px-7 text-center text-sm font-semibold uppercase text-white transition-all duration-500 ease-out wave-effect"
-            type="button"
-          >
-            <span class="relative z-10">View Event Details</span>
-          </button>
+        <div class="p-6 pt-3 flex space-x-2">
+            <!-- View Details Modal Button -->
+            <button
+                @click="showModal = true; imageLoaded = false; modalImageLoaded = false;"
+                class="flex-1 relative overflow-hidden rounded-lg bg-broad-blue hover:bg-clarinet py-3.5 px-7 text-center text-sm font-semibold uppercase text-white transition-all duration-500 ease-out wave-effect"
+                type="button"
+            >
+                <span class="relative z-10">Quick View</span>
+            </button>
+
+            <!-- View Full Event Page Button -->
+            <a
+                href="{{ route('events.show', $modalContent['event_id']) }}"
+                class="flex-1 relative overflow-hidden rounded-lg bg-primary hover:bg-primary-dark py-3.5 px-7 text-center text-sm font-semibold uppercase text-white transition-all duration-500 ease-out wave-effect"
+            >
+                <span class="relative z-10">View Details</span>
+            </a>
         </div>
       </div>
     </div>
@@ -371,11 +381,10 @@
                     @endif
                     
                     <!-- New Submit a Feedback button -->
-                    <button type="button"
-                            wire:click="submitFeedback"
-                            class="mt-3 w-full inline-flex justify-center rounded-md border border-primary shadow-sm px-4 py-2 bg-white text-base font-medium text-primary hover:bg-gray-100 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                        Submit a Feedback
-                    </button>
+                    <a href="{{ route('events.show', $modalContent['event_id']) }}"
+                       class="mt-3 w-full inline-flex justify-center rounded-md border border-primary shadow-sm px-4 py-2 bg-white text-base font-medium text-primary hover:bg-gray-100 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        View Details & Feedback
+                    </a>
                 </div>
             </div>
         </div>

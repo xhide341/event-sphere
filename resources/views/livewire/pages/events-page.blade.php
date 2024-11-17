@@ -15,14 +15,16 @@
     <x-slot name="header">
         <div class="ml-1 rounded-lg flex flex-row flex-wrap items-center w-full">
             <nav class="bg-transparent antialiased text-primary">
-                <ol class="flex flex-wrap mr-8 bg-transparent">
-                    <li class="text-sm breadcrumb-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#0B2147""><path d="M149-100v-521l331-249 331 248.67V-100H564v-316H396v316H149Z"/></svg>
+                <ol class="flex flex-wrap mr-8 bg-transparent items-center">
+                    <li class="text-sm breadcrumb-item align-middle">
+                        <x-heroicon-s-home class="w-5 h-5 text-primary" />
                     </li>
-                    <li class="text-sm pl-2 capitalize leading-normal before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">
+                    <li class="text-sm capitalize leading-normal flex items-center">
+                        <x-heroicon-s-chevron-right class="w-4 h-4 text-gray-600 mx-2" />
                         Pages
                     </li>
-                    <li class="text-sm pl-2 capitalize leading-normal before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">
+                    <li class="text-sm capitalize leading-normal flex items-center">
+                        <x-heroicon-s-chevron-right class="w-4 h-4 text-gray-600 mx-2" />
                         Events
                     </li>
                 </ol>

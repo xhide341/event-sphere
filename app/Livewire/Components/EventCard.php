@@ -25,6 +25,7 @@ class EventCard extends Component
     public function getModalContent()
     {
         return [
+            'event_id' => $this->event->id,
             'event_name' => $this->event->name ?? 'No name assigned',
             'description' => $this->event->description,
             'image' => $this->event->image,

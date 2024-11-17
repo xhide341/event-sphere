@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
 class Event extends Model
 {
     use HasFactory;
@@ -75,6 +75,17 @@ class Event extends Model
     {
         return $this->users()->where('user_id', $userId)->exists();
     }
+
+    public function feedbacks(): HasMany
+    {
+        return $this->hasMany(Feedback::class);
+    }
+
+    public function averageRating(): float
+    {
+        return $this->feedbacks()->avg('rating') ?? 0;
+    }
+
 
     public function scopeConflictingWith($query, $startDate, $endDate, $startTime, $endTime)
     {
