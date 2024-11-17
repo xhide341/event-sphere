@@ -15,10 +15,12 @@ return new class extends Migration
 
         Schema::create('registrations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('event_id')->constrained()->unsigned()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->unsigned()->cascadeOnDelete();
+            $table->foreignId('event_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->dateTime('registration_date');
             $table->timestamps();
+            
+            $table->unique(['event_id', 'user_id']);
         });
 
         Schema::enableForeignKeyConstraints();

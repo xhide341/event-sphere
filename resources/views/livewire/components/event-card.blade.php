@@ -168,23 +168,13 @@
             </div>
           </div>
         </div>
-        <div class="p-6 pt-3 flex space-x-2">
-            <!-- View Details Modal Button -->
+        <div class="p-6 pt-3">
             <button
                 @click="showModal = true; imageLoaded = false; modalImageLoaded = false;"
-                class="flex-1 relative overflow-hidden rounded-lg bg-broad-blue hover:bg-clarinet py-3.5 px-7 text-center text-sm font-semibold uppercase text-white transition-all duration-500 ease-out wave-effect"
-                type="button"
-            >
-                <span class="relative z-10">Quick View</span>
-            </button>
-
-            <!-- View Full Event Page Button -->
-            <a
-                href="{{ route('events.show', $modalContent['event_id']) }}"
-                class="flex-1 relative overflow-hidden rounded-lg bg-primary hover:bg-primary-dark py-3.5 px-7 text-center text-sm font-semibold uppercase text-white transition-all duration-500 ease-out wave-effect"
+                class="w-full block relative overflow-hidden rounded-lg bg-accent hover:bg-primary py-3.5 px-7 text-center text-sm font-semibold uppercase text-white transition-all duration-500 ease-out wave-effect"
             >
                 <span class="relative z-10">View Details</span>
-            </a>
+            </button>
         </div>
       </div>
     </div>
@@ -380,10 +370,12 @@
                         </button>
                     @endif
                     
-                    <!-- New Submit a Feedback button -->
-                    <a href="{{ route('events.show', $modalContent['event_id']) }}"
-                       class="mt-3 w-full inline-flex justify-center rounded-md border border-primary shadow-sm px-4 py-2 bg-white text-base font-medium text-primary hover:bg-gray-100 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                        View Details & Feedback
+                    <!-- Submit Feedback button -->
+                    <a href="{{ $modalContent['is_user_registered'] ? route('events.show', $modalContent['event_id']) : '#' }}"
+                       class="mt-3 w-full inline-flex justify-center rounded-md border border-primary shadow-sm px-4 py-2 {{ $modalContent['is_user_registered'] ? 'bg-white text-primary hover:bg-gray-100' : 'bg-gray-100 text-gray-400 cursor-not-allowed' }} focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                       {{ !$modalContent['is_user_registered'] ? 'disabled' : '' }}
+                       title="{{ !$modalContent['is_user_registered'] ? 'Please register for the event to submit feedback' : 'Submit your feedback' }}">
+                        Submit Feedback
                     </a>
                 </div>
             </div>

@@ -289,9 +289,9 @@
                                     <div class="flex items-center space-x-3">
                                         <!-- User Avatar -->
                                         <img 
-                                            src="{{ $feedback->user->avatar 
-                                                ? Storage::disk('s3')->temporaryUrl('avatars/minion.jpg', now()->addMinutes(60)) 
-                                                : 'https://ui-avatars.com/api/?name=' . urlencode($feedback->user->name) }}"
+                                            src="{{ $feedback->user->id === 1 
+                                                ? Storage::disk('s3')->temporaryUrl($feedback->user->avatar, now()->addMinutes(60))
+                                                : ($feedback->user->avatar ?: 'https://ui-avatars.com/api/?name=' . urlencode($feedback->user->name)) }}"
                                             alt="{{ $feedback->user->name }}"
                                             class="w-10 h-10 rounded-full object-cover"
                                             onerror="this.src='https://ui-avatars.com/api/?name={{ urlencode($feedback->user->name) }}'"

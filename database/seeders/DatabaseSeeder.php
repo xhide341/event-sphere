@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             'avatar' => 'avatars/minion.jpg',
             'role' => 'admin',
         ]);
-        User::factory(10)->create();
+        User::factory(100)->create();
         
         $this->call([
             VenueSeeder::class,
