@@ -22,7 +22,7 @@ class Sidebar extends Component
 
         if ($user->avatar) {
             try {            
-                $this->avatarUrl = Storage::disk('s3')->temporaryUrl('avatars/minion.jpg', now()->addMinutes(60));
+                $this->avatarUrl = Storage::disk('s3')->temporaryUrl('avatars/minion.jpg', now()->addMinutes(120));
             } catch (\Exception $e) {
                 $this->avatarUrl = "https://ui-avatars.com/api/?name=" . urlencode($user->name);
             }

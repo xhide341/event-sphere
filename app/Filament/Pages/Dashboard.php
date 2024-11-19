@@ -12,8 +12,6 @@ use App\Filament\Widgets\TopSpeakers;
 
 class Dashboard extends BaseDashboard
 {
-    protected static ?string $navigationGroup = 'Dashboard';
-
     public function getHeaderWidgets(): array
     {
         return [

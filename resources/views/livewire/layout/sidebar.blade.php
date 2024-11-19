@@ -1,7 +1,7 @@
 <div x-data="{ isToggled: false }" 
     @toggle-sidebar.window="isToggled = !isToggled"
     :class="{ 'translate-x-0': isToggled, '-translate-x-full': !isToggled }"
-    class="fixed flex flex-col bg-white z-50 w-64 px-8 py-10 h-full shadow-xl transform transition-transform ease-in-out -translate-x-full xl:translate-x-0">
+    class="fixed flex flex-col bg-white z-50 w-64 px-6 py-10 h-full shadow-xl transform transition-transform ease-in-out -translate-x-full xl:translate-x-0">
     <div class="mx-auto flex align-center justify-center space-x-2">
         <x-application-logo class="w-auto h-6 sm:h-7"/>
         <span class="text-primary text-base font-logo">{{ config('app.name') }}</span>
@@ -24,33 +24,32 @@
     <div class="flex flex-col justify-between flex-1 mt-6">
         <nav>
             <a wire:navigate href="/events" 
-                class="flex items-center px-4 py-2 mt-5 {{ request()->routeIs('events') ? 'text-gray-200 bg-gray-800 active:bg-gray-800 focus:bg-gray-800' : 'text-primary' }} transform rounded-lg hover:bg-gray-800 hover:text-gray-200 active:text-white">
+                class="flex items-center px-4 py-2 mt-5 {{ request()->routeIs('events') ? 'text-gray-200 bg-primary active:bg-primary focus:bg-primary' : 'text-primary' }} transform rounded-md hover:bg-primary hover:text-gray-200 active:text-white">
                 <x-heroicon-s-calendar-days class="w-5 h-5" />
-                <span class="mx-4 font-medium">Events</span>
+                <span class="mx-4 font-medium text-base">Events</span>
             </a>
 
             <a wire:navigate href="/profile" 
-                class="flex items-center px-4 py-2 mt-5 {{ request()->routeIs('profile') ? 'text-gray-200 bg-gray-800 active:bg-gray-800 focus:bg-gray-800' : 'text-primary' }} transform rounded-lg hover:bg-gray-800 hover:text-gray-200 active:text-white">
+                class="flex items-center px-4 py-2 mt-5 {{ request()->routeIs('profile') ? 'text-gray-200 bg-primary active:bg-primary focus:bg-primary' : 'text-primary' }} transform rounded-md hover:bg-primary hover:text-gray-200 active:text-white">
                 <x-heroicon-s-user class="w-5 h-5" />
-                <span class="mx-4 font-medium">Profile</span>
+                <span class="mx-4 font-medium text-base">Profile</span>
             </a>
 
             <a wire:navigate href="/venues" 
-                class="flex items-center px-4 py-2 mt-5 {{ request()->routeIs('venues') ? 'text-gray-200 bg-gray-800 active:bg-gray-800 focus:bg-gray-800' : 'text-primary' }} transform rounded-lg hover:bg-gray-800 hover:text-gray-200 active:text-white">
+                class="flex items-center px-4 py-2 mt-5 {{ request()->routeIs('venues') ? 'text-gray-200 bg-primary active:bg-primary focus:bg-primary' : 'text-primary' }} transform rounded-md hover:bg-primary hover:text-gray-200 active:text-white">
                 <x-heroicon-s-building-office class="w-5 h-5" />
-                <span class="mx-4 font-medium">Venues</span>
+                <span class="mx-4 font-medium text-base">Venues</span>
             </a>
 
             <a wire:navigate href="/speakers" 
-                class="flex items-center px-4 py-2 mt-5 {{ request()->routeIs('speakers') ? 'text-gray-200 bg-gray-800 active:bg-gray-800 focus:bg-gray-800' : 'text-primary' }} transform rounded-lg hover:bg-gray-800 hover:text-gray-200 active:text-white">
+                class="flex items-center px-4 py-2 mt-5 {{ request()->routeIs('speakers') ? 'text-gray-200 bg-primary active:bg-primary focus:bg-primary' : 'text-primary' }} transform rounded-md hover:bg-primary hover:text-gray-200 active:text-white">
                 <x-heroicon-s-users class="w-5 h-5" />
-                <span class="mx-4 font-medium">Speakers</span>
+                <span class="mx-4 font-medium text-base">Speakers</span>
             </a>
-
             <a wire:navigate href="/settings" 
-                class="flex items-center px-4 py-2 mt-5 text-primary transform rounded-lg hover:bg-gray-800 hover:text-gray-200 active:text-white">
+                class="flex items-center px-4 py-2 mt-5 {{ request()->routeIs('settings') ? 'text-gray-200 bg-primary active:bg-primary focus:bg-primary' : 'text-primary' }} transform rounded-md hover:bg-primary hover:text-gray-200 active:text-white">
                 <x-heroicon-s-cog-6-tooth class="w-5 h-5" />
-                <span class="mx-4 font-medium">Settings</span>
+                <span class="mx-4 font-medium text-base">Settings</span>
             </a>
         </nav>
     </div>

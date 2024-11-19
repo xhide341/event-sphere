@@ -51,14 +51,14 @@ class EventsPage extends Component
     {
         // Calculate items per page based on screen width
         // Using 1 row as default layout
-        if ($width >= 1280) { // xl breakpoint
-            return 4; // 1 row of 4
-        } elseif ($width >= 1024) { // lg breakpoint
-            return 3; // 1 row of 3
-        } elseif ($width >= 640) { // sm breakpoint
-            return 2; // 1 row of 2
+        if ($width >= 1280) {
+            return 4;
+        } elseif ($width >= 1024) {
+            return 4;
+        } elseif ($width >= 640) {
+            return 2;
         } else {
-            return 1; // 1 row of 1
+            return 1; 
         }
     }
 
@@ -77,7 +77,8 @@ class EventsPage extends Component
             ->with(['department:id,name', 'venue:id,name,capacity', 'speaker:id,name', 'users'])
             ->withCount('users')
             ->orderBy('events.start_date', 'asc')
-            ->paginate($this->perPage, ['*'], 'registeredEventsPage');
+            ->paginate(4);
+            // ->paginate($this->perPage, ['*'], 'registeredEventsPage');
 
         $allEvents = Event::with(['department:id,name', 'venue:id,name,capacity', 'speaker:id,name', 'users'])
             ->withCount('users')
@@ -87,7 +88,8 @@ class EventsPage extends Component
                 });
             })
             ->orderBy('start_date', 'asc')
-            ->paginate($this->perPage, ['*'], 'allEventsPage');
+            ->paginate(4);
+            // ->paginate($this->perPage, ['*'], 'allEventsPage');
 
         $departments = Department::all();
         
