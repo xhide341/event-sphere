@@ -20,6 +20,16 @@ EventSphere is a modern event management system and admin dashboard built for La
 
 EventSphere is built using the powerful TALL stack and modern DevOps tools:
 
+<div class="flex flex-row space-x-2 mt-4">
+  <a href="https://laravel.com" target="_blank"><img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel" /></a>
+  <a href="https://alpinejs.dev" target="_blank"><img src="https://img.shields.io/badge/Alpine.js-8BC0D0?style=for-the-badge&logo=alpine.js&logoColor=black" alt="Alpine.js" /></a>
+  <a href="https://tailwindcss.com" target="_blank"><img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" /></a>
+  <a href="https://livewire.laravel.com" target="_blank"><img src="https://img.shields.io/badge/Livewire-4E56A6?style=for-the-badge&logo=livewire&logoColor=white" alt="Livewire" /></a>
+  <a href="https://filamentphp.com" target="_blank"><img src="https://img.shields.io/badge/Filament-22292f?style=for-the-badge&logo=filament&logoColor=white" alt="Filament" /></a>
+  <a href="https://frankenphp.dev" target="_blank"><img src="https://img.shields.io/badge/FrankenPHP-6C4AB0?style=for-the-badge&logo=php&logoColor=white" alt="FrankenPHP" /></a>
+  <a href="https://www.docker.com" target="_blank"><img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" /></a>
+</div>
+
 <div class="flex flex-col space-y-2">
   <div class="flex flex-row space-x-2 items-center">
     <a href="https://laravel.com" target="_blank">Laravel</a> - As the robust PHP framework
@@ -42,16 +52,6 @@ EventSphere is built using the powerful TALL stack and modern DevOps tools:
   <div class="flex flex-row space-x-2 items-center">
     <a href="https://www.docker.com" target="_blank">Docker</a> - For containerization and deployment
   </div>
-</div>
-
-<div class="flex flex-row space-x-2 mt-4">
-  <img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel" />
-  <img src="https://img.shields.io/badge/Alpine.js-8BC0D0?style=for-the-badge&logo=alpine.js&logoColor=black" alt="Alpine.js" />
-  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
-  <img src="https://img.shields.io/badge/Livewire-4E56A6?style=for-the-badge&logo=livewire&logoColor=white" alt="Livewire" />
-  <img src="https://img.shields.io/badge/Filament-22292f?style=for-the-badge&logo=filament&logoColor=white" alt="Filament" />
-  <img src="https://img.shields.io/badge/FrankenPHP-6C4AB0?style=for-the-badge&logo=php&logoColor=white" alt="FrankenPHP" />
-  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
 </div>
 
 ## 🎯 Core Modules
