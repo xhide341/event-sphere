@@ -21,13 +21,34 @@ EventSphere is a modern event management system and admin dashboard built for La
 EventSphere is built using the powerful TALL stack and modern DevOps tools:
 
 <div class="flex flex-col space-y-2">
-  <div class="flex flex-row space-x-2 align-center"><a href="https://laravel.com" target="_blank"><img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel" /></a> <span>- As the robust PHP framework</span></div>
-  <div class="flex flex-row space-x-2 align-center"><a href="https://alpinejs.dev" target="_blank"><img src="https://img.shields.io/badge/Alpine.js-8BC0D0?style=for-the-badge&logo=alpine.js&logoColor=black" alt="Alpine.js" /></a> <span>- For lightweight JavaScript interactions</span></div>
-  <div class="flex flex-row space-x-2 align-center"><a href="https://tailwindcss.com" target="_blank"><img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" /></a> <span>- For utility-first styling</span></div>
-  <div class="flex flex-row space-x-2 align-center"><a href="https://livewire.laravel.com" target="_blank"><img src="https://img.shields.io/badge/Livewire-4E56A6?style=for-the-badge&logo=livewire&logoColor=white" alt="Livewire" /></a> <span>- For dynamic frontend interactions</span></div>
-  <div class="flex flex-row space-x-2 align-center"><a href="https://filamentphp.com" target="_blank"><img src="https://img.shields.io/badge/Filament-22292f?style=for-the-badge&logo=filament&logoColor=white" alt="Filament" /></a> <span>- For the admin dashboard</span></div>
-  <div class="flex flex-row space-x-2 align-center"><a href="https://frankenphp.dev" target="_blank"><img src="https://img.shields.io/badge/FrankenPHP-6C4AB0?style=for-the-badge&logo=php&logoColor=white" alt="FrankenPHP" /></a> <span>- Modern PHP application server</span></div>
-  <div class="flex flex-row space-x-2 align-center"><a href="https://www.docker.com" target="_blank"><img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" /></a> <span>- For containerization and deployment</span></div>
+  <div class="flex flex-row space-x-2 items-center">
+    <a href="https://laravel.com" target="_blank"><img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel" /></a>
+    <span>- As the robust PHP framework</span>
+  </div>
+  <div class="flex flex-row space-x-2 items-center">
+    <a href="https://alpinejs.dev" target="_blank"><img src="https://img.shields.io/badge/Alpine.js-8BC0D0?style=for-the-badge&logo=alpine.js&logoColor=black" alt="Alpine.js" /></a>
+    <span>- For lightweight JavaScript interactions</span>
+  </div>
+  <div class="flex flex-row space-x-2 items-center">
+    <a href="https://tailwindcss.com" target="_blank"><img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" /></a>
+    <span>- For utility-first styling</span>
+  </div>
+  <div class="flex flex-row space-x-2 items-center">
+    <a href="https://livewire.laravel.com" target="_blank"><img src="https://img.shields.io/badge/Livewire-4E56A6?style=for-the-badge&logo=livewire&logoColor=white" alt="Livewire" /></a>
+    <span>- For dynamic frontend interactions</span>
+  </div>
+  <div class="flex flex-row space-x-2 items-center">
+    <a href="https://filamentphp.com" target="_blank"><img src="https://img.shields.io/badge/Filament-22292f?style=for-the-badge&logo=filament&logoColor=white" alt="Filament" /></a>
+    <span>- For the admin dashboard</span>
+  </div>
+  <div class="flex flex-row space-x-2 items-center">
+    <a href="https://frankenphp.dev" target="_blank"><img src="https://img.shields.io/badge/FrankenPHP-6C4AB0?style=for-the-badge&logo=php&logoColor=white" alt="FrankenPHP" /></a>
+    <span>- Modern PHP application server</span>
+  </div>
+  <div class="flex flex-row space-x-2 items-center">
+    <a href="https://www.docker.com" target="_blank"><img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" /></a>
+    <span>- For containerization and deployment</span>
+  </div>
 </div>
 
 ## 🎯 Core Modules
