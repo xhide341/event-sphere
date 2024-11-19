@@ -22,32 +22,25 @@ EventSphere is built using the powerful TALL stack and modern DevOps tools:
 
 <div class="flex flex-col space-y-2">
   <div class="flex flex-row space-x-2 items-center">
-    <a href="https://laravel.com" target="_blank"><img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel" /></a>
-    <span>- As the robust PHP framework</span>
+    <a href="https://laravel.com" target="_blank">Laravel</a> - As the robust PHP framework
   </div>
   <div class="flex flex-row space-x-2 items-center">
-    <a href="https://alpinejs.dev" target="_blank"><img src="https://img.shields.io/badge/Alpine.js-8BC0D0?style=for-the-badge&logo=alpine.js&logoColor=black" alt="Alpine.js" /></a>
-    <span>- For lightweight JavaScript interactions</span>
+    <a href="https://alpinejs.dev" target="_blank">Alpine.js</a> - For lightweight JavaScript interactions
   </div>
   <div class="flex flex-row space-x-2 items-center">
-    <a href="https://tailwindcss.com" target="_blank"><img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" /></a>
-    <span>- For utility-first styling</span>
+    <a href="https://tailwindcss.com" target="_blank">Tailwind CSS</a> - For utility-first styling
   </div>
   <div class="flex flex-row space-x-2 items-center">
-    <a href="https://livewire.laravel.com" target="_blank"><img src="https://img.shields.io/badge/Livewire-4E56A6?style=for-the-badge&logo=livewire&logoColor=white" alt="Livewire" /></a>
-    <span>- For dynamic frontend interactions</span>
+    <a href="https://livewire.laravel.com" target="_blank">Livewire</a> - For dynamic frontend interactions
   </div>
   <div class="flex flex-row space-x-2 items-center">
-    <a href="https://filamentphp.com" target="_blank"><img src="https://img.shields.io/badge/Filament-22292f?style=for-the-badge&logo=filament&logoColor=white" alt="Filament" /></a>
-    <span>- For the admin dashboard</span>
+    <a href="https://filamentphp.com" target="_blank">Filament</a> - For the admin dashboard
   </div>
   <div class="flex flex-row space-x-2 items-center">
-    <a href="https://frankenphp.dev" target="_blank"><img src="https://img.shields.io/badge/FrankenPHP-6C4AB0?style=for-the-badge&logo=php&logoColor=white" alt="FrankenPHP" /></a>
-    <span>- Modern PHP application server</span>
+    <a href="https://frankenphp.dev" target="_blank">FrankenPHP</a> - Modern PHP application server
   </div>
   <div class="flex flex-row space-x-2 items-center">
-    <a href="https://www.docker.com" target="_blank"><img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" /></a>
-    <span>- For containerization and deployment</span>
+    <a href="https://www.docker.com" target="_blank">Docker</a> - For containerization and deployment
   </div>
 </div>
 
