@@ -20,7 +20,7 @@ EventSphere is a modern event management system and admin dashboard built for La
 
 EventSphere is built using the powerful TALL stack and modern DevOps tools:
 
-<div class="flex flex-row items-center space-x-2">
+<div class="flex flex-col space-y-2">
   <a href="https://laravel.com" target="_blank"><img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel" /></a> <span>- As the robust PHP framework</span>
   <a href="https://alpinejs.dev" target="_blank"><img src="https://img.shields.io/badge/Alpine.js-8BC0D0?style=for-the-badge&logo=alpine.js&logoColor=black" alt="Alpine.js" /></a> <span>- For lightweight JavaScript interactions</span>
   <a href="https://tailwindcss.com" target="_blank"><img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" /></a> <span>- For utility-first styling</span>
