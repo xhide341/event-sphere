@@ -67,7 +67,7 @@
             </p>
           </div>
           <div class="min-h-11">
-            <p class="line-clamp-3 text-balance text-sm font-light text-gray-700">
+            <p class="line-clamp-3 text-pretty text-sm font-light text-gray-700">
               {{ $modalContent['description'] }}
             </p>
           </div>
@@ -208,8 +208,8 @@
                   x-transition:leave="transition ease-in duration-200"
                   x-transition:leave-start="opacity-100 scale-100"
                   x-transition:leave-end="opacity-0 scale-95"
-                  class="inline-block align-bottom bg-white rounded-lg border-2 border-primary text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                <div class="leading-normal font-poppins bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                  class="inline-block align-bottom bg-white rounded-lg border-2 border-primary text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle w-full max-w-[95%] sm:max-w-lg">
+                <div class="leading-normal font-poppins bg-white px-3 pt-4 pb-3 sm:p-6 sm:pb-4">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-2xl leading-6 font-semibold text-primary" id="modal-title">
                             {{ $modalContent['event_name'] }}
@@ -262,7 +262,7 @@
                                 <p class="text-base text-primary font-normal mb-4">{{ $modalContent['description'] }}</p>
                                 
                                 <div class="flex justify-between">
-                                  <div class="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">
+                                  <div class="grid grid-cols-1 gap-x-5 gap-y-4 md:grid-cols-2 w-full">
                                       <div class="flex items-center space-x-3">
                                           <div class="bg-primary bg-opacity-10 rounded-full p-2">
                                               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" viewBox="0 0 20 20" fill="currentColor">
@@ -337,14 +337,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <div class="bg-gray-50 px-3 py-3 sm:px-6 sm:flex sm:flex-row-reverse space-y-2 sm:space-y-0">
+                    <a href="{{ $modalContent['is_user_registered'] ? route('events.show', $modalContent['event_id']) : '#' }}"
+                       class="w-full inline-flex justify-center border border-transparent rounded-md shadow-sm px-4 py-2.5 {{ $modalContent['is_user_registered'] ? 'bg-accent text-custom-white hover:bg-primary' : 'bg-gray-100 text-gray-400 cursor-not-allowed' }} focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                       {{ !$modalContent['is_user_registered'] ? 'disabled' : '' }}
+                       title="{{ !$modalContent['is_user_registered'] ? 'Please register for the event to submit feedback' : 'Submit your feedback' }}">
+                        Submit Feedback
+                    </a>
+
                     @if(!$modalContent['is_user_registered'])
                         <button type="button"
                                 wire:click="toggleRegistration"
                                 wire:loading.attr="disabled"
                                 wire:target="toggleRegistration"
                                 wire:loading.class="opacity-50 cursor-not-allowed"
-                                class="w-full inline-flex justify-center items-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-primary-dark focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
+                                class="w-full inline-flex justify-center items-center rounded-md border border-transparent shadow-sm px-4 py-2.5 bg-primary text-base font-medium text-white hover:bg-primary-dark focus:outline-none sm:mt-0 sm:w-auto sm:text-sm">
                             <span wire:loading.remove wire:target="toggleRegistration">Register</span>
                             <span wire:loading wire:target="toggleRegistration" class="flex items-center justify-between">
                                 <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -359,7 +366,7 @@
                                 wire:loading.attr="disabled"
                                 wire:target="toggleRegistration"
                                 wire:loading.class="opacity-50 cursor-not-allowed"
-                                class="w-full inline-flex justify-center items-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
+                                class="w-full inline-flex justify-center items-center rounded-md border border-transparent shadow-sm px-4 py-2.5 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none sm:mt-0 sm:w-auto sm:text-sm">
                             <span wire:loading.remove wire:target="toggleRegistration">Cancel Registration</span>
                             <span wire:loading wire:target="toggleRegistration" class="flex items-center justify-between">
                                 <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -369,14 +376,6 @@
                             </span>
                         </button>
                     @endif
-                    
-                    <!-- Submit Feedback button -->
-                    <a href="{{ $modalContent['is_user_registered'] ? route('events.show', $modalContent['event_id']) : '#' }}"
-                       class="mt-3 w-full inline-flex justify-center rounded-md border border-primary shadow-sm px-4 py-2 {{ $modalContent['is_user_registered'] ? 'bg-white text-primary hover:bg-gray-100' : 'bg-gray-100 text-gray-400 cursor-not-allowed' }} focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                       {{ !$modalContent['is_user_registered'] ? 'disabled' : '' }}
-                       title="{{ !$modalContent['is_user_registered'] ? 'Please register for the event to submit feedback' : 'Submit your feedback' }}">
-                        Submit Feedback
-                    </a>
                 </div>
             </div>
         </div>

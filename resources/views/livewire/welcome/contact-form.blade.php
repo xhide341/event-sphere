@@ -41,15 +41,15 @@ new class extends Component {
     
     <div class="mb-4">
         <label for="name" class="block text-sm mb-2">Name</label>
-        <input wire:model="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Enter your name" required>
+        <input wire:model="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" required>
     </div>
     <div class="mb-4">
         <label for="email" class="block text-sm mb-2">Email</label>
-        <input wire:model="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Enter your email" required>
+        <input wire:model="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" required>
     </div>
     <div class="mb-4">
         <label for="message" class="block text-sm mb-2">Message</label>
-        <textarea wire:model="message" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-32" id="message" placeholder="Enter your message" required></textarea>
+        <textarea wire:model="message" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-32" id="message" placeholder="..." required></textarea>
     </div>
     <div class="flex flex-col items-center justify-center mt-4 space-y-2 sm:mt-6 sm:space-y-4">
         <button class="min-w-fit w-32 bg-accent hover:bg-primary text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">

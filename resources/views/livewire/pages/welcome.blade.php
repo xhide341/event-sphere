@@ -18,7 +18,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/welcome.js'])
     </head>
     <body class="antialiased font-poppins">
-        <div class="relative text-primary bg-alice-blue">
+        <div class="relative text-primary custom-bg">
             <div class="relative min-h-screen flex flex-col items-center justify-between pb-16 sm:px-0 sm:pb-20">
                 <!-- header -->                 
                 <div class="fixed top-0 w-full flex flex-col justify-center z-10 text-primary bg-white backdrop-blur shadow-lg mx-auto sm:flex-row">

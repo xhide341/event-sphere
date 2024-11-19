@@ -49,30 +49,12 @@
   font-display: swap;
 }
 
-/* large background image for landing page */
-.bg-landing {
-    position: relative;
-    background-image: url('../images/bg-image-lcup.jpg');
+/* custom bg pattern */
+.custom-bg {
+    background-image: url('../images/welcome-images/custom-bg.svg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-}
-
-.bg-landing::before {
-    content: ''; /* Required for pseudo-element */
-    position: absolute; /* Position it over the background */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7); /* Changed to solid black with adjusted opacity for white text */
-    z-index: 1; /* Ensure it sits above the background image */
-}
-
-/* Ensure content within .bg-landing is above the overlay */
-.bg-landing > * {
-    position: relative; /* Positioning context for child elements */
-    z-index: 2; /* Ensure content is above the overlay */
 }
 
 /* typing effect for landing page */

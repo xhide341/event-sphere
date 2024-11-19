@@ -34,13 +34,13 @@
             </nav>
         </div>
     </x-slot>
+
     <div class="mt-4 font-poppins">
         <div class="space-y-6 overflow-hidden">
-            <div class="bg-white shadow-sm rounded-lg flex flex-col p-4 sm:p-8">
+            <div class="bg-white shadow-md rounded-lg flex flex-col p-4 sm:p-8">
                 <header>
-                    <div class="flex flex-row items-center space-x-2">
-                        <x-heroicon-s-calendar-days class="w-6 h-6 flex-shrink-0" />
-                        <h2 class="text-lg font-medium text-gray-900 align-middle">
+                    <div class="flex flex-row items-center space-x-2">                        
+                        <h2 class="text-xl font-medium text-primary align-middle">
                             {{ __('My Events') }}
                         </h2>
                     </div>
@@ -64,9 +64,9 @@
                 </div>
 
                 @if($registeredEvents->isEmpty())
-                    <p>No registered events found.</p>
+                    <p class="text-center text-sm text-gray-500 mt-4">No registered events found.</p>
                 @else
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-2 xl:p-4" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 auto-rows-fr p-2 sm:p-4">
                         @foreach($registeredEvents as $event)
                             <div wire:key="registered-event-wrapper-{{ $event->id }}">
                                 <livewire:components.event-card 
@@ -83,11 +83,11 @@
                 @endif
             </div>
 
-            <div class="bg-white shadow-sm rounded-lg flex flex-col p-4 sm:p-8">
+            <div class="bg-white shadow-md rounded-lg flex flex-col p-4 sm:p-8">
                 <header>
                     <div class="flex flex-row space-x-2">
-                        <x-heroicon-s-calendar-days class="w-6 h-6 flex-shrink-0" />
-                        <h2 class="text-lg font-medium text-gray-900 align-middle">
+                        
+                        <h2 class="text-xl font-medium text-primary align-middle">
                             {{ __('All Events') }}
                         </h2>
                     </div>
@@ -111,9 +111,9 @@
                 </div>
 
                 @if($allEvents->isEmpty())
-                    <p>No events found.</p>
+                    <p class="text-center text-sm text-gray-500 mt-4">No events found.</p>
                 @else
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-2 xl:p-4" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 auto-rows-fr p-2 sm:p-4">
                         @foreach($allEvents as $event)
                             <div wire:key="all-event-wrapper-{{ $event->id }}">                                
                                 <livewire:components.event-card 
