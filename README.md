@@ -105,16 +105,16 @@ Ensure you have the following installed:
 
 ```
 1. Clone the repository:
-   git clone https://github.com/your-repo/EventSphere.git
+   git clone https://github.com/xhide341/eventsphere.git
 
 2. Navigate to the project directory:
-   cd EventSphere
+   cd eventsphere
 
 3. Build Docker images:
    sail build
 
 4. Start the Docker containers:
-   sail up
+   sail up -d
 
 5. Run database migrations and seeders:
    sail artisan migrate:fresh --seed
@@ -141,5 +141,5 @@ Also, make sure you follow the sail setup from laravel sail's documentation.
 ## 🧑‍💻 Author
 
 Developed by:
-- [Shawne Nuque](https://github.com/xhide341)
+- [xhide341](https://github.com/xhide341)
 
