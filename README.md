@@ -76,55 +76,42 @@ Ensure you have the following installed:
 
 ### Option 1: Local Installation
 
-```
-1. Clone the repository:
-   git clone https://github.com/xhide341/eventsphere.git
+```bash
+# Clone and setup
+git clone https://github.com/xhide341/eventsphere.git
+cd eventsphere
 
-2. Navigate to the project directory:
-   cd eventsphere
+# Install dependencies
+composer install
+npm install
 
-3. Install backend dependencies:
-   composer install
+# Configure environment
+cp .env.example .env
 
-4. Install frontend dependencies:
-   npm install
-
-5. Configure your environment variables:
-   cp .env.example .env
-   # Update your .env with database and application details.
-
-6. Run database migrations and seeders:
-   php artisan migrate:fresh --seed
-
-7. Start the development server:
-   npm run dev
-
+# Setup database and start server
+php artisan migrate:fresh --seed
+npm run dev
 ```
 
 ### Option 2: Docker Installation
 
+```bash
+# Clone and setup
+git clone https://github.com/xhide341/eventsphere.git
+cd eventsphere
+cp .env.example .env
+
+# Start Docker environment
+./vendor/bin/sail up -d
+
+# Install dependencies and setup database
+sail composer install
+sail npm install
+sail artisan migrate:fresh --seed
+sail npm run dev
 ```
-1. Clone the repository:
-   git clone https://github.com/xhide341/eventsphere.git
 
-2. Navigate to the project directory:
-   cd eventsphere
-
-3. Build Docker images:
-   sail build
-
-4. Start the Docker containers:
-   sail up -d
-
-5. Run database migrations and seeders:
-   sail artisan migrate:fresh --seed
-
-6. Start the development server:
-   sail npm run dev
-
-Note: Make sure to update the .env file with the correct database credentials and other environment variables.
-Also, make sure you follow the sail setup from laravel sail's documentation.
-```
+> **Note**: Update your `.env` file with appropriate credentials before starting.
 
 ---
 
