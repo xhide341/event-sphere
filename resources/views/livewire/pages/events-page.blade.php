@@ -37,7 +37,7 @@
 
     <div class="mt-4 font-poppins">
         <div class="space-y-6 overflow-hidden">
-            <div class="bg-white shadow-md rounded-lg flex flex-col p-4 sm:p-8">
+            <div class="bg-white shadow-sm rounded-lg flex flex-col p-4 sm:p-8">
                 <header>
                     <div class="flex flex-row items-center space-x-2">                        
                         <h2 class="text-xl font-medium text-primary align-middle">
@@ -83,7 +83,7 @@
                 @endif
             </div>
 
-            <div class="bg-white shadow-md rounded-lg flex flex-col p-4 sm:p-8">
+            <div class="bg-white shadow-sm rounded-lg flex flex-col p-4 sm:p-8">
                 <header>
                     <div class="flex flex-row space-x-2">
                         
