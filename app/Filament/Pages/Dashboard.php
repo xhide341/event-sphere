@@ -21,9 +21,9 @@ class Dashboard extends BaseDashboard
 
     public function getWidgets(): array
     {
-        return [
-            EventAttendanceChart::class,
+        return [            
             DepartmentEventsChart::class,
+            EventAttendanceChart::class,
             LatestEvents::class,
             PopularVenues::class,
             TopSpeakers::class,

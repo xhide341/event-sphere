@@ -6,6 +6,10 @@ use App\Models\Event;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\BadgeColumn;
+
 
 class LatestEvents extends BaseWidget
 {
@@ -26,23 +30,27 @@ class LatestEvents extends BaseWidget
                     ->limit(static::$limit)
             )
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                ImageColumn::make('image')
+                    ->disk('s3')
+                    ->defaultImageUrl('/storage/image_placeholder.jpg')
+                    ->square(),
+                TextColumn::make('name')
                     ->searchable()
                     ->limit(30)
                     ->alignment('center'),
-                Tables\Columns\TextColumn::make('start_date')
+                TextColumn::make('start_date')
                     ->date()
                     ->sortable()
                     ->alignment('center'),
-                Tables\Columns\TextColumn::make('venue.name')
+                TextColumn::make('venue.name')
                     ->searchable()
                     ->label('Venue')
                     ->alignment('center'),
-                Tables\Columns\TextColumn::make('department.name')
+                TextColumn::make('department.name')
                     ->searchable()
                     ->label('Department')
                     ->alignment('center'),
-                Tables\Columns\BadgeColumn::make('status')                    
+                BadgeColumn::make('status')                    
                     ->alignment('center')                    
                     ->colors([
                         'success' => 'Completed',
@@ -50,11 +58,6 @@ class LatestEvents extends BaseWidget
                         'primary' => 'Upcoming',
                         'danger' => 'Archived',
                     ])
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->defaultSort('start_date', 'desc')
-            ->poll('30s');
+            ]);
     }
 }

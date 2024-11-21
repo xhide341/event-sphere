@@ -8,11 +8,12 @@ use Illuminate\Support\Carbon;
 
 class EventAttendanceChart extends ChartWidget
 {
-    protected static ?string $heading = 'Event Registrations';
+    protected static ?string $heading = 'Event Registration Trends';
+    protected static ?string $description = 'Number of event registrations over time';
     protected static ?int $sort = 2;
     protected int|string|array $columnSpan = '1/2';
+    protected static ?string $pollingInterval = '30s';   
     protected static ?string $maxHeight = '300px';
-    protected static ?string $pollingInterval = '30s';
 
     public ?string $filter = '30';
     

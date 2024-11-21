@@ -8,7 +8,7 @@ use Filament\Widgets\ChartWidget;
 class DepartmentEventsChart extends ChartWidget
 {
     protected static ?string $heading = 'Events by Department';
-    protected static ?int $sort = 3;
+    protected static ?int $sort = 2;
     protected int|string|array $columnSpan = '1/2';
     protected static ?string $maxHeight = '300px';
 

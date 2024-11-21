@@ -27,6 +27,9 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+                ->brandLogo(asset('storage/images/LCUP.png'))
+                ->brandLogoHeight('2rem')
+                ->favicon(asset('storage/images/LCUP.ico'))
             ->colors([
                 'primary' => Color::Blue,
             ])

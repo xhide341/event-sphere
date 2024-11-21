@@ -77,6 +77,10 @@ class SpeakerResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->headerActions([
+                Tables\Actions\CreateAction::make()
+                    ->label('Add Speaker'),
+            ])
             ->columns([
                 ImageColumn::make('avatar')
                     ->circular()
@@ -115,7 +119,35 @@ class SpeakerResource extends Resource
                     ]),
             ])
             ->actions([
-                ViewAction::make(),
+                ViewAction::make()
+                    ->modalHeading(fn (Speaker $record): string => "{$record->name}'s Profile")
+                    ->form([
+                        Section::make('Speaker Details')
+                            ->schema([
+                                TextInput::make('name')
+                                    ->disabled(),
+                                TextInput::make('email')
+                                    ->disabled(),
+                                TextInput::make('phone_number')
+                                    ->disabled(),
+                                Select::make('availability_status')
+                                    ->disabled()
+                                    ->options([
+                                        'Available' => 'Available',
+                                        'Tentative' => 'Tentative',
+                                        'Confirmed' => 'Confirmed',
+                                        'Cancelled' => 'Cancelled',
+                                    ]),
+                            ])->columns(2),
+
+                        Section::make('Additional Information')
+                            ->schema([
+                                Textarea::make('bio')
+                                    ->disabled()
+                                    ->rows(4)
+                                    ->columnSpanFull(),
+                            ]),
+                    ]),
                 EditAction::make(),
             ])
             ->bulkActions([

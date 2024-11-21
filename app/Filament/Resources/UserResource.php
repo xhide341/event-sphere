@@ -71,8 +71,8 @@ class UserResource extends Resource
                         Select::make('role')
                             ->label('Role')
                             ->options([
-                                'admin' => 'Admin',
-                                'user' => 'User',
+                                'admin' => 'admin',
+                                'user' => 'user',
                             ])
                             ->default('user')
                             ->required(),
@@ -125,8 +125,8 @@ class UserResource extends Resource
             ->filters([
                 SelectFilter::make('role')
                     ->options([
-                        'admin' => 'Admin',
-                        'user' => 'User',
+                        'admin' => 'admin',
+                        'user' => 'user',
                     ]),
             ])
             ->actions([
