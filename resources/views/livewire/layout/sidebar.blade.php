@@ -23,37 +23,36 @@
 
     <div class="flex flex-col justify-between flex-1 mt-6">
         <nav>
-            <a wire:navigate href="/events" 
-                class="flex items-center px-4 py-2 mt-5 {{ request()->routeIs('events') ? 'text-gray-200 bg-primary active:bg-primary focus:bg-primary' : 'text-primary' }} transform rounded-md hover:bg-primary hover:text-gray-200 active:text-white">
-                <x-heroicon-s-calendar-days class="w-5 h-5" />
-                <span class="mx-4 font-medium text-base">Events</span>
-            </a>
+            @php
+                $navigationItems = [
+                    ['route' => 'events', 'label' => 'Events', 'icon' => 'calendar-days'],
+                    ['route' => 'profile', 'label' => 'Profile', 'icon' => 'user'],
+                    ['route' => 'venues', 'label' => 'Venues', 'icon' => 'building-office'],
+                    ['route' => 'speakers', 'label' => 'Speakers', 'icon' => 'users'],
+                    ['route' => 'settings', 'label' => 'Settings', 'icon' => 'cog-6-tooth'],
+                ];
+            @endphp
 
-            <a wire:navigate href="/profile" 
-                class="flex items-center px-4 py-2 mt-5 {{ request()->routeIs('profile') ? 'text-gray-200 bg-primary active:bg-primary focus:bg-primary' : 'text-primary' }} transform rounded-md hover:bg-primary hover:text-gray-200 active:text-white">
-                <x-heroicon-s-user class="w-5 h-5" />
-                <span class="mx-4 font-medium text-base">Profile</span>
-            </a>
-
-            <a wire:navigate href="/venues" 
-                class="flex items-center px-4 py-2 mt-5 {{ request()->routeIs('venues') ? 'text-gray-200 bg-primary active:bg-primary focus:bg-primary' : 'text-primary' }} transform rounded-md hover:bg-primary hover:text-gray-200 active:text-white">
-                <x-heroicon-s-building-office class="w-5 h-5" />
-                <span class="mx-4 font-medium text-base">Venues</span>
-            </a>
-
-            <a wire:navigate href="/speakers" 
-                class="flex items-center px-4 py-2 mt-5 {{ request()->routeIs('speakers') ? 'text-gray-200 bg-primary active:bg-primary focus:bg-primary' : 'text-primary' }} transform rounded-md hover:bg-primary hover:text-gray-200 active:text-white">
-                <x-heroicon-s-users class="w-5 h-5" />
-                <span class="mx-4 font-medium text-base">Speakers</span>
-            </a>
-            <a wire:navigate href="/settings" 
-                class="flex items-center px-4 py-2 mt-5 {{ request()->routeIs('settings') ? 'text-gray-200 bg-primary active:bg-primary focus:bg-primary' : 'text-primary' }} transform rounded-md hover:bg-primary hover:text-gray-200 active:text-white">
-                <x-heroicon-s-cog-6-tooth class="w-5 h-5" />
-                <span class="mx-4 font-medium text-base">Settings</span>
-            </a>
+            @foreach($navigationItems as $item)
+                <a wire:navigate 
+                   href="{{ route($item['route']) }}"
+                   @class([
+                       'flex items-center px-4 py-2 mt-5 transform rounded-md transition-colors duration-200',
+                       'text-gray-200 bg-primary' => request()->routeIs($item['route']),
+                       'text-primary hover:bg-primary hover:text-gray-200' => !request()->routeIs($item['route'])
+                   ])>
+                    <x-dynamic-component :component="'heroicon-s-'.$item['icon']" class="w-5 h-5" />
+                    <span class="mx-4 font-medium text-base">{{ $item['label'] }}</span>
+                </a>
+            @endforeach
         </nav>
     </div>
     <div class="text-center text-sm mx-auto flex items-center text-gray-500 mt-4">
         Made with <span class="text-red-500 mx-1">♥</span> by xhide3
     </div>
+    <button @click="isToggled = !isToggled" 
+            class="absolute -right-4 top-1/2 bg-primary text-white p-1 rounded-full transform -translate-y-1/2 xl:hidden">
+        <x-heroicon-s-chevron-right class="w-4 h-4 transition-transform"
+            :class="{ 'rotate-180': isToggled }" />
+    </button>
 </div>

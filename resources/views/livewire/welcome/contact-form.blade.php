@@ -16,54 +16,73 @@ new class extends Component {
             'email' => 'required|email',
             'message' => 'required|string|max:500',
         ]);
-        
+
         $recipientEmail = "shawnehgn10@gmail.com";
         try {
             // Send the email
             $fromEmail = $this->email; // Capture the email in a variable
             Mail::raw("From {$fromEmail}\n\n{$this->message}", function ($message) use ($recipientEmail, $fromEmail) {
                 $message->to($recipientEmail)
-                        ->from(env("MAIL_FROM_ADDRESS"))
-                        ->subject('New Contact Form Submission');
+                    ->from(env("MAIL_FROM_ADDRESS"))
+                    ->subject('New Contact Form Submission');
             });
 
             session()->flash('message', 'Your message has been sent successfully!');
         } catch (\Exception $e) {
             session()->flash('error', 'There was an error sending your message. Please try again later.');
         }
-        
+
         $this->reset();
     }
 } ?>
 
-<form wire:submit="submit" class="w-full max-w-md px-4">
+<form wire:submit="submit" class="space-y-6 w-full max-w-md">
     @csrf
-    
-    <div class="mb-4">
-        <label for="name" class="block text-sm mb-2">Name</label>
-        <input wire:model="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" required>
-    </div>
-    <div class="mb-4">
-        <label for="email" class="block text-sm mb-2">Email</label>
-        <input wire:model="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" required>
-    </div>
-    <div class="mb-4">
-        <label for="message" class="block text-sm mb-2">Message</label>
-        <textarea wire:model="message" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-32" id="message" placeholder="..." required></textarea>
-    </div>
-    <div class="flex flex-col items-center justify-center mt-4 space-y-2 sm:mt-6 sm:space-y-4">
-        <button class="min-w-fit w-32 bg-accent hover:bg-primary text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-            Submit
-        </button>
-        @if (session()->has('message'))
-        <div class="mt-4 text-success text-sm">
-            {{ session('message') }}
-        </div>
-        @elseif (session()->has('error'))
-        <div class="mt-4 text-error text-sm">
-            {{ session('error') }}
-        </div>
-        @endif
+
+    <div>
+        <x-input-label for="name" :value="__('Name')" />
+        <x-text-input wire:model="name" id="name" class="block mt-1 w-full text-custom-black md:text-base text-sm"
+            type="text" name="name" required />
+        <x-input-error :messages="$errors->get('name')" class="mt-2" />
     </div>
 
+    <div class="mt-4">
+        <x-input-label for="email" :value="__('Email')" />
+        <x-text-input wire:model="email" id="email" class="block mt-1 w-full text-custom-black md:text-base text-sm"
+            type="email" name="email" required />
+        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+    </div>
+
+    <div class="mt-4">
+        <x-input-label for="message" :value="__('Message')" />
+        <textarea wire:model="message" id="message" name="message"
+            class="border-gray-300 focus:border-primary focus:ring-primary rounded-md shadow-sm block mt-1 w-full text-custom-black md:text-base text-sm h-32"
+            required></textarea>
+        <x-input-error :messages="$errors->get('message')" class="mt-2" />
+    </div>
+
+    <div>
+        <x-primary-button class="w-full flex justify-center items-center relative" wire:loading.attr="disabled">
+            <span wire:loading.remove>{{ __('Submit') }}</span>
+            <span wire:loading class="flex items-center">
+                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                    </path>
+                </svg>
+            </span>
+        </x-primary-button>
+
+        @if (session()->has('message'))
+            <div class="mt-4 text-success text-sm text-center">
+                {{ session('message') }}
+            </div>
+        @elseif (session()->has('error'))
+            <div class="mt-4 text-error text-sm text-center">
+                {{ session('error') }}
+            </div>
+        @endif
+    </div>
 </form>

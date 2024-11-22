@@ -17,10 +17,12 @@ use Illuminate\Support\Facades\Log;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
+use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Auth\Passwords\CanResetPassword as CanResetPasswordTrait;
 
-class User extends Authenticatable implements FilamentUser, HasAvatar
+class User extends Authenticatable implements FilamentUser, HasAvatar, CanResetPassword
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, CanResetPasswordTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -71,8 +73,8 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     public function events(): BelongsToMany
     {
         return $this->belongsToMany(Event::class, 'registrations', 'user_id', 'event_id')
-                    ->withPivot('registration_date')
-                    ->withTimestamps();
+            ->withPivot('registration_date')
+            ->withTimestamps();
     }
 
     public function getFilamentAvatarUrl(): ?string
@@ -80,7 +82,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         if ($this->avatar) {
             return Storage::disk('s3')->temporaryUrl($this->avatar, now()->addMinutes(60));
         }
-        
+
         return null;
     }
 

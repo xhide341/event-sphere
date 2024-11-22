@@ -23,7 +23,7 @@ export default defineConfig({
         }),
         ViteImageOptimizer(),
     ],
-    server: {
+    server: {        
         hmr: {
             host: 'localhost'
         },
