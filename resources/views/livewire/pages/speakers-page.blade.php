@@ -1,10 +1,10 @@
 <div>
     <x-slot name="header">
         <div class="ml-1 rounded-lg flex flex-row flex-wrap items-center w-full">
-            <nav class="bg-transparent antialiased text-primary">
+            <nav class="bg-transparent antialiased text-primary-dark">
                 <ol class="flex flex-wrap mr-8 bg-transparent items-center">
                     <li class="text-sm breadcrumb-item align-middle">
-                        <x-heroicon-s-home class="w-5 h-5 text-primary" />
+                        <x-heroicon-s-home class="w-5 h-5 text-primary-dark" />
                     </li>
                     <li class="text-sm capitalize leading-normal flex items-center">
                         <x-heroicon-s-chevron-right class="w-4 h-4 text-gray-600 mx-2" />
@@ -22,7 +22,7 @@
         </div>
     </x-slot>
     <div class="mt-4 font-poppins">
-        <div class="space-y-6 overflow-hidden">     
+        <div class="space-y-6 overflow-hidden">
             <div class="bg-white shadow-sm rounded-lg flex flex-col p-4 sm:p-8">
                 <header>
                     <div class="flex flex-row items-center space-x-2">
@@ -42,10 +42,16 @@
                             <table class="min-w-full divide-y divide-gray-300">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Name</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Phone</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Events</th>
+                                        <th scope="col"
+                                            class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Name
+                                        </th>
+                                        <th scope="col"
+                                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
+                                        <th scope="col"
+                                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Phone</th>
+                                        <th scope="col"
+                                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Events
+                                        </th>
                                         <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
                                             <span class="sr-only">Actions</span>
                                         </th>
@@ -55,9 +61,8 @@
                                     @forelse($speakers as $speaker)
                                         <tr>
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">
-                                                <img src="{{ $speaker->avatar }}" 
-                                                     alt="{{ $speaker->name }}'s avatar"
-                                                     class="h-10 w-10 rounded-full object-cover" />
+                                                <img src="{{ $speaker->avatar }}" alt="{{ $speaker->name }}'s avatar"
+                                                    class="h-10 w-10 rounded-full object-cover" />
                                             </td>
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">
                                                 {{ $speaker->name }}

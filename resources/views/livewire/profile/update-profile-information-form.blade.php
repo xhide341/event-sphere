@@ -182,9 +182,9 @@ new class extends Component
             <div class="mt-2 mb-4 flex items-center">
                 <div class="mr-4 relative">
                     @if ($avatar)
-                        <img src="{{ $avatar->temporaryUrl() }}" alt="New Avatar" class="h-20 w-20 rounded-full object-cover mb-4 border-2 border-primary">
+                        <img src="{{ $avatar->temporaryUrl() }}" alt="New Avatar" class="h-20 w-20 rounded-full object-cover mb-4 border-0">
                     @else
-                        <img src="{{ $avatarUrl }}" alt="Current Avatar" class="h-20 w-20 rounded-full object-cover mb-4 border-2 border-primary">                    
+                        <img src="{{ $avatarUrl }}" alt="Current Avatar" class="h-20 w-20 rounded-full object-cover mb-4 border-0">                    
                     @endif
                 </div>
                 <div>
@@ -199,7 +199,7 @@ new class extends Component
                 x-on:dragleave.prevent="dragOver = false"
                 x-on:drop.prevent="handleDrop($event)"
                 :class="{ 'border-blue-500 bg-blue-50': dragOver }"
-                class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-primary border-dashed rounded-md relative"
+                class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-primary-dark border-dashed rounded-md relative"
             >
                 <div class="space-y-1 text-center">
                     <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
@@ -259,15 +259,19 @@ new class extends Component
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button wire:loading.attr="disabled" wire:target="updateProfileInformation" class="relative">
+            <x-primary-button 
+                wire:loading.attr="disabled" 
+                wire:target="updateProfileInformation" 
+                class="flex items-center relative leading-none text-sm px-4 py-2 tracking-normal"
+            >
                 <span wire:loading.remove wire:target="updateProfileInformation">
                     {{ __('Save') }}
                 </span>
-                <span wire:loading wire:target="updateProfileInformation" class="absolute inset-0 flex items-center justify-center">
+                <span wire:loading wire:target="updateProfileInformation" class="flex items-center">
                     <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
+                    </svg>                    
                 </span>
             </x-primary-button>
 
