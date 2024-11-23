@@ -12,7 +12,7 @@
         <div class="relative w-full h-[10rem]">
           <div x-data="{ imageLoaded: false }" class="w-full h-full">
             <div x-show="!imageLoaded" class="absolute inset-0 flex items-center justify-center bg-gray-200">
-              <svg class="animate-spin h-8 w-8 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none"
+              <svg class="animate-spin h-8 w-8 text-primary-dark" xmlns="http://www.w3.org/2000/svg" fill="none"
                 viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                 <path class="opacity-75" fill="currentColor"
@@ -43,7 +43,7 @@
       </button>
     @endif
         <div class="absolute bottom-0 left-0 p-2">
-          <span class="bg-white rounded-full px-3 py-1 text-sm font-semibold text-primary">
+          <span class="bg-white rounded-full px-3 py-1 text-sm font-semibold text-primary-dark">
             {{ $modalContent['department_name'] }}
           </span>
         </div>
@@ -53,7 +53,7 @@
           <h5 class="block text-xl font-medium leading-snug tracking-normal text-blue-gray-900 antialiased truncate">
             {{ $modalContent['event_name'] }}
           </h5>
-          <p class="text-sm font-normal text-primary-dark overflow-hidden truncate">
+          <p class="text-sm font-normal text-primary-dark-dark overflow-hidden truncate">
             {{ $modalContent['venue_name'] }}
           </p>
         </div>
@@ -68,7 +68,7 @@
       <div class="flex w-full p-6">
         <div class="flex justify-evenly w-full">
           <span data-tooltip-target="money"
-            class="cursor-pointer rounded-full border border-patten-blue bg-white p-2 sm:p-3 text-primary-500 transition-colors hover:border-primary-500/10 hover:bg-primary-500/10 hover:!opacity-100 group-hover:opacity-70">
+            class="cursor-pointer rounded-full border border-patten-blue bg-white p-2 sm:p-3 text-primary-dark-500 transition-colors hover:border-primary-500/10 hover:bg-primary-500/10 hover:!opacity-100 group-hover:opacity-70">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
               class="h-4 w-4 sm:h-5 sm:w-5">
               <path d="M12 7.5a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z"></path>
@@ -81,7 +81,7 @@
             </svg>
           </span>
           <span data-tooltip-target="wifi"
-            class="cursor-pointer rounded-full border border-patten-blue bg-white p-2 sm:p-3 text-primary-500 transition-colors hover:border-primary-500/10 hover:bg-primary-500/10 hover:!opacity-100 group-hover:opacity-70">
+            class="cursor-pointer rounded-full border border-patten-blue bg-white p-2 sm:p-3 text-primary-dark-500 transition-colors hover:border-primary-500/10 hover:bg-primary-500/10 hover:!opacity-100 group-hover:opacity-70">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
               class="h-4 w-4 sm:h-5 sm:w-5">
               <path fill-rule="evenodd"
@@ -90,7 +90,7 @@
             </svg>
           </span>
           <span data-tooltip-target="bedrooms"
-            class="cursor-pointer rounded-full border border-patten-blue bg-white p-2 sm:p-3 text-primary-500 transition-colors hover:border-primary-500/10 hover:bg-primary-500/10 hover:!opacity-100 group-hover:opacity-70">
+            class="cursor-pointer rounded-full border border-patten-blue bg-white p-2 sm:p-3 text-primary-dark-500 transition-colors hover:border-primary-500/10 hover:bg-primary-500/10 hover:!opacity-100 group-hover:opacity-70">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
               class="h-4 w-4 sm:h-5 sm:w-5">
               <path
@@ -102,7 +102,7 @@
             </svg>
           </span>
           <span data-tooltip-target="tv"
-            class="cursor-pointer rounded-full border border-patten-blue bg-white p-2 sm:p-3 text-primary-500 transition-colors hover:border-primary-500/10 hover:bg-primary-500/10 hover:!opacity-100 group-hover:opacity-70">
+            class="cursor-pointer rounded-full border border-patten-blue bg-white p-2 sm:p-3 text-primary-dark-500 transition-colors hover:border-primary-500/10 hover:bg-primary-500/10 hover:!opacity-100 group-hover:opacity-70">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
               class="h-4 w-4 sm:h-5 sm:w-5">
               <path d="M19.5 6h-15v9h15V6z"></path>
@@ -112,7 +112,7 @@
             </svg>
           </span>
           <span data-tooltip-target="fire"
-            class="cursor-pointer rounded-full border border-patten-blue bg-white p-2 sm:p-3 text-primary-500 transition-colors hover:border-primary-500/10 hover:bg-primary-500/10 hover:!opacity-100 group-hover:opacity-70">
+            class="cursor-pointer rounded-full border border-patten-blue bg-white p-2 sm:p-3 text-primary-dark-500 transition-colors hover:border-primary-500/10 hover:bg-primary-500/10 hover:!opacity-100 group-hover:opacity-70">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
               class="h-4 w-4 sm:h-5 sm:w-5">
               <path fill-rule="evenodd"
@@ -148,10 +148,10 @@
         x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
         x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100"
         x-transition:leave-end="opacity-0 scale-95"
-        class="inline-block align-bottom bg-white rounded-lg border-2 border-primary text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle w-full max-w-[95%] sm:max-w-lg">
+        class="inline-block align-bottom bg-white rounded-lg border-2 border-primary-dark text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle w-full max-w-[95%] sm:max-w-lg">
         <div class="leading-normal font-poppins bg-white px-3 pt-4 pb-3 sm:p-6 sm:pb-4">
           <div class="flex justify-between items-center mb-4">
-            <h3 class="text-2xl leading-6 font-semibold text-primary" id="modal-title">
+            <h3 class="text-2xl leading-6 font-semibold text-primary-dark" id="modal-title">
               {{ $modalContent['event_name'] }}
             </h3>
             <button type="button" class="text-gray-400 transition-colors duration-200 hover:text-gray-500"
@@ -167,7 +167,7 @@
             <div class="relative mb-4">
               <div x-data="{ modalImageLoaded: false }" class="w-full h-64 rounded-lg overflow-hidden shadow-md">
                 <div x-show="!modalImageLoaded" class="absolute inset-0 flex items-center justify-center bg-gray-200">
-                  <svg class="animate-spin h-8 w-8 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none"
+                  <svg class="animate-spin h-8 w-8 text-primary-dark" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor"
@@ -182,13 +182,13 @@
                 </div>
               </div>
               <p
-                class="absolute bottom-2 left-2 bg-white rounded-full px-3 py-1 text-sm font-semibold text-primary shadow">
+                class="absolute bottom-2 left-2 bg-white rounded-full px-3 py-1 text-sm font-semibold text-primary-dark shadow">
                 {{ $modalContent['department_name'] }}
               </p>
 
               <!-- New countdown section -->
               <div
-                class="absolute top-2 right-2 bg-white rounded-full px-3 py-1 text-sm font-semibold text-primary shadow flex items-center">
+                class="absolute top-2 right-2 bg-white rounded-full px-3 py-1 text-sm font-semibold text-primary-dark shadow flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
                   stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -198,9 +198,9 @@
               </div>
             </div>
             <div class="mt-4">
-              <h5 class="text-xl font-semibold text-primary mb-3">Event Details</h5>
+              <h5 class="text-xl font-semibold text-primary-dark mb-3">Event Details</h5>
               <div class="bg-gray-100 rounded-lg p-4 shadow-sm">
-                <p class="text-base text-primary font-normal mb-4">{{ $modalContent['description'] }}</p>
+                <p class="text-base text-primary-dark font-normal mb-4">{{ $modalContent['description'] }}</p>
 
                 <div class="flex justify-between">
                   <div class="grid grid-cols-1 gap-x-5 gap-y-4 md:grid-cols-2 w-full">
@@ -215,7 +215,7 @@
                       </div>
                       <div>
                         <p class="text-xs text-gray-500 font-medium">Venue</p>
-                        <p class="text-sm font-semibold text-primary">{{ $modalContent['venue_name'] }}</p>
+                        <p class="text-sm font-semibold text-primary-dark">{{ $modalContent['venue_name'] }}</p>
                       </div>
                     </div>
                     <div class="flex items-center space-x-3">
@@ -229,7 +229,8 @@
                       </div>
                       <div>
                         <p class="text-xs text-gray-500 font-medium">Schedule</p>
-                        <p class="text-sm font-semibold text-primary text-nowrap">{{ $modalContent['schedule'] }}</p>
+                        <p class="text-sm font-semibold text-primary-dark text-nowrap">{{ $modalContent['schedule'] }}
+                        </p>
                       </div>
                     </div>
                     <div class="flex items-center space-x-3">
@@ -244,7 +245,7 @@
                       <div>
                         <p class="text-xs text-gray-500 font-medium">Status</p>
                         <p
-                          class="text-sm font-semibold {{ $modalContent['status'] === 'Postponed' ? 'text-red-500' : ($modalContent['status'] === 'Delayed' ? 'text-yellow-500' : ($modalContent['status'] === 'Scheduled' ? 'text-green-500' : 'text-primary')) }}">
+                          class="text-sm font-semibold {{ $modalContent['status'] === 'Postponed' ? 'text-red-500' : ($modalContent['status'] === 'Delayed' ? 'text-yellow-500' : ($modalContent['status'] === 'Scheduled' ? 'text-green-500' : 'text-primary-dark')) }}">
                           {{ $modalContent['status'] }}
                         </p>
                       </div>
@@ -260,7 +261,7 @@
                       </div>
                       <div>
                         <p class="text-xs text-gray-500 font-medium">Department</p>
-                        <p class="text-sm font-semibold text-primary">{{ $modalContent['department_name'] }}</p>
+                        <p class="text-sm font-semibold text-primary-dark">{{ $modalContent['department_name'] }}</p>
                       </div>
                     </div>
                     <div class="flex items-center space-x-3">
@@ -273,7 +274,7 @@
                       </div>
                       <div>
                         <p class="text-xs text-gray-500 font-medium">Capacity</p>
-                        <p class="text-sm font-semibold text-primary">{{ $modalContent['participant_count'] }} /
+                        <p class="text-sm font-semibold text-primary-dark">{{ $modalContent['participant_count'] }} /
                           {{ $modalContent['capacity'] }}
                         </p>
                       </div>
@@ -288,7 +289,7 @@
                       </div>
                       <div>
                         <p class="text-xs text-gray-500 font-medium">Speaker</p>
-                        <p class="text-sm font-semibold text-primary">{{ $modalContent['speaker'] }}</p>
+                        <p class="text-sm font-semibold text-primary-dark">{{ $modalContent['speaker'] }}</p>
                       </div>
                     </div>
                   </div>
