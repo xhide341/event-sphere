@@ -58,7 +58,7 @@
           </p>
         </div>
         <div class="min-h-11">
-          <p class="line-clamp-3 text-pretty text-sm font-light text-gray-700">
+          <p class="line-clamp-3 text-pretty text-xs sm:text-sm font-light text-gray-700">
             {{ $modalContent['description'] }}
           </p>
         </div>
@@ -124,7 +124,7 @@
       </div>
       <div class="p-6 pt-3">
         <button @click="showModal = true; imageLoaded = false; modalImageLoaded = false;"
-          class="w-full block relative overflow-hidden rounded-lg bg-accent hover:bg-primary py-3.5 px-7 text-center text-sm font-semibold uppercase text-white transition-all duration-500 ease-out wave-effect">
+          class="w-full block relative overflow-hidden rounded-lg bg-primary hover:bg-primary-light py-3.5 px-7 text-center text-sm font-semibold uppercase text-white transition-all duration-500 ease-out wave-effect">
           <span class="relative z-10">View Details</span>
         </button>
       </div>
@@ -200,7 +200,7 @@
             <div class="mt-4">
               <h5 class="text-xl font-semibold text-primary-dark mb-3">Event Details</h5>
               <div class="bg-gray-100 rounded-lg p-4 shadow-sm">
-                <p class="text-base text-primary-dark font-normal mb-4">{{ $modalContent['description'] }}</p>
+                <p class="text-xs sm:text-sm text-primary-dark font-normal mb-4">{{ $modalContent['description'] }}</p>
 
                 <div class="flex justify-between">
                   <div class="grid grid-cols-1 gap-x-5 gap-y-4 md:grid-cols-2 w-full">
@@ -300,7 +300,7 @@
         </div>
         <div class="bg-gray-50 px-3 py-3 sm:px-6 sm:flex sm:flex-row-reverse space-y-2 sm:space-y-0">
           <a href="{{ $modalContent['is_user_registered'] ? route('events.show', $modalContent['event_id']) : '#' }}"
-            class="w-full inline-flex justify-center border border-transparent rounded-md shadow-sm px-4 py-2.5 {{ $modalContent['is_user_registered'] ? 'bg-accent text-custom-white hover:bg-primary' : 'bg-gray-100 text-gray-400 cursor-not-allowed' }} focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            class="w-full inline-flex justify-center border border-transparent rounded-md shadow-sm px-4 py-2.5 {{ $modalContent['is_user_registered'] ? 'bg-primary text-custom-white hover:bg-primary-light' : 'bg-gray-100 text-gray-400 cursor-not-allowed' }} focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
             {{ !$modalContent['is_user_registered'] ? 'disabled' : '' }}
             title="{{ !$modalContent['is_user_registered'] ? 'Please register for the event to submit feedback' : 'Submit your feedback' }}">
             Submit Feedback
@@ -309,7 +309,7 @@
           @if(!$modalContent['is_user_registered'])
         <button type="button" wire:click="toggleRegistration" wire:loading.attr="disabled"
         wire:target="toggleRegistration" wire:loading.class="opacity-50 cursor-not-allowed"
-        class="w-full inline-flex justify-center items-center rounded-md border border-transparent shadow-sm px-4 py-2.5 bg-primary text-base font-medium text-white hover:bg-primary-dark focus:outline-none sm:mt-0 sm:w-auto sm:text-sm">
+        class="w-full inline-flex justify-center items-center rounded-md border border-transparent shadow-sm px-4 py-2.5 bg-primary text-base font-medium text-white hover:bg-primary-light focus:outline-none sm:mt-0 sm:w-auto sm:text-sm">
         <span wire:loading.remove wire:target="toggleRegistration">Register</span>
         <span wire:loading wire:target="toggleRegistration" class="flex items-center justify-between">
           <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"

@@ -17,6 +17,8 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Illuminate\Support\Facades\Storage;
+
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -27,9 +29,9 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-                ->brandLogo(asset('storage/images/LCUP.png'))
-                ->brandLogoHeight('2rem')
-                ->favicon(asset('storage/images/LCUP.ico'))
+            ->brandLogo(asset('images/LCUP.png'))
+            ->brandLogoHeight('2rem')
+            ->favicon(asset('images/LCUP.ico'))
             ->colors([
                 'primary' => Color::Blue,
             ])

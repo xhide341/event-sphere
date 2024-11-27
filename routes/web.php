@@ -9,10 +9,6 @@ use App\Livewire\EventShowPage;
 
 Route::view('/', 'livewire.pages.welcome')->name('welcome');
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
-    
 Route::get('/events', EventsPage::class)
     ->middleware(['auth', 'verified'])
     ->name('events');
@@ -33,7 +29,7 @@ Route::get('/settings', SettingsPage::class)
     ->middleware(['auth', 'verified'])
     ->name('settings');
 
-Route::get('/events/{event}',EventShowPage::class)
+Route::get('/events/{event}', EventShowPage::class)
     ->middleware(['auth', 'verified'])
     ->name('events.show');
 
@@ -61,4 +57,4 @@ Route::get('/debug-favicon', function () {
     ];
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

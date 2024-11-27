@@ -154,8 +154,7 @@ new class extends Component
 <section>
     <header>
         <div class="flex flex-row items-center space-x-2">
-            <x-heroicon-s-user class="w-6 h-6 flex-shrink-0" />
-            <h2 class="text-lg font-medium text-gray-900 align-middle">
+            <h2 class="text-lg font-medium text-primary-dark align-middle">
                 {{ __('Profile Information') }}
             </h2>
         </div>
