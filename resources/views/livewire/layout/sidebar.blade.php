@@ -23,12 +23,14 @@
         <p class="mx-2 mt-1 text-sm font-sm text-gray-600">{{ auth()->user()->email }}</p>
     </div>
 
-    <div class="flex flex-col justify-between flex-1 mt-6">
-        <nav>
+    <hr class="w-full border-t border-gray-300 my-6">
+
+    <div class="flex flex-col justify-between flex-1 mt-1">
+        <nav class="flex flex-col space-y-2">
             <a wire:navigate 
                href="{{ route('events') }}"
                @class([
-                   'flex items-center px-4 py-2 mt-5 transform rounded-md',
+                   'flex items-center px-4 py-2 transform rounded-md',
                    'text-gray-200 bg-primary-dark' => request()->routeIs('events'),
                    'text-primary-dark hover:bg-primary-dark hover:text-gray-200' => !request()->routeIs('events')
                ])>
@@ -39,7 +41,7 @@
             <a wire:navigate 
                href="{{ route('profile') }}"
                @class([
-                   'flex items-center px-4 py-2 mt-5 transform rounded-md',
+                   'flex items-center px-4 py-2 transform rounded-md',
                    'text-gray-200 bg-primary-dark' => request()->routeIs('profile'),
                    'text-primary-dark hover:bg-primary-dark hover:text-gray-200' => !request()->routeIs('profile')
                ])>
@@ -50,7 +52,7 @@
             <a wire:navigate 
                href="{{ route('venues') }}"
                @class([
-                   'flex items-center px-4 py-2 mt-5 transform rounded-md',
+                   'flex items-center px-4 py-2 transform rounded-md',
                    'text-gray-200 bg-primary-dark' => request()->routeIs('venues'),
                    'text-primary-dark hover:bg-primary-dark hover:text-gray-200' => !request()->routeIs('venues')
                ])>
@@ -61,7 +63,7 @@
             <a wire:navigate 
                href="{{ route('speakers') }}"
                @class([
-                   'flex items-center px-4 py-2 mt-5 transform rounded-md',
+                   'flex items-center px-4 py-2 transform rounded-md',
                    'text-gray-200 bg-primary-dark' => request()->routeIs('speakers'),
                    'text-primary-dark hover:bg-primary-dark hover:text-gray-200' => !request()->routeIs('speakers')
                ])>
@@ -72,7 +74,7 @@
             <a wire:navigate 
                href="{{ route('settings') }}"
                @class([
-                   'flex items-center px-4 py-2 mt-5 transform rounded-md',
+                   'flex items-center px-4 py-2 transform rounded-md',
                    'text-gray-200 bg-primary-dark' => request()->routeIs('settings'),
                    'text-primary-dark hover:bg-primary-dark hover:text-gray-200' => !request()->routeIs('settings')
                ])>
