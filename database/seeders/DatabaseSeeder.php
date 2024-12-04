@@ -18,11 +18,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'test',
             'email' => 'test@example.com',
             'password' => Hash::make('asdfasdf'),
-            'avatar' => 'avatars/minion.jpg',
+            'avatar' => 'avatars/cat_shades.jpg',
             'role' => 'admin',
         ]);
         User::factory(100)->create();
-        
+
         $this->call([
             VenueSeeder::class,
             SpeakerSeeder::class,

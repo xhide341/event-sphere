@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 class Sidebar extends Component
 {
     public $avatarUrl;
-    
+
     public function mount()
     {
         $this->generateAvatarUrl();
@@ -21,8 +21,8 @@ class Sidebar extends Component
         $user = auth()->user();
 
         if ($user->avatar) {
-            try {            
-                $this->avatarUrl = Storage::disk('s3')->temporaryUrl('avatars/minion.jpg', now()->addMinutes(120));
+            try {
+                $this->avatarUrl = Storage::disk('s3')->temporaryUrl('avatars/cat_shades.jpg', now()->addMinutes(120));
             } catch (\Exception $e) {
                 $this->avatarUrl = "https://ui-avatars.com/api/?name=" . urlencode($user->name);
             }
