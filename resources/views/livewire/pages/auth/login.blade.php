@@ -97,7 +97,7 @@ new #[Layout('layouts.guest')] class extends Component
                     wire:model="form.remember" 
                     id="remember" 
                     type="checkbox" 
-                    class="rounded border-gray-300 text-accent shadow-sm ring-0 focus:ring-0 focus:ring-offset-0"
+                    class="rounded border-gray-400 text-accent shadow-sm ring-0 focus:ring-0 focus:ring-offset-0"
                     name="remember"
                 >
                 <span class="ml-2 text-xs md:text-sm text-gray-600">{{ __('Remember me') }}</span>
@@ -106,7 +106,7 @@ new #[Layout('layouts.guest')] class extends Component
                 <a class="text-xs md:text-sm text-accent hover:underline transition-colors duration-200" 
                    href="{{ route('password.request') }}" 
                    wire:navigate>
-                    {{ __('Forgot your password?') }}
+                    {{ __('Forgot password?') }}
                 </a>
             @endif
         </div>

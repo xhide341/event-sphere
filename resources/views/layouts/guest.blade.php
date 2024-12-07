@@ -34,6 +34,16 @@
                         <div class="w-full sm:max-w-md mt-6 px-6 py-4 overflow-hidden sm:rounded-lg z-10">
                             {{ $slot }}
                         </div>
+                        
+                        <div class="mt-16">
+                            @if (Route::currentRouteName() === 'login' || Route::currentRouteName() === 'register')
+                                <footer class="text-center text-sm text-gray-600">
+                                    By continuing, you agree to eventsphere's 
+                                <a href="#" class="text-accent hover:underline">terms of service</a> and 
+                                    <a href="#" class="text-accent hover:underline">privacy policy</a>.
+                                </footer>
+                            @endif
+                        </div>
                     </div>
                 </div>
             @else

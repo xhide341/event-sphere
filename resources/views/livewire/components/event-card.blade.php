@@ -48,24 +48,25 @@
           </span>
         </div>
       </div>
-      <div class="pt-6 px-6 pb-4">
+      <div class="pt-6 px-6 pb-0 2xl:pb-4">
         <div class="mb-3 flex flex-col justify-between">
-          <h5 class="block text-xl font-medium leading-snug tracking-normal text-blue-gray-900 antialiased truncate">
+          <h5
+            class="block text-lg 2xl:text-xl font-medium leading-snug tracking-normal text-blue-gray-900 antialiased truncate">
             {{ $modalContent['event_name'] }}
           </h5>
           <p class="text-sm font-normal text-primary-dark-dark overflow-hidden truncate">
             {{ $modalContent['venue_name'] }}
           </p>
         </div>
-        <div class="min-h-11">
-          <p class="line-clamp-3 text-pretty text-xs sm:text-sm font-light text-gray-700">
+        <div class="min-h-10">
+          <p class="line-clamp-2 2xl:line-clamp-3 text-pretty text-xs 2xl:text-sm font-light text-gray-700">
             {{ $modalContent['description'] }}
           </p>
         </div>
       </div>
 
       <!-- Separated SVG container with full width and padding -->
-      <div class="flex w-full p-6">
+      <div class="flex w-full p-6 lg:hidden 2xl:block">
         <div class="flex justify-evenly w-full">
           <span data-tooltip-target="money"
             class="cursor-pointer rounded-full border border-patten-blue bg-white p-2 sm:p-3 text-primary-dark-500 transition-colors hover:border-primary-500/10 hover:bg-primary-500/10 hover:!opacity-100 group-hover:opacity-70">

@@ -42,12 +42,13 @@
 }
 
 @font-face {
-  font-family: 'McLaren';
-  src: url('../fonts/McLaren-Regular.ttf') format('truetype');
-  font-weight: normal;
+  font-family: 'Excon-Bold';
+  src: url('../fonts/Excon-Bold.otf') format('opentype');
+  font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
+
 
 /* custom bg pattern */
 .custom-bg {

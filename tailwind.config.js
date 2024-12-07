@@ -13,7 +13,7 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
                 poppins: ['Poppins', ...defaultTheme.fontFamily.sans],
-                logo: ['McLaren', ...defaultTheme.fontFamily.sans],
+                logo: ['Excon-Bold', ...defaultTheme.fontFamily.sans],
             },
             colors: {
                 primary: {
