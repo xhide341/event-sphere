@@ -157,14 +157,14 @@
                     @if($isRegistered)
                         <button 
                             wire:click="toggleRegistration"
-                            class="bg-red-600 text-white rounded-lg px-8 py-3 font-semibold hover:bg-red-700 transition-colors"
+                            class="bg-red-600 text-white rounded-lg ml-2 text-sm px-4 py-3 font-semibold hover:bg-red-700 transition-colors"
                         >
                             Cancel Registration
                         </button>
                     @else
                         <button 
                             wire:click="toggleRegistration"
-                            class="bg-primary text-white rounded-lg px-8 py-3 font-semibold hover:bg-primary-dark transition-colors"
+                            class="bg-primary text-white rounded-lg ml-2 text-sm px-4 py-3 font-semibold hover:bg-primary-dark transition-colors"
                         >
                             Register for Event
                         </button>

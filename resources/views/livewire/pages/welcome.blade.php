@@ -54,10 +54,10 @@
                                     Register now
                                 </a>
                             @else
-                                <a href="{{ route('login') }}" title="Login"
+                                <a href="{{ route('events') }}" title="Events"
                                     class="inline-flex items-center justify-center w-full px-8 py-3 text-lg font-semibold text-white transition-all duration-200 bg-primary border-2 border-transparent sm:w-auto rounded-lg hover:bg-primary-light focus:outline-none focus:ring-0 focus:ring-offset-0"
                                     role="button">
-                                    Login
+                                    Browse Events
                                 </a>
                             @endif
                         </div>

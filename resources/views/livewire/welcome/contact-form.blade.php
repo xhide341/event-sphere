@@ -56,7 +56,7 @@ new class extends Component {
     <div class="mt-4">
         <x-input-label for="message" :value="__('Message')" />
         <textarea wire:model="message" id="message" name="message"
-            class="border-gray-300 focus:border-primary focus:ring-primary rounded-md shadow-sm block mt-1 w-full text-custom-black md:text-base text-sm h-32"
+            class="border-gray-400 focus:border-primary focus:ring-primary rounded-md shadow-sm block mt-1 w-full text-custom-black md:text-base text-sm h-32"
             required></textarea>
         <x-input-error :messages="$errors->get('message')" class="mt-2" />
     </div>
