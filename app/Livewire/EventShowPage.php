@@ -117,7 +117,6 @@ class EventShowPage extends Component
 
         if ($this->isRegistered) {
             $this->event->users()->detach(Auth::id());
-            $this->event->decrement('participant_count');
         } else {
             // Check if event is at capacity
             if ($this->event->participant_count >= $this->event->capacity) {
@@ -128,7 +127,6 @@ class EventShowPage extends Component
             $this->event->users()->attach(Auth::id(), [
                 'registration_date' => now()
             ]);
-            $this->event->increment('participant_count');
         }
 
         $this->event->refresh();
