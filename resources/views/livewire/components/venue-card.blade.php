@@ -26,9 +26,9 @@
         </div>
         
         <div class="p-4 bg-white">
-            <h3 class="text-lg font-semibold text-gray-900">{{ $venue->name }}</h3>
+            <h3 class="text-md xl:text-lg line-clamp-1 font-semibold text-gray-900">{{ $venue->name }}</h3>
             @if($currentEvent)
-                <p class="text-sm text-gray-600 mt-1">
+                <p class="text-xs xl:text-sm text-gray-600 mt-1 min-h-10">
                     Current Event: {{ $currentEvent->name }}
                 </p>
             @endif
@@ -139,7 +139,7 @@
 
                 <!-- Venue Details Section - Outside the carousel container -->
                 <div class="p-6 bg-white">
-                    <h2 class="text-2xl font-bold text-gray-900">{{ $venue->name }}</h2>
+                    <h2 class="text-1xl xl:text-2xl font-bold text-gray-900 text-wrap line-clamp-1">{{ $venue->name }}</h2>
                     
                     <div class="mt-4">
                         <div class="bg-gray-100 rounded-lg p-4 shadow-sm">
@@ -193,9 +193,9 @@
                                             <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
                                         </svg>
                                     </div>
-                                    <div>
-                                        <p class="text-xs text-gray-500 font-medium">Current Event</p>
-                                        <p class="text-sm font-semibold text-primary">{{ $currentEvent->name }}</p>
+                                    <div class="text-xs xl:text-sm">
+                                        <p class="text-gray-500 font-medium">Current Event:</p>
+                                        <p class="font-semibold text-primary">{{ $currentEvent->name }}</p>
                                     </div>
                                 </div>
                                 @endif

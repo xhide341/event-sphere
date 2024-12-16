@@ -26,13 +26,12 @@
             <div class="bg-white shadow-sm rounded-lg flex flex-col p-4 sm:p-8">
                 <header>
                     <div class="flex flex-row items-center space-x-2">
-                        <x-heroicon-s-building-office class="w-6 h-6 flex-shrink-0" />
-                        <h2 class="text-lg font-medium text-gray-900 align-middle">
-                            {{ __('Event Venues') }}
+                        <h2 class="text-xl font-medium text-primary-dark align-middle">
+                            {{ __('Venues') }}
                         </h2>
                     </div>
                     <p class="mt-1 text-sm text-gray-600">
-                        {{ __("Browse our list of venues for your next event.") }}
+                        {{ __("Browse a list of venues here.") }}
                     </p>
                 </header>
                 @if($venues->isEmpty())

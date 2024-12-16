@@ -21,12 +21,12 @@
                     <div class="flex flex-col items-center justify-center shadow-lg md:shadow-none bg-white md:bg-transparent p-4 md:p-6 rounded-lg">
                         @if (Route::currentRouteName() === 'login')
                             <div class="flex flex-col items-center justify-center">
-                                <h1 class="lg:text-5xl md:text-4xl text-2xl text-accent font-bold mb-2">Welcome back</h1>
+                                <h1 class="lg:text-4xl md:text-3xl text-2xl text-accent font-bold mb-2">Welcome back</h1>
                                 <p class="md:text-base text-sm text-gray-600 font-xs">Enter your credentials to sign in.</p>
                             </div>
                         @elseif (Route::currentRouteName() === 'register')
                             <div class="flex flex-col items-center justify-center">
-                                <h1 class="lg:text-5xl md:text-4xl text-2xl text-accent font-bold mb-2">Create an account</h1>
+                                <h1 class="lg:text-4xl md:text-3xl text-2xl text-accent font-bold mb-2">Create an account</h1>
                                 <p class="md:text-base text-sm text-gray-600 font-xs">Fill in the form to create an account.</p>
                             </div>                    
                         @endif
@@ -84,9 +84,9 @@
             @endif
 
             <!-- Image section -->
-            <div class="fixed top-0 right-0 h-screen w-1/2 hidden md:block">
-                @if (Route::currentRouteName() === 'login' || Route::currentRouteName() === 'register')
-                    <img src="{{ Vite::asset('resources/images/guest-images/login-image.jpg') }}" 
+            <div class="fixed top-0 right-0 h-screen w-1/2 hidden md:block bg-patten-blue pb-4 pt-4 pr-4">
+                @if (Route::currentRouteName() === 'login')
+                    <img src="{{ Vite::asset('resources/images/guest-images/login.png') }}" 
                         alt="Illustration for {{ Route::currentRouteName() === 'login' ? 'Login' : 'Register' }}" 
                         loading="lazy"
                         x-data="{ loaded: false }"
@@ -96,8 +96,21 @@
                             img.src = $el.src;
                         "
                         :class="{ 'opacity-0': !loaded, 'opacity-100': loaded }"
-                        class="w-full h-full object-cover transition-opacity duration-300">
-                    <div x-show="!loaded" class="w-full h-full bg-gray-300 animate-pulse"></div>
+                        class="w-full h-full object-contain absolute">
+                    <div x-show="!loaded" class="w-full h-full bg-primary-dark rounded-lg"></div>
+                    @elseif (Route::currentRouteName() === 'register')
+                    <img src="{{ Vite::asset('resources/images/guest-images/register.png') }}" 
+                        alt="Illustration for {{ Route::currentRouteName() === 'login' ? 'Login' : 'Register' }}" 
+                        loading="lazy"
+                        x-data="{ loaded: false }"
+                        x-init="
+                            const img = new Image();
+                            img.onload = () => loaded = true;
+                            img.src = $el.src;
+                        "
+                        :class="{ 'opacity-0': !loaded, 'opacity-100': loaded }"
+                        class="w-full h-full object-contain absolute">
+                    <div x-show="!loaded" class="w-full h-full bg-primary-dark rounded-lg"></div>
                 @endif
             </div>
         </div>
