@@ -188,7 +188,17 @@
                         </div>
                     </div>
                     @if(Auth::check())
-                        @if(!$userFeedbackExists)
+                        @if($showFeedbackForm)
+                            <button 
+                                wire:click="toggleFeedbackForm"
+                                class="p-2 text-gray-500 hover:text-gray-700 rounded-full transition-colors"
+                                title="Close"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        @elseif(!$userFeedbackExists)
                             <button 
                                 wire:click="$toggle('showFeedbackForm')"
                                 class="bg-primary text-white rounded-lg px-4 py-2 hover:bg-primary-dark transition-colors"
@@ -208,7 +218,7 @@
 
                 <!-- Feedback Form -->
                 @if($showFeedbackForm)
-                    <div class="mb-8 bg-gray-50 rounded-lg">
+                    <div class="p-4 mb-8 bg-gray-50 rounded-lg">
                         <form wire:submit.prevent="saveFeedback">
                             <!-- Form Header -->
                             <h3 class="text-lg font-semibold mb-4">

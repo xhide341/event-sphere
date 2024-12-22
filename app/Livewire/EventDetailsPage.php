@@ -193,6 +193,10 @@ class EventDetailsPage extends Component
             return redirect()->route('login');
         }
 
+        if ($this->showFeedbackForm) {
+            $this->cancelFeedback();
+        }
+
         $this->showFeedbackForm = !$this->showFeedbackForm;
     }
 
