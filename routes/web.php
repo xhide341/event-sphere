@@ -35,10 +35,12 @@ Route::get('/events/{event}', EventDetailsPage::class)
     ->middleware(['auth', 'verified'])
     ->name('event.details');
 
-Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])
-    ->name('google.login');
+Route::middleware('guest')->group(function () {
+    Route::get('/auth/google/redirect', function () {
+        return Socialite::driver('google')->redirect();
+    })->name('auth.google');
 
-Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])
-    ->name('google.callback');
+    Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+});
 
 require __DIR__ . '/auth.php';

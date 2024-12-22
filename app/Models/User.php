@@ -33,8 +33,10 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, CanResetP
         'name',
         'email',
         'password',
+        'google_id',
+        'avatar',
         'role',
-        'avatar'
+        'email_verified_at',
     ];
 
     /**
