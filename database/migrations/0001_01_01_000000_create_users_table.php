@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('password')->nullable();
             $table->string('role');
             $table->string('avatar')->nullable();
+            $table->string('avatar_type')->nullable();
             $table->string('google_id')->nullable();
             $table->rememberToken();
             $table->timestamps();

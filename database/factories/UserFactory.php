@@ -30,6 +30,8 @@ class UserFactory extends Factory
             'password' => static::$password ??= Hash::make('password'),
             'role' => fake()->randomElement(['user', 'admin']),
             'avatar' => 'https://robohash.org/' . uniqid() . '?set=set4',
+            'avatar_type' => 'robohash',
+            'google_id' => null,
             'remember_token' => Str::random(10),
         ];
     }
@@ -39,7 +41,7 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
         ]);
     }

@@ -8,6 +8,7 @@ use App\Livewire\SettingsPage;
 use App\Livewire\EventDetailsPage;
 use App\Http\Controllers\Auth\GoogleController;
 use Laravel\Socialite\Facades\Socialite;
+use App\Livewire\AdminDashboard;
 
 Route::view('/', 'livewire.pages.welcome')->name('welcome');
 
@@ -42,5 +43,6 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 });
+
 
 require __DIR__ . '/auth.php';

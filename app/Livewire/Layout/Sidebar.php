@@ -20,14 +20,14 @@ class Sidebar extends Component
     {
         $user = auth()->user();
 
-        if ($user->avatar) {
-            try {
-                $this->avatarUrl = Storage::disk('s3')->temporaryUrl('avatars/cat_shades.jpg', now()->addMinutes(120));
-            } catch (\Exception $e) {
-                $this->avatarUrl = "https://ui-avatars.com/api/?name=" . urlencode($user->name);
-            }
+        // If user has an avatar (from Google or uploaded), use it directly
+        // Otherwise, fallback to UI Avatars
+        if ($user->avatar_type === 'google') {
+            $this->avatarUrl = $user->avatar;
+        } elseif ($user->avatar_type === 's3') {
+            $this->avatarUrl = Storage::disk('s3')->temporaryUrl($user->avatar, now()->addMinutes(120));
         } else {
-            $this->avatarUrl = "https://ui-avatars.com/api/?name=" . urlencode($user->name);
+            $this->avatarUrl = "https://api.dicebear.com/9.x/initials/svg?seed=" . urlencode($user->name);
         }
     }
 

@@ -33,6 +33,7 @@ class GoogleController extends Controller
                     $user->update([
                         'google_id' => $googleUser->id,
                         'avatar' => $googleUser->avatar ?? $user->avatar,
+                        'avatar_type' => 'google',
                     ]);
                 } else {
                     // Create new user
@@ -43,6 +44,7 @@ class GoogleController extends Controller
                         'password' => null,
                         'role' => 'user',
                         'avatar' => $googleUser->avatar,
+                        'avatar_type' => 'google',
                         'email_verified_at' => now(),
                     ]);
                 }

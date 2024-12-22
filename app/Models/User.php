@@ -35,6 +35,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, CanResetP
         'password',
         'google_id',
         'avatar',
+        'avatar_type',
         'role',
         'email_verified_at',
     ];

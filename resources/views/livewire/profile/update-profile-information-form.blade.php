@@ -38,21 +38,24 @@ new class extends Component
     {
         $user = Auth::user();
         if ($user->avatar) {
-            $path = $user->avatar;
             try {
-                // Log the path we're checking for debugging
-                Log::info('Attempting to generate avatar URL', [
-                    'user_id' => $user->id,
-                    'path' => $path,
-                    'file_extension' => pathinfo($path, PATHINFO_EXTENSION)
+                if ($user->avatar_type === 's3') {
+                    // Generate temporary URL for S3 stored avatars
+                    $this->avatarUrl = Storage::disk('s3')->temporaryUrl($user->avatar, now()->addMinutes(5));
+                } else {
+                    // For Google avatars, use the URL directly
+                    $this->avatarUrl = $user->avatar;
+                }
+                Log::info('Avatar URL generated successfully', [
+                    'user_id' => $user->id, 
+                    'avatar_type' => $user->avatar_type
                 ]);
-    
-                // Don't check existence - just try to generate URL
-                $this->avatarUrl = Storage::disk('s3')->temporaryUrl($path, now()->addMinutes(5));
-                Log::info('Avatar URL generated successfully', ['user_id' => $user->id, 'path' => $path]);
-                
             } catch (\Exception $e) {
                 $this->avatarUrl = "https://ui-avatars.com/api/?name=" . urlencode($user->name);
+                Log::error('Failed to generate avatar URL', [
+                    'error' => $e->getMessage(),
+                    'user_id' => $user->id
+                ]);
             }
         } else {
             $this->avatarUrl = "https://ui-avatars.com/api/?name=" . urlencode($user->name);
@@ -91,8 +94,9 @@ new class extends Component
                 $success = Storage::disk('s3')->put('avatars/' . $filename, $encoded->toString(), 'public');
 
                 if ($success) {
-                    // Update the user's avatar field with the S3 filename
+                    // Update the user's avatar field with the S3 filename and type
                     $user->avatar = 'avatars/' . $filename;
+                    $user->avatar_type = 's3';  // Set avatar type to 's3'
                     Log::info('Avatar uploaded successfully to S3', ['user_id' => $user->id, 'filename' => $filename]);
                 } else {
                     throw new \Exception('Failed to store file in S3');
@@ -107,7 +111,6 @@ new class extends Component
                     'mime_type' => $this->avatar->getMimeType()
                 ]);
                 session()->flash('error', 'Failed to upload avatar: ' . $e->getMessage());
-                // Don't return here, allow the rest of the profile update to continue
             }
         }
 
@@ -119,7 +122,11 @@ new class extends Component
 
         try {
             $user->save();
-            Log::info('User profile updated successfully', ['user_id' => $user->id, 'avatar' => $user->avatar]);
+            Log::info('User profile updated successfully', [
+                'user_id' => $user->id, 
+                'avatar' => $user->avatar,
+                'avatar_type' => $user->avatar_type
+            ]);
         } catch (\Exception $e) {
             Log::error('Failed to save user profile', ['error' => $e->getMessage(), 'user_id' => $user->id]);
             session()->flash('error', 'Failed to update profile: ' . $e->getMessage());
