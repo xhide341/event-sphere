@@ -5,7 +5,7 @@ use App\Livewire\EventsPage;
 use App\Livewire\VenuesPage;
 use App\Livewire\SpeakersPage;
 use App\Livewire\SettingsPage;
-use App\Livewire\EventShowPage;
+use App\Livewire\EventDetailsPage;
 use App\Http\Controllers\Auth\GoogleController;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -31,9 +31,9 @@ Route::get('/settings', SettingsPage::class)
     ->middleware(['auth', 'verified'])
     ->name('settings');
 
-Route::get('/events/{event}', EventShowPage::class)
+Route::get('/events/{event}', EventDetailsPage::class)
     ->middleware(['auth', 'verified'])
-    ->name('events.show');
+    ->name('event.details');
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])
     ->name('google.login');

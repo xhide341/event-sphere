@@ -13,7 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 #[Layout('layouts.app')]
-class EventShowPage extends Component
+class EventDetailsPage extends Component
 {
     public Event $event;
     public $rating = 0;
@@ -55,11 +55,11 @@ class EventShowPage extends Component
     {
         try {
             $dateTime = Carbon::parse($this->event->start_date->toDateString());
-            
+
             $dateTime->setHour($this->event->start_time->hour)
-                    ->setMinute($this->event->start_time->minute)
-                    ->setSecond($this->event->start_time->second);
-            
+                ->setMinute($this->event->start_time->minute)
+                ->setSecond($this->event->start_time->second);
+
             return $dateTime->format('M j, Y g:i A');
         } catch (\Exception $e) {
             return 'Invalid date format';
@@ -75,7 +75,7 @@ class EventShowPage extends Component
     {
         if (Auth::check()) {
             $this->isRegistered = $this->event->users()->where('user_id', Auth::id())->exists();
-            
+
             $userFeedback = $this->event->feedbacks()
                 ->where('user_id', Auth::id())
                 ->first();
@@ -95,14 +95,14 @@ class EventShowPage extends Component
 
         $avgRating = (float) $this->event->feedbacks()->avg('rating') ?? 0;
         $this->averageRating = number_format($avgRating, 1);
-        
+
         $this->feedbackCount = $this->event->feedbacks()->count();
     }
 
     public function loadMoreFeedback()
     {
         $this->showAllFeedback = true;
-        
+
         $this->recentFeedbacks = $this->event->feedbacks()
             ->with('user')
             ->latest()
@@ -132,8 +132,8 @@ class EventShowPage extends Component
         $this->event->refresh();
         $this->isRegistered = !$this->isRegistered;
 
-        session()->flash('message', $this->isRegistered 
-            ? 'Successfully registered for the event.' 
+        session()->flash('message', $this->isRegistered
+            ? 'Successfully registered for the event.'
             : 'Registration cancelled successfully.');
     }
 
@@ -153,7 +153,7 @@ class EventShowPage extends Component
     public function cancelFeedback()
     {
         $this->reset(['rating', 'comment', 'showFeedbackForm']);
-        
+
         // If editing, restore original values
         if ($this->userFeedbackExists) {
             $this->loadEventData();
@@ -177,10 +177,10 @@ class EventShowPage extends Component
 
         $this->showFeedbackForm = false;
         $this->userFeedbackExists = true;
-        
+
         // Refresh the feedback data
         $this->loadEventData();
-        
+
         $this->dispatch('notify', [
             'message' => $this->userFeedbackExists ? 'Review updated successfully!' : 'Review submitted successfully!',
             'type' => 'success'
@@ -216,7 +216,7 @@ class EventShowPage extends Component
 
     public function render()
     {
-        return view('livewire.pages.event-show-page', [
+        return view('livewire.pages.event-details-page', [
             'event' => $this->event,
             'eventData' => $this->eventData,
             'isRegistered' => $this->isRegistered,

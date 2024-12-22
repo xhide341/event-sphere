@@ -300,7 +300,7 @@
           </div>
         </div>
         <div class="bg-gray-50 px-3 py-3 sm:px-6 sm:flex sm:flex-row-reverse space-y-2 sm:space-y-0">
-          <a href="{{ $modalContent['is_user_registered'] ? route('events.show', $modalContent['event_id']) : '#' }}"
+          <a href="{{ $modalContent['is_user_registered'] ? route('event.details', $modalContent['event_id']) : '#' }}"
             class="w-full inline-flex justify-center border border-transparent rounded-md shadow-sm px-4 py-2.5 {{ $modalContent['is_user_registered'] ? 'bg-primary text-custom-white hover:bg-primary-light' : 'bg-gray-100 text-gray-400 cursor-not-allowed' }} focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
             {{ !$modalContent['is_user_registered'] ? 'disabled' : '' }}
             title="{{ !$modalContent['is_user_registered'] ? 'Please register for the event to submit feedback' : 'Submit your feedback' }}">
