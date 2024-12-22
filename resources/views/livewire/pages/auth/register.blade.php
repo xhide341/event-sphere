@@ -44,35 +44,38 @@ new #[Layout('layouts.guest')] class extends Component
 
 <div>
     <form wire:submit="register" class="space-y-6">
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input 
-                wire:model="name" 
-                id="name" 
-                class="block mt-1 w-full text-custom-black md:text-base text-sm" 
-                type="text" 
-                name="name" 
-                required 
-                autofocus 
-                autocomplete="name"
-            />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
+        <!-- Name and Email wrapper -->
+        <div class="lg:flex lg:space-x-4 lg:space-y-0 space-y-6">
+            <!-- Name -->
+            <div class="lg:w-1/2">
+                <x-input-label for="name" :value="__('Name')" />
+                <x-text-input 
+                    wire:model="name" 
+                    id="name" 
+                    class="block mt-1 w-full text-custom-black lg:text-base text-sm" 
+                    type="text" 
+                    name="name" 
+                    required 
+                    autofocus 
+                    autocomplete="name"
+                />
+                <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            </div>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input 
-                wire:model="email" 
-                id="email" 
-                class="block mt-1 w-full text-custom-black md:text-base text-sm" 
-                type="email" 
-                name="email" 
-                required 
-                autocomplete="username"                
-            />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <!-- Email Address -->
+            <div class="lg:w-1/2">
+                <x-input-label for="email" :value="__('Email')" />
+                <x-text-input 
+                    wire:model="email" 
+                    id="email" 
+                    class="block mt-1 w-full text-custom-black lg:text-base text-sm" 
+                    type="email" 
+                    name="email" 
+                    required 
+                    autocomplete="username"                
+                />
+                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            </div>
         </div>
 
         <!-- Password -->
@@ -81,7 +84,7 @@ new #[Layout('layouts.guest')] class extends Component
             <x-text-input 
                 wire:model="password" 
                 id="password" 
-                class="block mt-1 w-full text-custom-black md:text-base text-sm"
+                class="block mt-1 w-full text-custom-black lg:text-base text-sm"
                 type="password"
                 name="password"
                 required 
@@ -97,7 +100,7 @@ new #[Layout('layouts.guest')] class extends Component
             <x-text-input 
                 wire:model="password_confirmation" 
                 id="password_confirmation" 
-                class="block mt-1 w-full text-custom-black md:text-base text-sm"
+                class="block mt-1 w-full text-custom-black lg:text-base text-sm"
                 type="password"
                 name="password_confirmation" 
                 required 
